@@ -1,0 +1,69 @@
+# State space exploration timings for the
+# new, simplified implementation of hash map
+# 
+# 
+# 
+#
+
+kdc.pepa
+State space size: 80730
+Elapsed derivation: 1516
+Elapsed derivation: 1250
+Elapsed derivation: 1172
+Avg derivation: 1312
+
+alternatingbit.pepa
+State space size: 26385
+Elapsed derivation: 313
+Elapsed derivation: 312
+Elapsed derivation: 312
+Avg derivation: 312
+
+ws-large.pepa
+State space size: 47220
+Elapsed derivation: 1547
+Elapsed derivation: 1422
+Elapsed derivation: 1359
+Avg derivation: 1442
+
+RKIP_MEK.pepa
+State space size: 51327
+Elapsed derivation: 4094
+Elapsed derivation: 4172
+Elapsed derivation: 4094
+Avg derivation: 4120
+
+large-t.pepa
+State space size: 65536
+Elapsed derivation: 6766
+Elapsed derivation: 6421
+Elapsed derivation: 6250
+Avg derivation: 6479
+
+medium-t.pepa
+State space size: 65536
+Elapsed derivation: 4109
+Elapsed derivation: 4047
+Elapsed derivation: 4219
+Avg derivation: 4125
+
+x-large-t.pepa
+State space size: 262144
+Elapsed derivation: 42375
+Elapsed derivation: 40891
+Elapsed derivation: 324610
+Avg derivation: 135958
+
+static/deadlockfree/jobshop5.pepa
+State space size: 704645
+Elapsed derivation: 43750
+Elapsed derivation: 30234
+Elapsed derivation: 30453
+Avg derivation: 34812
+
+production.pepa
+State space size: 17846
+Elapsed derivation: 156
+Elapsed derivation: 125
+Elapsed derivation: 156
+Avg derivation: 146

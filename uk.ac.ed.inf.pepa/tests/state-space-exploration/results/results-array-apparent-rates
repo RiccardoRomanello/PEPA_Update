@@ -1,0 +1,69 @@
+# State space exploration timings for implementation
+# with bitsets for hiding sets and cooperation sets.
+# 
+# 
+# 
+#
+
+kdc.pepa
+State space size: 80730
+Elapsed derivation: 1609
+Elapsed derivation: 1312
+Elapsed derivation: 1250
+Avg derivation: 1390
+
+alternatingbit.pepa
+State space size: 26385
+Elapsed derivation: 328
+Elapsed derivation: 328
+Elapsed derivation: 328
+Avg derivation: 328
+
+ws-large.pepa
+State space size: 47220
+Elapsed derivation: 1578
+Elapsed derivation: 1454
+Elapsed derivation: 1438
+Avg derivation: 1490
+
+RKIP_MEK.pepa
+State space size: 51327
+Elapsed derivation: 4235
+Elapsed derivation: 4265
+Elapsed derivation: 4188
+Avg derivation: 4229
+
+large-t.pepa
+State space size: 65536
+Elapsed derivation: 7031
+Elapsed derivation: 6625
+Elapsed derivation: 6282
+Avg derivation: 6646
+
+medium-t.pepa
+State space size: 65536
+Elapsed derivation: 4188
+Elapsed derivation: 4203
+Elapsed derivation: 4343
+Avg derivation: 7114.6
+
+x-large-t.pepa
+State space size: 262144
+Elapsed derivation: 43641
+Elapsed derivation: 41594
+Elapsed derivation: 449453
+Avg derivation: 178229.3
+
+static/deadlockfree/jobshop5.pepa
+State space size: 704645
+Elapsed derivation: 45125
+Elapsed derivation: 33110
+Elapsed derivation: 32422
+Avg derivation: 36885
+
+production.pepa
+State space size: 17846
+Elapsed derivation: 156
+Elapsed derivation: 172
+Elapsed derivation: 157
+Avg derivation: 161

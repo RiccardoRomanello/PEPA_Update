@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 TRANSITIONAL//EN">
+<html>
+	<head>
+		<title>Capacity Planning</title>
+	</head>
+	<body>
+	<h3>Capacity planning</h3>
+		<p>
+			Real systems are expected to service some <b>demand</b> with good <b>performance</b>. For example, a cloud based web-service
+			may have a Service Level Agreement (SLA). This SLA might stipulate that the web-service will have a number of clients
+			when operating (service demand) and must respond to all client requests within a certain time (performance).
+		</p>
+		<p>
+			Real systems are usually complex systems, consisting of <b>compositions of resources</b>. A naive approach to satisfying the SLA would be to 
+			continue adding resources to the system until the system meets the performance requirement. We want to avoid <b>over-provisioning</b>,
+			where we have under-used resources, because these add to our operational cost unnecessarily. We want to avoid <b>under-provisioning</b>,
+			as this means our system is not going to meet the SLA.
+		</p>
+		<p>
+			We want an <b>optimum configuration</b> of resources, a configuration that uses the fewest number of resources, but still meets
+			the expected service demand with a good performance. Searching for optimal configurations is time consuming and difficult. The CPT
+			is an automated tool designed to aid the modeller in finding an optimal confguration, and in gaining some insight into the systems' behaviour 
+			when we consider the number of resources as a parameter.
+		</p>
+	
+		<h3>This guide</h3>
+		<p>
+			This guide provides a step-by-step description of the <b>Capacity Planning Tool</b> (CPT).
+		</p>
+		<p>
+			It shows how to configure the tool in order to search for some <b> optimal model configuration</b> of system components. This page gives an
+			overview of the tool in order to provide insight into how the tool works, and therefore how to configure the tool for a search. We start with
+			a brief motivation, and then provide a high level view of the CPT.
+		</p>
+		<p>
+			Familiarity with PEPA is assumed. To learn more about PEPA
+			visit <a href="http://www.dcs.ed.ac.uk/pepa/">the PEPA web site</a>.
+		</p>
+
+		<h3>Tool overview</h3>
+		
+		<center><img src="img/cptoverview.png"></center>
+		
+		<ol>
+		<li> The designer creates a PEPA model in the <a href="../editor.html">PEPA editor</a>.
+		<li> Then the designer starts the CPT choosing either a <a href="driven.html">Driven Particle Swarm Optimisation (dPSO)</a> or a
+			<a href="single.html">Single Particle Swarm Optimisation (PSO)</a> search.
+		<li> The search engine then searches through the <a href="../../reference/CPT/cpt.html#modelConfigurationSearchSpace">model configuration
+		search space</a>, using a <a href="../../reference/CPT/cpt.html#costFunction">cost function</a> to evaluate each model configuration.
+		<li> The CPT passes a <a href="treeView.html">tree view</a> of the results, with the model configuration with the least cost at the top.
+		<li> The CPT also passes a <a href="listView.html">list view</a> of the results, sorted in ascending cost.
+		</ol>
+		
+		<center><h4>Performance evaluation</h4></center>
+		
+		The CPT can evaluate models in terms of:
+		
+		<ol>
+		<li> Capacity Utilisation
+		<li> Population levels
+		<li> Throughput
+		<li> Average Response-Time
+		</ol>
+		
+				<center><h4>The search algorithm (in brief)</h4></center>
+		<p>		
+		The CPT uses <a href="../../reference/CPT/cpt.html#pso">Particle Swarm Optimisation (PSO)</a> to search through a model configuration search 
+		space. The PSO creates a population of particles. This population then moves through the model configuration search space a number of times seeking an 
+		optimal configuration. 
+		</p>
+		<p>		
+		Particles have a value derived from the corresponding model configuration using a <a href="../../reference/CPT/cpt.html#costFunction">cost function</a>. The parameters of the cost function will have been defined by the designer.
+		Therefore the meaning of optimal, in terms of a model configuration, will be dependent on the user-defined cost function.  
+		</p>
+		<p>
+		In a dPSO the CPT uses a Hill Climbing algorithm in order to find the best PSO settings for a model configuration search.
+		</p>		
+		
+	</body>
+</html>

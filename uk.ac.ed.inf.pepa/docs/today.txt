@@ -1,0 +1,23 @@
+TODO list for PEPAto at 03/11/2006 
+Author Mirco Tribastone --mtribast
+-- 
+Parsing and state space derivation error handling within Eclipse.
+--
+Make names of the AST API coherent (setProcess, setTarget, setNode
+generate a lot of confusion)
+--
+Make method names of the AST Factory coherent (the rule should be
+xxxNode createXXX)
+--
+Implement a method which validates strings passed to AST nodes to name
+rate or processes (currently only null check performed)
+--
+Create example of infinite state space derivation
+--
+Actions, Process definitions and rate definitions are not so consistent
+with the API. They should simply be multi-valued properties
+--
+Important modification to the API: provide nodes with getter methods.
+Put setter methods elsewhere (JDT pattern). What does that impact on?
+-- 
+

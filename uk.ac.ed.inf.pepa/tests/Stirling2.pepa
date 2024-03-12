@@ -1,0 +1,79 @@
+/*
+Soufiene Benkirane (Stirling)
+Highlighted issue with calculating apparent rates when using passive rates.
+*/
+
+big = 1000000000.;//1E9 
+//small = 1000.;
+prob=0.01;
+pbl = 0.1;
+pbm = 0.1;
+pbh = 0.1;
+pdl = 0.1;
+pdm = 0.1;
+pdh = 0.1;
+
+lose_immun_rate = 0.005; 
+transmission_rate = 0.5; 
+infection_rate = 0.1; 
+recover_rate=0.0025; 
+
+// Counting bit
+Low =  (downML,big).Low + (birth,prob).Medium + (birth,1.-prob).Low + (death,T).Low + (death2,T).Low;
+Medium = (downHM,big).Medium + (upLM,big).Medium + (death, prob).Low + (birth,prob).High + (death, 1.-prob).Medium + (death,1.-prob).Medium + (death2, prob).Low + (death2, 1.-prob).Medium ;
+High = (upMH,big).High + (death,prob).Medium + (death,1.-prob).High + (death2,prob).Medium + (death2,1.-prob).High + (birth,T).High;
+
+// Rules
+
+Sb = (downML,T).SLb + (downHM,T).SMb + (upLM,T).SMb + (upMH,T).SHb;
+
+Ib = (downML,T).ILb + (downHM,T).IMb + (upLM,T).IMb + (upMH,T).IHb;
+
+Rb = (downML,T).RLb + (downHM,T).RMb + (upLM,T).RMb + (upMH,T).RHb;
+
+  //Births
+
+SLb = (birth, pbl).SLd + (no_birth,1.-pbl).SLd + (upLM,T).SMb;
+SMb = (birth, pbm).SMd + (no_birth,1.-pbm).SMd + (upMH,T).SHb + (downML,T).SLb;
+SHb = (birth,pbh).SHd + (no_birth,1.-pbh).SHd + (downHM,T).SMb;
+
+ILb = (birth, pbl).ILd + (no_birth,1.-pbl).ILd + (upLM,T).IMb;
+IMb = (birth, pbm).IMd + (no_birth,1.-pbm).IMd + (upMH,T).IHb + (downML,T).ILb;
+IHb = (birth,pbh).IHd + (no_birth,1.-pbh).IHd + (downHM,T).IMb;
+
+RLb = (birth, pbl).RLd + (no_birth,1.-pbl).RLd + (upLM,T).RMb;
+RMb = (birth, pbm).RMd + (no_birth,1.-pbm).RMd + (upMH,T).RHb + (downML,T).RLb;
+RHb = (birth,pbh).RHd + (no_birth,1.-pbh).RHd + (downHM,T).RMb;
+
+  //Deaths
+  
+SLd = (death, pdl).Dead  + (no_death,1.-pdl).S  + (upLM,T).SMd;
+SMd = (death, pdm).Dead  + (no_death,1.-pdm).S  + (upMH,T).SHd + (downML,T).SLd;
+SHd = (death,pdh).Dead  + (no_death,1.-pdh).S  + (downHM,T).SMd;
+
+ILd = (death2, pdl).Dead  + (no_death,1.-pdl).I  + (upLM,T).IMd;
+IMd = (death2, pdm).Dead  + (no_death,1.-pdm).I  + (upMH,T).IHd + (downML,T).ILd;
+IHd = (death2,pdh).Dead  + (no_death,1.-pdh).I  + (downHM,T).IMd;
+
+RLd = (death, pdl).Dead  + (no_death,1.-pdl).R  + (upLM,T).RMd;
+RMd = (death, pdm).Dead  + (no_death,1.-pdm).R  + (upMH,T).RHd + (downML,T).RLd;
+RHd = (death,pdh).Dead  + (no_death,1.-pdh).R  + (downHM,T).RMd;
+
+  //SIR
+
+S = (infect, T).SI + (stayS,0.000001).S;
+
+SI = (infected, transmission_rate).Ib + (no_infection, (1.-transmission_rate)).Sb;
+
+I = (infect,T).Ib + (recover, recover_rate).Rb;
+
+R = (infect,T).Rb + (lose_immunity,lose_immun_rate).Sb ;
+  
+Dead = (birth2,T).Sb +(stayD,0.0000001).Dead;
+
+Transmitter = (infect,infection_rate).Transmitter + (recover, T).Useless + (death2,T).Dead2;
+Useless = (infected,T).Transmitter + (death,T).Dead2;
+Dead2 = (birth, T).Dead22;
+Dead22 = (birth2, big).Useless;
+
+((Ib[3])<birth,death,death2,downHM,downML,upLM,upMH>High)<infected, infect, recover, birth, birth2, death, death2>(Transmitter[3])

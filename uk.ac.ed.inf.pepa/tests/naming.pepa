@@ -1,0 +1,11 @@
+/*
+This is simply to test the use of Strings as names
+*/
+
+A = (a,1).B;
+B = (b,1).A;
+
+'A' = (a,1).'B';
+'B' = (b,1).'A';
+
+A <a> 'A'

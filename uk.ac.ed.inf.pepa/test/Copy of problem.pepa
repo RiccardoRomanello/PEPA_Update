@@ -1,0 +1,13 @@
+// Simple PEPA description to test the simulator
+P1 = (a, 1).P2;
+P2 = (b, 1).P1;
+P3 = (f, 1).P1;
+
+Q1 = (a, 1*T).Q2;
+Q2 = (c, 1).Q1;
+Q3 = (g, 1).Q1;
+
+R1 = (a, 1).R2;
+R2 = (e, 1).R1;
+
+(P1 <a> Q1) <> (P1 <a> Q1) 

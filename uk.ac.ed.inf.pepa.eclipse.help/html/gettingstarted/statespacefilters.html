@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 TRANSITIONAL//EN">
+<html>
+	<head>
+		<title>Filtering the State Space</title>
+	</head>
+	<body>		
+		<h3>Filtering the State Space</h3>
+		<p>
+			The view provides filters for the state space. Here are the 
+			filter rules available. 
+			<ol>
+				<li>States with unnamed sequential components.
+				<li>States whose steady-state probability is in a given range.
+				<li>States matching a given pattern .
+				<li>States which have a top-level component in a given state. 
+			</ol>
+		</p>
+			A number of rules can be grouped into a collection. The collection
+			is assigned a name which is unique within the model's rule sets.
+			You can specify any number of rule sets. However, only one rule
+			set can be applied at a time. The rule setting are persistent
+			across workbench sessions.
+		</p>
+		<p>
+			To open the filter rule editor, click the drop-down arrow in the
+			State Space View toolbar. 
+		</p>
+		<img src="img/filterdropdown.png">
+		<p>
+			The State Space Filters dialog box will show the currently
+			available filter sets for the model.
+		</p>
+		<img src="img/filters.png">
+		<p>
+		 	Click <b>New...</b> to edit a new set of rules. You are
+		 	required to give it a name. The two radio buttons let
+		 	you select between matching any or all of the defined rules.
+		 	The rules are shown in the list box.
+		</p>
+		<img src="img/ruleeditor.png">
+		<p>
+			To manage the rule list, right click the list box. 
+			Click <b>New</b> to show the supported rules.
+		</p>
+		<img src="img/rulecontextmenu.png">
+		
+	</body>
+</html>

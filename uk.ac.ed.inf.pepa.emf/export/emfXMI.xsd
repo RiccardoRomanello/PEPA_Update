@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:uk.ac.ed.inf.pepa.emf="http:///uk/ac/ed/inf/pepa/emf.ecore" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http:///uk/ac/ed/inf/pepa/emf.ecore">
+  <xsd:import namespace="http://www.omg.org/XMI" schemaLocation="../../../plugin/org.eclipse.emf.ecore/model/XMI.xsd"/>
+  <xsd:simpleType name="RateOperator">
+    <xsd:restriction base="xsd:NCName">
+      <xsd:enumeration value="Plus"/>
+      <xsd:enumeration value="Minus"/>
+      <xsd:enumeration value="Divide"/>
+      <xsd:enumeration value="Times"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType abstract="true" name="Action">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="Action" type="uk.ac.ed.inf.pepa.emf:Action"/>
+  <xsd:complexType name="Activity">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="rate" type="uk.ac.ed.inf.pepa.emf:Rate"/>
+      <xsd:element name="action" type="uk.ac.ed.inf.pepa.emf:Action"/>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="Activity" type="uk.ac.ed.inf.pepa.emf:Activity"/>
+  <xsd:complexType name="Aggregation">
+    <xsd:complexContent>
+      <xsd:extension base="uk.ac.ed.inf.pepa.emf:ProcessWithSet">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="process" type="uk.ac.ed.inf.pepa.emf:Process"/>
+        </xsd:choice>
+        <xsd:attribute name="copies" type="xsd:int" use="required"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Aggregation" type="uk.ac.ed.inf.pepa.emf:Aggregation"/>
+  <xsd:complexType abstract="true" name="BinaryOperator">
+    <xsd:complexContent>
+      <xsd:extension base="uk.ac.ed.inf.pepa.emf:Process">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="rightHandSide" type="uk.ac.ed.inf.pepa.emf:Process"/>
+          <xsd:element name="leftHandSide" type="uk.ac.ed.inf.pepa.emf:Process"/>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="BinaryOperator" type="uk.ac.ed.inf.pepa.emf:BinaryOperator"/>
+  <xsd:complexType name="Choice">
+    <xsd:complexContent>
+      <xsd:extension base="uk.ac.ed.inf.pepa.emf:BinaryOperator"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Choice" type="uk.ac.ed.inf.pepa.emf:Choice"/>
+  <xsd:complexType name="Cooperation">
+    <xsd:complexContent>
+      <xsd:extension base="uk.ac.ed.inf.pepa.emf:BinaryOperator">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="actions" type="uk.ac.ed.inf.pepa.emf:Action"/>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Cooperation" type="uk.ac.ed.inf.pepa.emf:Cooperation"/>
+  <xsd:complexType abstract="true" name="FiniteRate">
+    <xsd:complexContent>
+      <xsd:extension base="uk.ac.ed.inf.pepa.emf:Rate"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="FiniteRate" type="uk.ac.ed.inf.pepa.emf:FiniteRate"/>
+  <xsd:complexType name="Hiding">
+    <xsd:complexContent>
+      <xsd:extension base="uk.ac.ed.inf.pepa.emf:ProcessWithSet">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="hiddenProcess" type="uk.ac.ed.inf.pepa.emf:Process"/>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Hiding" type="uk.ac.ed.inf.pepa.emf:Hiding"/>
+  <xsd:complexType name="Model">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="systemEquation" type="uk.ac.ed.inf.pepa.emf:Process"/>
+      <xsd:element name="processAssignments" type="uk.ac.ed.inf.pepa.emf:ProcessAssignment"/>
+      <xsd:element name="rateAssignments" type="uk.ac.ed.inf.pepa.emf:RateAssignment"/>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="Model" type="uk.ac.ed.inf.pepa.emf:Model"/>
+  <xsd:complexType name="PassiveRate">
+    <xsd:complexContent>
+      <xsd:extension base="uk.ac.ed.inf.pepa.emf:Rate">
+        <xsd:attribute name="weight" type="xsd:int"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="PassiveRate" type="uk.ac.ed.inf.pepa.emf:PassiveRate"/>
+  <xsd:complexType name="Prefix">
+    <xsd:complexContent>
+      <xsd:extension base="uk.ac.ed.inf.pepa.emf:Process">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="targetProcess" type="uk.ac.ed.inf.pepa.emf:Process"/>
+          <xsd:element name="activity" type="uk.ac.ed.inf.pepa.emf:Activity"/>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="Prefix" type="uk.ac.ed.inf.pepa.emf:Prefix"/>
+  <xsd:complexType abstract="true" name="Process">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="Process" type="uk.ac.ed.inf.pepa.emf:Process"/>
+  <xsd:complexType abstract="true" name="ProcessWithSet">
+    <xsd:complexContent>
+      <xsd:extension base="uk.ac.ed.inf.pepa.emf:Process">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="actions" type="uk.ac.ed.inf.pepa.emf:Action"/>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="ProcessWithSet" type="uk.ac.ed.inf.pepa.emf:ProcessWithSet"/>
+  <xsd:complexType abstract="true" name="Rate">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="Rate" type="uk.ac.ed.inf.pepa.emf:Rate"/>
+  <xsd:complexType name="SilentAction">
+    <xsd:complexContent>
+      <xsd:extension base="uk.ac.ed.inf.pepa.emf:Action">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="hiddenAction" type="uk.ac.ed.inf.pepa.emf:ActionIdentifier"/>
+        </xsd:choice>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="SilentAction" type="uk.ac.ed.inf.pepa.emf:SilentAction"/>
+  <xsd:complexType name="ActionIdentifier">
+    <xsd:complexContent>
+      <xsd:extension base="uk.ac.ed.inf.pepa.emf:Action">
+        <xsd:attribute name="name" type="xsd:string" use="required"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="ActionIdentifier" type="uk.ac.ed.inf.pepa.emf:ActionIdentifier"/>
+  <xsd:complexType name="NumberLiteral">
+    <xsd:complexContent>
+      <xsd:extension base="uk.ac.ed.inf.pepa.emf:FiniteRate">
+        <xsd:attribute name="value" type="xsd:double"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="NumberLiteral" type="uk.ac.ed.inf.pepa.emf:NumberLiteral"/>
+  <xsd:complexType name="ProcessAssignment">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="processIdentifier" type="uk.ac.ed.inf.pepa.emf:ProcessIdentifier"/>
+      <xsd:element name="process" type="uk.ac.ed.inf.pepa.emf:Process"/>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="ProcessAssignment" type="uk.ac.ed.inf.pepa.emf:ProcessAssignment"/>
+  <xsd:complexType name="ProcessIdentifier">
+    <xsd:complexContent>
+      <xsd:extension base="uk.ac.ed.inf.pepa.emf:Process">
+        <xsd:attribute name="name" type="xsd:string" use="required"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="ProcessIdentifier" type="uk.ac.ed.inf.pepa.emf:ProcessIdentifier"/>
+  <xsd:complexType name="RateAssignment">
+    <xsd:choice maxOccurs="unbounded" minOccurs="0">
+      <xsd:element name="rateIdentifier" type="uk.ac.ed.inf.pepa.emf:RateIdentifier"/>
+      <xsd:element name="rate" type="uk.ac.ed.inf.pepa.emf:FiniteRate"/>
+      <xsd:element ref="xmi:Extension"/>
+    </xsd:choice>
+    <xsd:attribute ref="xmi:id"/>
+    <xsd:attributeGroup ref="xmi:ObjectAttribs"/>
+  </xsd:complexType>
+  <xsd:element name="RateAssignment" type="uk.ac.ed.inf.pepa.emf:RateAssignment"/>
+  <xsd:complexType name="RateExpression">
+    <xsd:complexContent>
+      <xsd:extension base="uk.ac.ed.inf.pepa.emf:FiniteRate">
+        <xsd:choice maxOccurs="unbounded" minOccurs="0">
+          <xsd:element name="leftHandSide" type="uk.ac.ed.inf.pepa.emf:FiniteRate"/>
+          <xsd:element name="rightHandSide" type="uk.ac.ed.inf.pepa.emf:FiniteRate"/>
+        </xsd:choice>
+        <xsd:attribute name="operator" type="uk.ac.ed.inf.pepa.emf:RateOperator"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="RateExpression" type="uk.ac.ed.inf.pepa.emf:RateExpression"/>
+  <xsd:complexType name="RateIdentifier">
+    <xsd:complexContent>
+      <xsd:extension base="uk.ac.ed.inf.pepa.emf:FiniteRate">
+        <xsd:attribute name="name" type="xsd:string"/>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:element name="RateIdentifier" type="uk.ac.ed.inf.pepa.emf:RateIdentifier"/>
+</xsd:schema>

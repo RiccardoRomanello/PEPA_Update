@@ -1,0 +1,7 @@
+<contexts>
+	<context id="time_series_analysis">
+		<description>Time series analysis</description>
+		<topic href="html/reference/timeSeriesAnalysis.html"
+			label="Time Series Analysis"/> 
+	</context>
+</contexts>

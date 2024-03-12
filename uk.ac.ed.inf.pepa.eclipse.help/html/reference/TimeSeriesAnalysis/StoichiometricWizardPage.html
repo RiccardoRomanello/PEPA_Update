@@ -1,0 +1,18 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Stoichiometric Information</title>
+</head>
+<body>
+This page of the wizard is only available if the PEPA model is being parsed using the reagent-centric approach. The purpose of this page is to augment the PEPA model with stoichiometric information, which cannot be stored within the current PEPA syntax. The forthcoming implementation of BioPEPA will remove the need for this augmentation.<p>
+
+The filter box in the top right hand corner works over the entire tables contents. The filter is case sensitive and clicking on the small cross clears the filter.<p>
+
+The textual view of the reactions has been elaborated with a combination of font styles. The stoichiometric information sits in front of the species/components name, separated by a dot. The value is set in <b>bold</b> and the <font color=ff0000>colour</font> of the value is different from the rest to <font color=ff0000><b>stand out</b></font>. Species/components that are behaving as either catalysts or inhibitors are highlighted with an <u>underline</u>.<p>
+
+To alter the stoichiometric information of a particular reaction, simply double left click on the row. A dialog box will pop up with two lists of species/components. The leftmost list represents the reactants (components somehow involved in allowing the reaction to occur), and the rightmost list represents the products (components that are formed by the reaction happening). Legal values are integers greater or equal to one. Both catalysts and inhibitors do not make use of stoichiometric information and so the ability to set a value is not present. Hovering the mouse over such a component will bring up a tool tip stating either catalytic or inhibiting.<p>
+
+The stoichiometric information is stored once a simulation/analysis is started. Until the information is saved to disk you can always use the restore button to revert the stoichiometric values to their last recorded values. Once a simulation/analysis has started, these become the newly stored values.
+</body>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/uk.ac.ed.inf.pepa.emf/src"
+    creationCommands="false" creationIcons="false" modelPluginID="uk.ac.ed.inf.pepa.emf"
+    modelName="Pepa" importerID="org.eclipse.emf.importer.java">
+  <foreignModel>@model</foreignModel>
+  <genPackages prefix="Emf" basePackage="uk.ac.ed.inf.pepa" disposableProviderFactory="true"
+      ecorePackage="emf.ecore#/">
+    <genEnums ecoreEnum="emf.ecore#//RateOperator">
+      <genEnumLiterals ecoreEnumLiteral="emf.ecore#//RateOperator/Plus"/>
+      <genEnumLiterals ecoreEnumLiteral="emf.ecore#//RateOperator/Minus"/>
+      <genEnumLiterals ecoreEnumLiteral="emf.ecore#//RateOperator/Divide"/>
+      <genEnumLiterals ecoreEnumLiteral="emf.ecore#//RateOperator/Times"/>
+    </genEnums>
+    <genClasses image="false" ecoreClass="emf.ecore#//Action"/>
+    <genClasses ecoreClass="emf.ecore#//Activity">
+      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference emf.ecore#//Activity/rate"/>
+      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference emf.ecore#//Activity/action"/>
+    </genClasses>
+    <genClasses ecoreClass="emf.ecore#//Aggregation">
+      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference emf.ecore#//Aggregation/process"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute emf.ecore#//Aggregation/copies"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="emf.ecore#//BinaryOperator">
+      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference emf.ecore#//BinaryOperator/rightHandSide"/>
+      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference emf.ecore#//BinaryOperator/leftHandSide"/>
+    </genClasses>
+    <genClasses ecoreClass="emf.ecore#//Choice"/>
+    <genClasses ecoreClass="emf.ecore#//Cooperation"/>
+    <genClasses ecoreClass="emf.ecore#//FiniteRate"/>
+    <genClasses ecoreClass="emf.ecore#//Hiding">
+      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference emf.ecore#//Hiding/hiddenProcess"/>
+    </genClasses>
+    <genClasses ecoreClass="emf.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference emf.ecore#//Model/systemEquation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference emf.ecore#//Model/processAssignments"/>
+      <genFeatures property="None" children="true" createChild="true" propertyDescription=""
+          ecoreFeature="ecore:EReference emf.ecore#//Model/rateAssignments"/>
+    </genClasses>
+    <genClasses ecoreClass="emf.ecore#//PassiveRate">
+      <genFeatures children="true" createChild="false" ecoreFeature="ecore:EAttribute emf.ecore#//PassiveRate/weight"/>
+    </genClasses>
+    <genClasses ecoreClass="emf.ecore#//Prefix">
+      <genFeatures notify="false" children="true" createChild="false" propertyCategory=""
+          propertyDescription="" propertySortChoices="true" ecoreFeature="ecore:EReference emf.ecore#//Prefix/targetProcess"/>
+      <genFeatures notify="false" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference emf.ecore#//Prefix/activity"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="emf.ecore#//Process"/>
+    <genClasses image="false" ecoreClass="emf.ecore#//ProcessWithSet">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference emf.ecore#//ProcessWithSet/actions"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="emf.ecore#//Rate"/>
+    <genClasses ecoreClass="emf.ecore#//SilentAction"/>
+    <genClasses ecoreClass="emf.ecore#//ActionIdentifier">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute emf.ecore#//ActionIdentifier/name"/>
+    </genClasses>
+    <genClasses ecoreClass="emf.ecore#//NumberLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute emf.ecore#//NumberLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="emf.ecore#//ProcessAssignment">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference emf.ecore#//ProcessAssignment/processIdentifier"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference emf.ecore#//ProcessAssignment/process"/>
+    </genClasses>
+    <genClasses ecoreClass="emf.ecore#//ProcessIdentifier">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute emf.ecore#//ProcessIdentifier/name"/>
+    </genClasses>
+    <genClasses ecoreClass="emf.ecore#//RateAssignment">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference emf.ecore#//RateAssignment/rateIdentifier"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference emf.ecore#//RateAssignment/rate"/>
+    </genClasses>
+    <genClasses ecoreClass="emf.ecore#//RateExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference emf.ecore#//RateExpression/leftHandSide"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference emf.ecore#//RateExpression/rightHandSide"/>
+      <genFeatures children="true" createChild="false" ecoreFeature="ecore:EAttribute emf.ecore#//RateExpression/operator"/>
+    </genClasses>
+    <genClasses ecoreClass="emf.ecore#//RateIdentifier">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute emf.ecore#//RateIdentifier/name"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

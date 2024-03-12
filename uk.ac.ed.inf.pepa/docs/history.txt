@@ -1,0 +1,10 @@
+PEPA Core Implementation PEPAto
+
+Command line version
+State space derivation speed up
+Direct solver added
+Improved static analysis
+Aggregation cooperation added
+Refactoring of parsing related classes
+AST API
+In-memory model representation API

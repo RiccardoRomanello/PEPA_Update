@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Core Plug-in
+Bundle-SymbolicName: uk.ac.ed.inf.pepa.eclipse.core;singleton:=true
+Bundle-Version: 0.0.24
+Bundle-Activator: uk.ac.ed.inf.pepa.eclipse.core.PepaCore
+Bundle-Vendor: LFCS - The University of Edinburgh
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.core.resources,
+ uk.ac.ed.inf.pepa,
+ uk.ac.ed.inf.pepa.emf
+Eclipse-LazyStart: true
+Export-Package: uk.ac.ed.inf.pepa.eclipse.core

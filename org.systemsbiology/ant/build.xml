@@ -1,0 +1,60 @@
+<project name="org.systemsbiology" default="jar" basedir="../">
+	<property name="src" location="src" />
+	<property name="classes" location="ant_classes" />
+	<property name="lib" location="lib" />
+	<property name="dist" location="dist" />
+	<property environment="env" />
+
+	<!-- We rely on CUP-11a  JFlex 1.4.1  -->
+
+	<fileset dir="${lib}" id="libraries.fileset">
+		<include name="**/*.jar" />
+		<include name="**/*.zip" />
+	</fileset>
+
+	<!-- Here compile time tools -->
+	<path id="binaries">
+		<fileset refid="binaries.fileset" />
+		<pathelement location="${bin}" />
+		<pathelement path="${java.class.path}" />
+		<pathelement path="${classes}" />
+	</path>
+
+	<!-- Here, the runtime libraries are stored -->
+	<path id="libraries">
+		<fileset refid="libraries.fileset" />
+		<pathelement location="${lib}" />
+		<pathelement path="${java.class.path}" />
+	</path>
+
+
+	<target name="init">
+		<mkdir dir="${classes}" />
+		<delete dir="${dist}" />
+	</target>
+
+
+	<target name="compile" depends="init">
+		<javac srcdir="${src}" destdir="${classes}">
+			<classpath refid="libraries" />
+		</javac>
+	</target>
+
+	<target name="jar" depends="compile" description="Package as jar for PEPAto">
+		<mkdir dir="${dist}" />
+		<unjar dest="${classes}">
+			<fileset dir="${lib}">
+				<include name="**/*.jar" />
+			</fileset>
+		</unjar>
+
+		<jar compress="true" jarfile="${dist}/systemsbiology.jar" basedir="${classes}">
+			<fileset dir="${lib}" />
+		</jar>
+	</target>
+
+	<target name="clean">
+		<delete dir="${classes}" />
+	</target>
+
+</project>

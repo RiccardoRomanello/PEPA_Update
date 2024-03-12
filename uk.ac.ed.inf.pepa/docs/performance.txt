@@ -1,0 +1,38 @@
+Measurement Data of State Space Derivation
+
+Experiments carried out on MacBook 1.83Ghz 512MB RAM
+
+
+--
+Model: activebadge.pepa
+States: 72
+
+PEPAto: 141ms 
+Old: 151ms
+Pepa Workbench TABASCO: 138ms
+
+--
+Model: lan6.pepa
+States: 768
+
+PEPAto: 2742ms
+PEPA Workbench TABASCO: 5952ms
+
+--
+Model: tom222.pepa 
+States: 960
+
+PEPAto: 3526ms
+Old: 3555ms
+Pepa Workbench TABASCO: 8970ms
+
+--
+Model: tom322.pepa
+States: 2176
+
+PEPAto: 20879ms
+Old: 19972ms
+Pepa Workbench TABASCO: 49953ms
+
+Simulation
+11.70

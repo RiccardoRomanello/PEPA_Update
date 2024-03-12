@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: PEPA EMF Model
+Bundle-SymbolicName: uk.ac.ed.inf.pepa.emf; singleton:=true
+Bundle-Version: 0.0.24
+Bundle-Vendor: LFCS - The University of Edinburgh
+Bundle-Localization: plugin
+Export-Package: uk.ac.ed.inf.pepa.emf,
+ uk.ac.ed.inf.pepa.emf.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.core.resources,
+ uk.ac.ed.inf.pepa
+Eclipse-LazyStart: true
+Import-Package: org.eclipse.emf.ecore.xmi.impl

@@ -1,0 +1,69 @@
+# State space exploration timings for implementation
+# with arrays for apparent rates.
+# 
+# 
+# 
+#
+
+kdc.pepa
+State space size: 80730
+Elapsed derivation: 2047
+Elapsed derivation: 1718
+Elapsed derivation: 16251
+Avg derivation: 1796.6
+
+alternatingbit.pepa
+State space size: 26385
+Elapsed derivation: 531
+Elapsed derivation: 531
+Elapsed derivation: 547
+Avg derivation: 536.3
+
+ws-large.pepa
+State space size: 47220
+Elapsed derivation: 2562
+Elapsed derivation: 2421
+Elapsed derivation: 2391
+Avg derivation: 2458.0
+
+RKIP_MEK.pepa
+State space size: 51327
+Elapsed derivation: 6734
+Elapsed derivation: 6859
+Elapsed derivation: 6937
+Avg derivation: 6843.3
+
+large-t.pepa
+State space size: 65536
+Elapsed derivation: 11750
+Elapsed derivation: 11188
+Elapsed derivation: 11156
+Avg derivation: 11364.6
+
+medium-t.pepa
+State space size: 65536
+Elapsed derivation: 7125
+Elapsed derivation: 6969
+Elapsed derivation: 7250
+Avg derivation: 7114.6
+
+x-large-t.pepa
+State space size: 262144
+Elapsed derivation: 70531
+Elapsed derivation: 153844
+Elapsed derivation: 79969
+Avg derivation: 101448.0
+
+static/deadlockfree/jobshop5.pepa
+State space size: 704645
+Elapsed derivation: 48562
+Elapsed derivation: 47891
+Elapsed derivation: 48422
+Avg derivation: 48291
+
+production.pepa
+State space size: 17846
+Elapsed derivation: 235
+Elapsed derivation: 266
+Elapsed derivation: 234
+Avg derivation: 245

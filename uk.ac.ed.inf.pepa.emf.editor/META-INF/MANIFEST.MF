@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: PEPA EMF Editor
+Bundle-SymbolicName: uk.ac.ed.inf.pepa.emf.editor; singleton:=true
+Bundle-Version: 0.0.24
+Bundle-ClassPath: .
+Bundle-Activator: uk.ac.ed.inf.pepa.emf.presentation.PepaEditorPlugin$Implementation
+Bundle-Vendor: LFCS - The University of Edinburgh
+Bundle-Localization: plugin
+Export-Package: uk.ac.ed.inf.pepa.emf.presentation
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources;visibility:=reexport,
+ uk.ac.ed.inf.pepa.emf.edit;visibility:=reexport,
+ org.eclipse.emf.ecore.xmi;visibility:=reexport,
+ org.eclipse.emf.edit.ui;visibility:=reexport,
+ org.eclipse.ui.ide;visibility:=reexport,
+ uk.ac.ed.inf.pepa.eclipse.ui,
+ uk.ac.ed.inf.pepa.eclipse.core,
+ uk.ac.ed.inf.pepa
+Eclipse-LazyStart: true

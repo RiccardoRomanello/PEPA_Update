@@ -1,0 +1,69 @@
+# State space exploration timings for the unbuffered
+# implementation
+#
+#
+#
+#
+
+kdc.pepa
+State space size: 80730
+Elapsed derivation: 2015
+Elapsed derivation: 1672
+Elapsed derivation: 1594
+Avg derivation: 1760
+
+alternatingbit.pepa
+State space size: 26385
+Elapsed derivation: 562
+Elapsed derivation: 562
+Elapsed derivation: 578
+Avg derivation: 567
+
+ws-large.pepa
+State space size: 47220
+Elapsed derivation: 2781
+Elapsed derivation: 2657
+Elapsed derivation: 2578
+Avg derivation: 2672
+
+RKIP_MEK.pepa
+State space size: 51327
+Elapsed derivation: 7532
+Elapsed derivation: 7547
+Elapsed derivation: 7500
+Avg derivation: 7526
+
+large-t.pepa
+State space size: 65536
+Elapsed derivation: 12797
+Elapsed derivation: 12234
+Elapsed derivation: 12078
+Avg derivation: 12370
+
+medium-t.pepa
+State space size: 65536
+Elapsed derivation: 7594
+Elapsed derivation: 7578
+Elapsed derivation: 7641
+Avg derivation: 7604
+
+x-large-t.pepa
+State space size: 262144
+Elapsed derivation: 76360
+Elapsed derivation: 94547
+Elapsed derivation: 348609
+Avg derivation: 173172
+
+static/deadlockfree/jobshop5.pepa
+State space size: 704645
+Elapsed derivation: 57578
+Elapsed derivation: 53125
+Elapsed derivation: 52328
+Avg derivation: 54344
+
+production.pepa
+State space size: 17846
+Elapsed derivation: 250
+Elapsed derivation: 250
+Elapsed derivation: 265
+Avg derivation: 255

@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Systems Biology Support Plug-in
+Bundle-SymbolicName: uk.ac.ed.inf.systemsbiology
+Bundle-Version: 0.0.23
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ClassPath: .,
+ lib/colt.jar,
+ lib/odeToJava.jar,
+ lib/ssj.jar
+Export-Package: org.systemsbiology.chem;
+  uses:="edu.cornell.lassp.houle.RngPack,
+   cern.jet.random,
+   org.systemsbiology.math,
+   org.systemsbiology.util",
+ org.systemsbiology.chem.odetojava;uses:="org.systemsbiology.chem,org.systemsbiology.util,odeToJava.modules",
+ org.systemsbiology.chem.tp,
+ org.systemsbiology.data,
+ org.systemsbiology.data.tp,
+ org.systemsbiology.math,
+ org.systemsbiology.math.probability;uses:="cern.colt.matrix",
+ org.systemsbiology.math.probability.tp,
+ org.systemsbiology.math.tp,
+ org.systemsbiology.util
+Bundle-Vendor: LFCS - The University of Edinburgh

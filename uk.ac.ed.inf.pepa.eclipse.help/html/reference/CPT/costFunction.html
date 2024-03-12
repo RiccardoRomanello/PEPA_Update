@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Capacity planning tool reference: cost function</title>
+</head>
+
+<body>
+<h1>Cost Function</h1>
+
+			<center><img src="../../gettingstarted/capacityplanning/img/CPTCostFunction.png"></center>
+		<p>
+			Each particle in a PSO search evaluates a model configuration using a cost function. The cost function is the summation of the 
+			weighted <b>population cost</b> and the 
+			weighted <b>performance cost</b>.
+			The weights provide some tuning, the designer can use the weights to determine the importance of each cost in the search.
+		</p>
+		<p>
+			The summation and weights work as follows: 
+			<center><img src="../../gettingstarted/capacityplanning/img/CPTCostFunctionWeights.png"></center>
+		</p>
+
+
+<h3>Population cost</h3>
+			<center><img src="../../gettingstarted/capacityplanning/img/CPTPopulationCost.png"></center>
+		<p>
+			Population cost is the weighted sum of the population size of each component in that model configuration.
+		</p>
+		
+<h3>Performance cost</h3>
+			<center><img src="../../gettingstarted/capacityplanning/img/CPTartMeasure.png"></center>
+			<center><img src="../../gettingstarted/capacityplanning/img/CPTthrMeasure.png"></center>
+		<p>
+			Performance cost is dependent on the selection of performance measure. In either case the PSO is looking to reduce the cost as much as possible.
+			<b>Target</b> is the threshold or target performance the designer is looking for. <b>Measured</b> is performance measure of the evaluated model configuration. 
+		</p>
+		
+</body>
+
+</html>

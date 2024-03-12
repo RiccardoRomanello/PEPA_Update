@@ -1,0 +1,13 @@
+	This package is concerned with steady-state analysis of PEPA models whose 
+	underlying representation is a Continous Time Markov Chain (CTMC).
+<p>
+	Solvers all share the same interface <code>ISolver</code>, whose instances
+	are obtained via the factory <code>SolverFactory</code>. ISolver is
+	also responsible for the knowledge of the currently available solvers, which
+	are listed as ISolver's public constants.
+<p>
+	Solver implementations are taken from LGPL-based libraries such as 
+	MTJ - Matrix Toolkit for Java. Necessary classes for library bridging
+	and adapting are available descending the <code>ctmc</code> 
+	package hierarchy: For example, MTJ adaptation is available 
+	in <code>uk.ac.ed.inf.pepa.ctmc.solution.mtj</code>

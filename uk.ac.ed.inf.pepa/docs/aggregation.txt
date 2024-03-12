@@ -1,0 +1,23 @@
+Measurement Data for Aggregation Operator
+
+File name: browser.pepa
+
+--
+Number of browsers: 4
+Standard: 297 states
+Aggregation: 146
+
+--
+Number of browsers: 7
+Standard: 12393
+Aggregation: 551
+
+--
+Number of browsers: 8
+Standard: 41553
+Aggregation: 744
+
+--
+Number of browsers: 16
+Standard: to be computed
+Aggregation: 3332

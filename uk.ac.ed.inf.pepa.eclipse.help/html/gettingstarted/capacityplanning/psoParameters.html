@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Capacity planning tool reference: PSO Parameters</title>
+</head>
+
+<body>
+<h1>PSO parameters</h1>
+
+<h3>Particle velocity</h3>
+	<p>
+	
+	Each particle has a velocity. Every iteration the velocity is affected by three parameters:
+	
+	<ol>
+	<li> <b> Original velocity weight
+	<li> Personal best weight
+	<li> Global best weight </b>
+	</ol>
+	
+	Below we describe how a new particle position is calculated, how a particle moves through the search space:
+	
+	<center><img src="../../gettingstarted/capacityplanning/img/CPTNewPosition.png"></center>
+	
+	</p>
+	
+<h3>Population count</h3>
+	<p>
+	The number of particle agents used to search in the model configurations search space.
+	</p>
+	
+<h3>Generations</h3>
+	<p>
+	The number of iterations over which the meta heuristic will be run. For the HC, this is the number of mutations the algorithm will try; for the
+	PSO, this is the maximum number of particle moves that will be attempted.
+	</p>
+	
+<h3>Experiments</h3>
+
+	<center><img src="../../gettingstarted/capacityplanning/img/CPTLabToMH.png"></center>
+
+	<p>
+	A Lab runs a number of '<i>experiments</i>'. An experiment is a new seeding (start position/parameter configuration) of a PSO Lab or 
+	particle population in the model configuration search space. They are called experiments because we are testing to 
+	see if this seeding will yeild better results. Experiments are useful as they increase the chance of finding an optimal result. 
+	Setting up experiments saves the model designer from needing to repeat PSO or HC runs. 
+	</p>
+<p>
+The following three values give the weight or importance to be given to certain characteristics of a particle at the end of a move when its velocity for the next move is calculated.</p> 
+	
+<h3>Original velocity</h3>
+	<p>
+	This is the velocity of the particle on the previous move. Setting this weight higher makes the particle 'heavier', and less
+	likely to change course.
+	</p>
+	
+<h3>Personal best</h3>
+	<p>
+	As a particle moves through the search space it will find its own personal best model configuration, or position, in the search space. 
+	Giving more weight to the personal best makes the particle more attracted to its own findings than those of other particles. Setting this higher
+	than other weights could lead to the particles never converging; as they each prefer their own locations.
+	</p>
+	
+<h3>Global best</h3>
+	<p>
+	As the PSO iterates it will find a global best position --- the best position found by the PSO (by any particle, in any generation) so far. 
+	This weight determines how much a particle will be attracted to the global best position. Setting this weight too high could make the PSO
+	converge too early as the particles will be strongly attracted to the best position. 
+	</p>
+
+</html>

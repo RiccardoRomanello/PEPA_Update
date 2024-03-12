@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 TRANSITIONAL//EN">
+<html>
+	<head>
+		<title>Basic Syntax</title>
+	</head>
+	<body>
+		<h3>Basic Syntax</h3>
+		<p>
+			<b>Rate Assignments</b> must precede any process definition. 
+			A rate identifier is valid if it is a valid Java
+			identifier starting with a lowercase letter. Rate assignments
+			support expressions. They must end with a semicolon
+			<pre>
+				r1 = 1.0;
+				r2 = 2.0 * r1 - 0.05;
+			</pre>
+		</p>
+		<p>
+			<b>Process Assignments</b> A process identifier is valid if it is 
+			a valid Java identifier starting with an uppercase letter. As usual
+			an identifier can represent a Choice or a Prefix. It can also identify
+			subparts of the system when it is assigned a cooperation. Process
+			assignments must end with a semicolon
+			<pre>
+				P1 = (a, r1).P1 + (b, r2).P1;
+			</pre>
+		</p>
+		<p>
+			<b>Passive Rates</b> can be specified as either <code>infty</code> or 
+			<code>T</code>. Weights can be assigned as integer numbers. Weights however
+			cannot be rate identifiers. If no weight is specified, the default value
+			<code>1</code> is assumed.
+			<pre>
+				(a, T).P
+				(b, infty).P
+				(a, 3 * infty).P
+			</pre>
+		</p>
+		<p>
+			<b>Cooperation Sets</b> are enclosed by . Cooperations with empty action set
+			can be alternately specified with the parallel operation <code>||</code>.
+			<pre>
+				P <a,b,c> Q
+				P || P
+			</pre>
+		</p>
+		<p>
+			<b>Aggregation</b> is partially supported by the plugin. If a cooperation on an empty 
+			action set between <code>n</code> is declared as <code>P[n]</code> then a canonical
+			form representation for the process is considered during state space derivation
+			of the underlying Markov chain.
+		</p>
+	
+	</body>
+</html>

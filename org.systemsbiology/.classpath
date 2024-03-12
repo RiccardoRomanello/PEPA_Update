@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="lib" path="lib/Jama.jar" sourcepath="org.systemsbiologysrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="lib/odeToJava.jar" sourcepath="org.systemsbiologysrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="lib/SBMLReader.jar" sourcepath="org.systemsbiologysrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="lib/SBWCore.jar" sourcepath="org.systemsbiologysrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="lib/ssj.jar" sourcepath="org.systemsbiologysrc.zip"/>
+	<classpathentry exported="true" kind="lib" path="lib/colt.jar" sourcepath="org.systemsbiologysrc.zip"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

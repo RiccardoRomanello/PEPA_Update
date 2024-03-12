@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 TRANSITIONAL//EN">
+<html>
+	<head>
+		<title>Particle Swarm Optimisation (PSO)</title>
+	</head>
+	<body>
+	
+		<h3>Starting a PSO</h3>
+	
+		<center><img src="img/single.png"></center>
+		
+		<br>
+		<p>
+		The above is a screen shot of the PSO options menu being highlighted in the PEPA Eclipse plug-in project.
+		To start a PSO go to the PEPA menu, select <i>capacity planning</i>, <i>PSO</i> and then choose the type of performance target you would like to create.
+		</p>
+		
+	<h3>Overview</h3>
+	
+	<p> The CPT uses a PSO to search through the <b>model configuration search space</b>.
+	A PSO creates a <b>population</b> of particle agents; these are seeded randomly in the search space. In each generation/iteration, 
+	each particle 'moves' through the search space. A particle moves through the model configuration search space looking for an optimal 
+	model configuration based on a user defined <b>cost function</b>. 
+	The PSO in the CPT has six parameters: 
+	
+	<ol>
+	<li> Experiments
+	<li> Generation
+	<li> Population count
+	<li> Original velocity
+	<li> Personal best
+	<li> Global best
+	</ol>
+	
+	<br> 
+	</p>
+		
+		
+		<center><img src="img/CPTPSOOverview.png"></center>
+		
+		<ol>
+		<li> A PSO Lab creates a number of PSO <b>experiments</b>, each experiment is a single PSO run. 
+		The model designer can define the number of experiments to run; HC and PSO are stochastic heuristics, running a number 
+		of experiments increases the chance of a good outcome.
+		<li> A PSO run (each experiment) seeds a number of particle agents, and moves the particles through the model configuration search space
+		until either the particles converge, or the number of moves exceeds the generation count. 
+		<li> Each move the particles evaluate the model configuration using the <b>cost function</b>.
+		</ol>
+		
+	For more information about PSO in general see <a href="http://en.wikipedia.org/wiki/Particle_swarm_optimization">wiki</a> for details.
+		
+	</body>
+</html>

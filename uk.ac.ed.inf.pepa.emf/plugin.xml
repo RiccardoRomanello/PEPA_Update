@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.2 2007/01/25 16:06:49 mtribast Exp $
+-->
+
+<plugin>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http:///uk/ac/ed/inf/pepa/model.ecore" 
+       class = "uk.ac.ed.inf.pepa.emf.EmfPackage"
+       genModel = "model/pepa.genmodel" /> 
+  </extension>
+
+</plugin>
+

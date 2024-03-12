@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Main Topic</title>
+</head>
+
+<body>
+<h1>Time Series Analysis</h1>
+
+<h3>Gillespie Stochastic Algorithm</h3>
+The Gillespie stochastic algorithm is an algorithm for 
+modelling the kinetics of a set of coupled chemical reactions,
+taking into account stochastic effects from low copy numbers 
+of the chemical species. In Gillespie's approach, chemical 
+reaction kinetics are modelled as a Markov process in which 
+reactions occur at specific instants of time defining 
+intervals that are Poisson-distributed, with a mean reaction time 
+interval that is recomputed after each chemical reaction occurs. 
+For each chemical reaction interval, a specific chemical reaction 
+occurs, randomly selected from the set of all possible 
+reactions with a weight given by the individual reaction rates.
+
+<h3>Gibson-Bruck Stochastic Algorithm</h3>
+This implementation uses the "next reaction" variant of 
+the Gibson and Bruck algorithm. The Gibson-Bruck algorithm 
+is O(log(# reactions)), so it is preferred over the Gillespie 
+algorithm for models with a large number of reactions and/or 
+species. For models with a small number of reactions and 
+species, the Gillespie algorithm is preferred, as it 
+avoids the overhead of maintaining the complex data structures 
+needed for the Gibson-Bruck algorithm.
+
+<h3>Fixed step-size 5th-order Runge-Kutta ODE Solver</h3>
+Stephen Ramseys implementation of a 5th-order Runge-Kutta ODE solver with a fixed step-size. It is useful in certain cases where the adaptive step-size Runge-Kutta solver fails to work efficiently. The accuracy of the solution will depend on how small the step-size is, which must be specified. The computational cost is proportional to the number of steps (the length of the simulation run/step-size.
+
+<h3>Adaptive step-size 5th-order Runge-Kutta ODE Solver</h3>
+Stephen Ramseys implementation of a 5th-order Runge-Kutta ODE solver with adaptive step-size control. The step-size control is based on an error estimation formula that is accurate to 4th order. This particular implementation is deemed not very efficient by the writer but seems to work well for a wide variety of models. The initial step-size and desired relative/absolute accuracy tolerances must be specified.
+
+<h3>Adaptive step-size 5th-order Dormand-Prince ODE Solver</h3>
+This is the Patterson/Spiteri implementation of the 5th-order Dormand-Prince ODE solver, with adaptive step-size control. It is very similar to the Adaptive step-size 5th-order Runge-Kutta ODE Solver, but seems to be more aggressive with taking large time steps. Thus, it will generally be faster but it is useful to check your results with the Adaptive step-size 5th-order Runge-Kutta ODE Solver above. Currently one of two independent ODE solvers within ISBJava.
+
+<h3>Implicit-Explicit Runge-Kutta ODE Solver</h3>
+This is the Patterson/Spiteri implementation of an Implicit-Explicit Runge-Kutta ODE solver. It is mostly useful for solving models that have a high degree of stiffness. Useful if the other ODE solvers seem to get bogged down and run very slowly. Currently one of two independent ODE solvers within ISBJava. 
+
+</body>
+</html>

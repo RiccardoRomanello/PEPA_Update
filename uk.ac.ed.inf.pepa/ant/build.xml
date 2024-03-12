@@ -1,0 +1,96 @@
+<project name="PEPAto" default="compile" basedir="..">
+	<!-- 
+		 ********************************************************
+		 
+		 README IMPORTANT
+		 This build file has been removed from the project root
+		 directory because of a know issues about build.xml files
+		 being silently cancelled by update project builders.
+		 
+		 The article were this is reported is the Eclipse Keep-up-to-date
+		 article available on the Web.
+		 
+		 Check out this project's basedir attribute befor building 
+		 the system.
+		 
+		 ********************************************************
+	-->
+	<description>
+		Builds the PEPAto library. Includes classes for parsing PEPA files,
+		static analysis, deriving state space and calculating certain statistics.
+	</description>
+	<property name="cup" location="src/cup" />
+	<property name="jflex" location="src/jflex" />
+	<property name="src" location="src" />
+	<property name="bin" location="bin" />
+	<property name="lib" location="lib" />
+
+	<!-- We rely on CUP-11a & JFlex 1.4.1  -->
+	<!-- JFlex.jar only required for jflex target -->
+
+	<!-- fileset for the compilation -->
+	<fileset dir="${lib}" id="libraries.fileset">
+		<include name="**/*.jar" />
+		<exclude name="**/JFlex.jar"/>
+	</fileset>
+
+	<!-- fileset for the jar file -->
+	<fileset dir="." id="jarlib.fileset">
+		<include name="lib/" />
+		<exclude name="lib/JFlex.jar" />
+		<!-- exclude name="lib/java-cup-11a.jar" / -->
+	</fileset>
+
+	<!-- Creates the string for the Class-path,
+	     dynamically created from the jar fileset above-->
+	<pathconvert property="manifest.classpath" pathsep=" ">
+		<path>
+			<fileset refid="libraries.fileset" />
+		</path>
+		<chainedmapper>
+			<flattenmapper />
+			<globmapper from="*" to="lib/*" />
+		</chainedmapper>
+	</pathconvert>
+
+	<path id="libraries">
+		<fileset refid="libraries.fileset" />
+		<pathelement path="${java.class.path}" />
+	</path>
+
+	<taskdef name="jflex" classname="JFlex.anttask.JFlexTask" classpath="${lib}/JFlex.jar" />
+
+	<taskdef name="cup" classname="java_cup.anttask.CUPTask" classpath="${lib}/java-cup-11a.jar" />
+
+	<target name="cup">
+		<cup srcfile="${cup}/PepaLocation.cup" destdir="${src}" interface="true" parser="PepaParser" symbols="PepaToken" />
+	</target>
+
+	<target name="jflex">
+		<jflex file="${jflex}/PepaLocation.jflex" destdir="${src}" />
+	</target>
+
+	<target name="compile" depends="cup, jflex" description="Compiles the PEPAto package.">
+		<mkdir dir="${bin}" />
+		<javac srcdir="${src}" destdir="${bin}">
+			<classpath refid="libraries" />
+		</javac>
+	</target>
+
+	<target name="jar" depends="compile" description="Creates the PEPAto.jar file which can be used in further projects.">
+		<!--unjar dest="${bin}">
+			<fileset refid="jarlib.fileset" />
+		</unjar-->
+		<jar compress="true" jarfile="${ant.project.name}.jar" basedir="${bin}">
+			<manifest>
+				<attribute name="Class-Path" value="${manifest.classpath}" />
+			</manifest>
+			<fileset refid="jarlib.fileset" />
+		</jar>
+	</target>
+
+	<target name="clean" description="Removes the projects build files in the form of the bin directory and the jar file.">
+		<delete dir="${bin}" />
+		<delete file="${ant.project.name}.jar" />
+	</target>
+</project>

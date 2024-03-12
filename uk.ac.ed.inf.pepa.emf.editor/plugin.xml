@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.2 2007/10/10 18:05:16 mtribast Exp $
+-->
+
+<plugin>
+
+
+  <extension
+    point = "org.eclipse.ui.newWizards">
+    <category
+      id = "org.eclipse.emf.ecore.Wizard.category.ID"
+      name="%_UI_Wizard_category">
+    </category>
+    <wizard
+      id = "uk.ac.ed.inf.pepa.emf.presentation.EmfModelWizardID"
+      name = "%_UI_EmfModelWizard_label"
+      class = "uk.ac.ed.inf.pepa.emf.presentation.EmfModelWizard"
+      category = "org.eclipse.emf.ecore.Wizard.category.ID"
+      icon = "icons/full/obj16/EmfModelFile.gif">
+      <description>%_UI_EmfModelWizard_description</description>
+      <selection class = "org.eclipse.core.resources.IResource" />
+    </wizard>
+  </extension>
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+          class="uk.ac.ed.inf.pepa.emf.presentation.EmfEditor"
+          contributorClass="uk.ac.ed.inf.pepa.emf.presentation.EmfActionBarContributor"
+          default="true"
+          extensions="emfpepa"
+          icon="icons/full/obj16/EmfModelFile.gif"
+          id="uk.ac.ed.inf.pepa.emf.presentation.EmfEditorID"
+          name="%_UI_EmfEditor_label">
+    </editor>
+  </extension>
+  <extension
+        point="org.eclipse.ui.editorActions">
+     <editorContribution
+           id="uk.ac.ed.inf.pepa.emf.editor.convertToEmf"
+           targetID="uk.ac.ed.inf.pepa.eclipse.ui.editor.PEPAEditor">
+        <action
+              class="uk.ac.ed.inf.emf.actions.ConvertToEMFActionDelegate"
+              id="uk.ac.ed.inf.pepa.emf.editor.action1"
+              label="Convert to EMF..."
+              menubarPath="uk.ac.ed.inf.pepa.eclipse.ui.editorMenu/additions"
+              style="push">
+        </action>
+     </editorContribution>
+  </extension>    
+</plugin>

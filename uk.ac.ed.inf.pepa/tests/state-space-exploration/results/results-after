@@ -1,0 +1,69 @@
+# State space exploration timings for the new buffered implementation
+# The buffer size is static and set to 40
+# Main result: there is less memory allocated,
+# compare x-large-t against the previous implementation,
+# the garbage collector has less work to do.
+#
+
+kdc.pepa
+State space size: 80730
+Elapsed derivation: 2078
+Elapsed derivation: 1735
+Elapsed derivation: 1641
+Avg derivation: 1818.0
+
+alternatingbit.pepa
+State space size: 26385
+Elapsed derivation: 562
+Elapsed derivation: 563
+Elapsed derivation: 563
+Avg derivation: 562.6666666666666
+
+ws-large.pepa
+State space size: 47220
+Elapsed derivation: 2750
+Elapsed derivation: 2609
+Elapsed derivation: 2594
+Avg derivation: 2651.0
+
+RKIP_MEK.pepa
+State space size: 51327
+Elapsed derivation: 7015
+Elapsed derivation: 7000
+Elapsed derivation: 7016
+Avg derivation: 7010.333333333333
+
+large-t.pepa
+State space size: 65536
+Elapsed derivation: 13046
+Elapsed derivation: 12469
+Elapsed derivation: 12328
+Avg derivation: 12614.333333333334
+
+medium-t.pepa
+State space size: 65536
+Elapsed derivation: 7656
+Elapsed derivation: 7641
+Elapsed derivation: 7765
+Avg derivation: 7687.333333333333
+
+x-large-t.pepa
+State space size: 262144
+Elapsed derivation: 77453
+Elapsed derivation: 76563
+Elapsed derivation: 111547
+Avg derivation: 88521.0
+
+static/deadlockfree/jobshop5.pepa
+State space size: 704645
+Elapsed derivation: 57094
+Elapsed derivation: 52781
+Elapsed derivation: 52578
+Avg derivation: 54151.0
+
+production.pepa
+State space size: 17846
+Elapsed derivation: 250
+Elapsed derivation: 266
+Elapsed derivation: 250
+Avg derivation: 255.33333333333334

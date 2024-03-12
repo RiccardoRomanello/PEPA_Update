@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: PEPA Documentation
+Bundle-SymbolicName: uk.ac.ed.inf.pepa.eclipse.help;singleton:=true
+Bundle-Version: 0.0.24
+Bundle-ClassPath: uk.ac.ed.inf.pepa.eclipse.help
+Bundle-Vendor: LFCS - The University of Edinburgh
+Bundle-Localization: plugin
+Require-Bundle: org.eclipse.help

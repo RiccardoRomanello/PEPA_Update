@@ -1,0 +1,510 @@
+Reading C:/Europa-Workspace/uk.ac.ed.inf.pepa/tests/state-space-exploration/kdc.pepa
+Run #1
+Left: KDC Component at position: 0, length: 1 Right:Process array, offset: 1, length:22
+Buf: 6
+State space size: 80730
+Elapsed derivation: 2078
+Run #2
+Left: KDC Component at position: 0, length: 1 Right:Process array, offset: 1, length:22
+Buf: 6
+State space size: 80730
+Elapsed derivation: 1735
+Run #3
+Left: KDC Component at position: 0, length: 1 Right:Process array, offset: 1, length:22
+Buf: 6
+State space size: 80730
+Elapsed derivation: 1641
+C:/Europa-Workspace/uk.ac.ed.inf.pepa/tests/state-space-exploration/kdc.pepa
+Avg derivation: 1818.0
+Reading C:/Europa-Workspace/uk.ac.ed.inf.pepa/tests/state-space-exploration/alternatingbit.pepa
+Run #1
+Left: Left: Process array, offset: 0, length:2 Right:Process array, offset: 2, length:2 Right:Process array, offset: 4, length:2
+Buf: 11
+Left: Process array, offset: 0, length:2 Right:Process array, offset: 2, length:2
+Buf: 10
+State space size: 26385
+Elapsed derivation: 562
+Run #2
+Left: Left: Process array, offset: 0, length:2 Right:Process array, offset: 2, length:2 Right:Process array, offset: 4, length:2
+Buf: 11
+Left: Process array, offset: 0, length:2 Right:Process array, offset: 2, length:2
+Buf: 10
+State space size: 26385
+Elapsed derivation: 563
+Run #3
+Left: Left: Process array, offset: 0, length:2 Right:Process array, offset: 2, length:2 Right:Process array, offset: 4, length:2
+Buf: 11
+Left: Process array, offset: 0, length:2 Right:Process array, offset: 2, length:2
+Buf: 10
+State space size: 26385
+Elapsed derivation: 563
+C:/Europa-Workspace/uk.ac.ed.inf.pepa/tests/state-space-exploration/alternatingbit.pepa
+Avg derivation: 562.6666666666666
+Reading C:/Europa-Workspace/uk.ac.ed.inf.pepa/tests/state-space-exploration/ws-large.pepa
+Run #1
+Left: Left: Left: Left: Process array, offset: 0, length:2 Right:Writer Component at position: 2, length: 1 Right:Left: Reader Component at position: 3, length: 1 Right:Process array, offset: 4, length:2 Right:RW_reset Component at position: 6, length: 1 Right:Left: Left: Left: Left: Server Component at position: 7, length: 1 Right:Server Component at position: 8, length: 1 Right:Process array, offset: 9, length:3 Right:Process array, offset: 12, length:3 Right:Process array, offset: 15, length:2
+Buf: 22
+Left: Left: Left: Process array, offset: 0, length:2 Right:Writer Component at position: 2, length: 1 Right:Left: Reader Component at position: 3, length: 1 Right:Process array, offset: 4, length:2 Right:RW_reset Component at position: 6, length: 1
+Buf: 5
+Left: Left: Process array, offset: 0, length:2 Right:Writer Component at position: 2, length: 1 Right:Left: Reader Component at position: 3, length: 1 Right:Process array, offset: 4, length:2
+Buf: 5
+Left: Process array, offset: 0, length:2 Right:Writer Component at position: 2, length: 1
+Buf: 2
+Left: Reader Component at position: 3, length: 1 Right:Process array, offset: 4, length:2
+Buf: 3
+Left: Left: Left: Left: Server Component at position: 7, length: 1 Right:Server Component at position: 8, length: 1 Right:Process array, offset: 9, length:3 Right:Process array, offset: 12, length:3 Right:Process array, offset: 15, length:2
+Buf: 18
+Left: Left: Left: Server Component at position: 7, length: 1 Right:Server Component at position: 8, length: 1 Right:Process array, offset: 9, length:3 Right:Process array, offset: 12, length:3
+Buf: 14
+Left: Left: Server Component at position: 7, length: 1 Right:Server Component at position: 8, length: 1 Right:Process array, offset: 9, length:3
+Buf: 10
+Left: Server Component at position: 7, length: 1 Right:Server Component at position: 8, length: 1
+Buf: 5
+State space size: 47220
+Elapsed derivation: 2750
+Run #2
+Left: Left: Left: Left: Process array, offset: 0, length:2 Right:Writer Component at position: 2, length: 1 Right:Left: Reader Component at position: 3, length: 1 Right:Process array, offset: 4, length:2 Right:RW_reset Component at position: 6, length: 1 Right:Left: Left: Left: Left: Server Component at position: 7, length: 1 Right:Server Component at position: 8, length: 1 Right:Process array, offset: 9, length:3 Right:Process array, offset: 12, length:3 Right:Process array, offset: 15, length:2
+Buf: 22
+Left: Left: Left: Process array, offset: 0, length:2 Right:Writer Component at position: 2, length: 1 Right:Left: Reader Component at position: 3, length: 1 Right:Process array, offset: 4, length:2 Right:RW_reset Component at position: 6, length: 1
+Buf: 5
+Left: Left: Process array, offset: 0, length:2 Right:Writer Component at position: 2, length: 1 Right:Left: Reader Component at position: 3, length: 1 Right:Process array, offset: 4, length:2
+Buf: 5
+Left: Process array, offset: 0, length:2 Right:Writer Component at position: 2, length: 1
+Buf: 2
+Left: Reader Component at position: 3, length: 1 Right:Process array, offset: 4, length:2
+Buf: 3
+Left: Left: Left: Left: Server Component at position: 7, length: 1 Right:Server Component at position: 8, length: 1 Right:Process array, offset: 9, length:3 Right:Process array, offset: 12, length:3 Right:Process array, offset: 15, length:2
+Buf: 18
+Left: Left: Left: Server Component at position: 7, length: 1 Right:Server Component at position: 8, length: 1 Right:Process array, offset: 9, length:3 Right:Process array, offset: 12, length:3
+Buf: 14
+Left: Left: Server Component at position: 7, length: 1 Right:Server Component at position: 8, length: 1 Right:Process array, offset: 9, length:3
+Buf: 10
+Left: Server Component at position: 7, length: 1 Right:Server Component at position: 8, length: 1
+Buf: 5
+State space size: 47220
+Elapsed derivation: 2609
+Run #3
+Left: Left: Left: Left: Process array, offset: 0, length:2 Right:Writer Component at position: 2, length: 1 Right:Left: Reader Component at position: 3, length: 1 Right:Process array, offset: 4, length:2 Right:RW_reset Component at position: 6, length: 1 Right:Left: Left: Left: Left: Server Component at position: 7, length: 1 Right:Server Component at position: 8, length: 1 Right:Process array, offset: 9, length:3 Right:Process array, offset: 12, length:3 Right:Process array, offset: 15, length:2
+Buf: 22
+Left: Left: Left: Process array, offset: 0, length:2 Right:Writer Component at position: 2, length: 1 Right:Left: Reader Component at position: 3, length: 1 Right:Process array, offset: 4, length:2 Right:RW_reset Component at position: 6, length: 1
+Buf: 5
+Left: Left: Process array, offset: 0, length:2 Right:Writer Component at position: 2, length: 1 Right:Left: Reader Component at position: 3, length: 1 Right:Process array, offset: 4, length:2
+Buf: 5
+Left: Process array, offset: 0, length:2 Right:Writer Component at position: 2, length: 1
+Buf: 2
+Left: Reader Component at position: 3, length: 1 Right:Process array, offset: 4, length:2
+Buf: 3
+Left: Left: Left: Left: Server Component at position: 7, length: 1 Right:Server Component at position: 8, length: 1 Right:Process array, offset: 9, length:3 Right:Process array, offset: 12, length:3 Right:Process array, offset: 15, length:2
+Buf: 18
+Left: Left: Left: Server Component at position: 7, length: 1 Right:Server Component at position: 8, length: 1 Right:Process array, offset: 9, length:3 Right:Process array, offset: 12, length:3
+Buf: 14
+Left: Left: Server Component at position: 7, length: 1 Right:Server Component at position: 8, length: 1 Right:Process array, offset: 9, length:3
+Buf: 10
+Left: Server Component at position: 7, length: 1 Right:Server Component at position: 8, length: 1
+Buf: 5
+State space size: 47220
+Elapsed derivation: 2594
+C:/Europa-Workspace/uk.ac.ed.inf.pepa/tests/state-space-exploration/ws-large.pepa
+Avg derivation: 2651.0
+Reading C:/Europa-Workspace/uk.ac.ed.inf.pepa/tests/state-space-exploration/RKIP_MEK.pepa
+Run #1
+Left: Process array, offset: 0, length:10 Right:Left: Process array, offset: 10, length:10 Right:Left: Process array, offset: 20, length:5 Right:Left: Process array, offset: 25, length:3 Right:Left: Process array, offset: 28, length:2 Right:Left: Process array, offset: 30, length:2 Right:Left: Process array, offset: 32, length:3 Right:Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 15
+Left: Process array, offset: 10, length:10 Right:Left: Process array, offset: 20, length:5 Right:Left: Process array, offset: 25, length:3 Right:Left: Process array, offset: 28, length:2 Right:Left: Process array, offset: 30, length:2 Right:Left: Process array, offset: 32, length:3 Right:Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 15
+Left: Process array, offset: 20, length:5 Right:Left: Process array, offset: 25, length:3 Right:Left: Process array, offset: 28, length:2 Right:Left: Process array, offset: 30, length:2 Right:Left: Process array, offset: 32, length:3 Right:Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 15
+Left: Process array, offset: 25, length:3 Right:Left: Process array, offset: 28, length:2 Right:Left: Process array, offset: 30, length:2 Right:Left: Process array, offset: 32, length:3 Right:Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 13
+Left: Process array, offset: 28, length:2 Right:Left: Process array, offset: 30, length:2 Right:Left: Process array, offset: 32, length:3 Right:Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 13
+Left: Process array, offset: 30, length:2 Right:Left: Process array, offset: 32, length:3 Right:Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 13
+Left: Process array, offset: 32, length:3 Right:Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 12
+Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 12
+Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 9
+Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 9
+Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 7
+Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 5
+State space size: 51327
+Elapsed derivation: 7015
+Run #2
+Left: Process array, offset: 0, length:10 Right:Left: Process array, offset: 10, length:10 Right:Left: Process array, offset: 20, length:5 Right:Left: Process array, offset: 25, length:3 Right:Left: Process array, offset: 28, length:2 Right:Left: Process array, offset: 30, length:2 Right:Left: Process array, offset: 32, length:3 Right:Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 15
+Left: Process array, offset: 10, length:10 Right:Left: Process array, offset: 20, length:5 Right:Left: Process array, offset: 25, length:3 Right:Left: Process array, offset: 28, length:2 Right:Left: Process array, offset: 30, length:2 Right:Left: Process array, offset: 32, length:3 Right:Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 15
+Left: Process array, offset: 20, length:5 Right:Left: Process array, offset: 25, length:3 Right:Left: Process array, offset: 28, length:2 Right:Left: Process array, offset: 30, length:2 Right:Left: Process array, offset: 32, length:3 Right:Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 15
+Left: Process array, offset: 25, length:3 Right:Left: Process array, offset: 28, length:2 Right:Left: Process array, offset: 30, length:2 Right:Left: Process array, offset: 32, length:3 Right:Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 13
+Left: Process array, offset: 28, length:2 Right:Left: Process array, offset: 30, length:2 Right:Left: Process array, offset: 32, length:3 Right:Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 13
+Left: Process array, offset: 30, length:2 Right:Left: Process array, offset: 32, length:3 Right:Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 13
+Left: Process array, offset: 32, length:3 Right:Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 12
+Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 12
+Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 9
+Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 9
+Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 7
+Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 5
+State space size: 51327
+Elapsed derivation: 7000
+Run #3
+Left: Process array, offset: 0, length:10 Right:Left: Process array, offset: 10, length:10 Right:Left: Process array, offset: 20, length:5 Right:Left: Process array, offset: 25, length:3 Right:Left: Process array, offset: 28, length:2 Right:Left: Process array, offset: 30, length:2 Right:Left: Process array, offset: 32, length:3 Right:Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 15
+Left: Process array, offset: 10, length:10 Right:Left: Process array, offset: 20, length:5 Right:Left: Process array, offset: 25, length:3 Right:Left: Process array, offset: 28, length:2 Right:Left: Process array, offset: 30, length:2 Right:Left: Process array, offset: 32, length:3 Right:Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 15
+Left: Process array, offset: 20, length:5 Right:Left: Process array, offset: 25, length:3 Right:Left: Process array, offset: 28, length:2 Right:Left: Process array, offset: 30, length:2 Right:Left: Process array, offset: 32, length:3 Right:Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 15
+Left: Process array, offset: 25, length:3 Right:Left: Process array, offset: 28, length:2 Right:Left: Process array, offset: 30, length:2 Right:Left: Process array, offset: 32, length:3 Right:Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 13
+Left: Process array, offset: 28, length:2 Right:Left: Process array, offset: 30, length:2 Right:Left: Process array, offset: 32, length:3 Right:Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 13
+Left: Process array, offset: 30, length:2 Right:Left: Process array, offset: 32, length:3 Right:Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 13
+Left: Process array, offset: 32, length:3 Right:Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 12
+Left: Process array, offset: 35, length:7 Right:Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 12
+Left: Process array, offset: 42, length:3 Right:Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 9
+Left: Process array, offset: 45, length:3 Right:Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 9
+Left: Process array, offset: 48, length:8 Right:Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 7
+Left: Process array, offset: 56, length:3 Right:Process array, offset: 59, length:8
+Buf: 5
+State space size: 51327
+Elapsed derivation: 7016
+C:/Europa-Workspace/uk.ac.ed.inf.pepa/tests/state-space-exploration/RKIP_MEK.pepa
+Avg derivation: 7010.333333333333
+Reading C:/Europa-Workspace/uk.ac.ed.inf.pepa/tests/state-space-exploration/large-t.pepa
+Run #1
+Left: Left: Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1 Right:P1 Component at position: 6, length: 1 Right:Q1 Component at position: 7, length: 1
+Buf: 72
+Left: Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1 Right:P1 Component at position: 6, length: 1
+Buf: 66
+Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1
+Buf: 54
+Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1
+Buf: 48
+Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1
+Buf: 36
+Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1
+Buf: 30
+Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1
+Buf: 24
+State space size: 65536
+Elapsed derivation: 13046
+Run #2
+Left: Left: Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1 Right:P1 Component at position: 6, length: 1 Right:Q1 Component at position: 7, length: 1
+Buf: 72
+Left: Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1 Right:P1 Component at position: 6, length: 1
+Buf: 66
+Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1
+Buf: 54
+Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1
+Buf: 48
+Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1
+Buf: 36
+Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1
+Buf: 30
+Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1
+Buf: 24
+State space size: 65536
+Elapsed derivation: 12469
+Run #3
+Left: Left: Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1 Right:P1 Component at position: 6, length: 1 Right:Q1 Component at position: 7, length: 1
+Buf: 72
+Left: Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1 Right:P1 Component at position: 6, length: 1
+Buf: 66
+Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1
+Buf: 54
+Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1
+Buf: 48
+Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1
+Buf: 36
+Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1
+Buf: 30
+Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1
+Buf: 24
+State space size: 65536
+Elapsed derivation: 12328
+C:/Europa-Workspace/uk.ac.ed.inf.pepa/tests/state-space-exploration/large-t.pepa
+Avg derivation: 12614.333333333334
+Reading C:/Europa-Workspace/uk.ac.ed.inf.pepa/tests/state-space-exploration/medium-t.pepa
+Run #1
+Left: Left: Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1 Right:P1 Component at position: 6, length: 1 Right:Q1 Component at position: 7, length: 1
+Buf: 48
+Left: Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1 Right:P1 Component at position: 6, length: 1
+Buf: 42
+Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1
+Buf: 36
+Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1
+Buf: 30
+Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1
+Buf: 24
+Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1
+Buf: 18
+Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1
+Buf: 12
+State space size: 65536
+Elapsed derivation: 7656
+Run #2
+Left: Left: Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1 Right:P1 Component at position: 6, length: 1 Right:Q1 Component at position: 7, length: 1
+Buf: 48
+Left: Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1 Right:P1 Component at position: 6, length: 1
+Buf: 42
+Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1
+Buf: 36
+Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1
+Buf: 30
+Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1
+Buf: 24
+Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1
+Buf: 18
+Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1
+Buf: 12
+State space size: 65536
+Elapsed derivation: 7641
+Run #3
+Left: Left: Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1 Right:P1 Component at position: 6, length: 1 Right:Q1 Component at position: 7, length: 1
+Buf: 48
+Left: Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1 Right:P1 Component at position: 6, length: 1
+Buf: 42
+Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1
+Buf: 36
+Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1
+Buf: 30
+Left: Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1
+Buf: 24
+Left: Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1 Right:Q1 Component at position: 2, length: 1
+Buf: 18
+Left: P1 Component at position: 0, length: 1 Right:P1 Component at position: 1, length: 1
+Buf: 12
+State space size: 65536
+Elapsed derivation: 7765
+C:/Europa-Workspace/uk.ac.ed.inf.pepa/tests/state-space-exploration/medium-t.pepa
+Avg derivation: 7687.333333333333
+Reading C:/Europa-Workspace/uk.ac.ed.inf.pepa/tests/state-space-exploration/x-large-t.pepa
+Run #1
+Left: Left: Left: Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1 Right:P1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1 Right:P1 Component at position: 6, length: 1 Right:Q1 Component at position: 7, length: 1 Right:P1 Component at position: 8, length: 1
+Buf: 108
+Left: Left: Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1 Right:P1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1 Right:P1 Component at position: 6, length: 1 Right:Q1 Component at position: 7, length: 1
+Buf: 96
+Left: Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1 Right:P1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1 Right:P1 Component at position: 6, length: 1
+Buf: 84
+Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1 Right:P1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1
+Buf: 72
+Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1 Right:P1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1
+Buf: 60
+Left: Left: Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1 Right:P1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1
+Buf: 48
+Left: Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1 Right:P1 Component at position: 2, length: 1
+Buf: 36
+Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1
+Buf: 24
+State space size: 262144
+Elapsed derivation: 77453
+Run #2
+Left: Left: Left: Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1 Right:P1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1 Right:P1 Component at position: 6, length: 1 Right:Q1 Component at position: 7, length: 1 Right:P1 Component at position: 8, length: 1
+Buf: 108
+Left: Left: Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1 Right:P1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1 Right:P1 Component at position: 6, length: 1 Right:Q1 Component at position: 7, length: 1
+Buf: 96
+Left: Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1 Right:P1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1 Right:P1 Component at position: 6, length: 1
+Buf: 84
+Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1 Right:P1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1
+Buf: 72
+Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1 Right:P1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1
+Buf: 60
+Left: Left: Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1 Right:P1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1
+Buf: 48
+Left: Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1 Right:P1 Component at position: 2, length: 1
+Buf: 36
+Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1
+Buf: 24
+State space size: 262144
+Elapsed derivation: 76563
+Run #3
+Left: Left: Left: Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1 Right:P1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1 Right:P1 Component at position: 6, length: 1 Right:Q1 Component at position: 7, length: 1 Right:P1 Component at position: 8, length: 1
+Buf: 108
+Left: Left: Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1 Right:P1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1 Right:P1 Component at position: 6, length: 1 Right:Q1 Component at position: 7, length: 1
+Buf: 96
+Left: Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1 Right:P1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1 Right:P1 Component at position: 6, length: 1
+Buf: 84
+Left: Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1 Right:P1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1 Right:Q1 Component at position: 5, length: 1
+Buf: 72
+Left: Left: Left: Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1 Right:P1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1 Right:P1 Component at position: 4, length: 1
+Buf: 60
+Left: Left: Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1 Right:P1 Component at position: 2, length: 1 Right:Q1 Component at position: 3, length: 1
+Buf: 48
+Left: Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1 Right:P1 Component at position: 2, length: 1
+Buf: 36
+Left: P1 Component at position: 0, length: 1 Right:Q1 Component at position: 1, length: 1
+Buf: 24
+State space size: 262144
+Elapsed derivation: 111547
+C:/Europa-Workspace/uk.ac.ed.inf.pepa/tests/state-space-exploration/x-large-t.pepa
+Avg derivation: 88521.0
+Reading C:/Europa-Workspace/uk.ac.ed.inf.pepa/tests/state-space-exploration/verysimple.pepa
+Run #1
+State space size: 2
+Elapsed derivation: 16
+Run #2
+State space size: 2
+Elapsed derivation: 0
+Run #3
+State space size: 2
+Elapsed derivation: 0
+C:/Europa-Workspace/uk.ac.ed.inf.pepa/tests/state-space-exploration/verysimple.pepa
+Avg derivation: 5.333333333333333
+Reading C:/Europa-Workspace/uk.ac.ed.inf.pepa/tests/state-space-exploration/static/deadlockfree/jobshop5.pepa
+Run #1
+Left: Left: Left: Left: Left: PoliteWorker0 Component at position: 0, length: 1 Right:PoliteWorker0 Component at position: 1, length: 1 Right:PoliteWorker0 Component at position: 2, length: 1 Right:PoliteWorker0 Component at position: 3, length: 1 Right:SimpleWorker0 Component at position: 4, length: 1 Right:Left: Left: Left: Left: Left: Hammer_free Component at position: 5, length: 1 Right:Hammer_free Component at position: 6, length: 1 Right:Hammer_free Component at position: 7, length: 1 Right:Hammer_free Component at position: 8, length: 1 Right:Hammer_free Component at position: 9, length: 1 Right:Left: Left: Left: Left: Chisel_free Component at position: 10, length: 1 Right:Chisel_free Component at position: 11, length: 1 Right:Chisel_free Component at position: 12, length: 1 Right:Chisel_free Component at position: 13, length: 1 Right:Chisel_free Component at position: 14, length: 1
+Buf: 45
+Left: Left: Left: Left: PoliteWorker0 Component at position: 0, length: 1 Right:PoliteWorker0 Component at position: 1, length: 1 Right:PoliteWorker0 Component at position: 2, length: 1 Right:PoliteWorker0 Component at position: 3, length: 1 Right:SimpleWorker0 Component at position: 4, length: 1
+Buf: 9
+Left: Left: Left: PoliteWorker0 Component at position: 0, length: 1 Right:PoliteWorker0 Component at position: 1, length: 1 Right:PoliteWorker0 Component at position: 2, length: 1 Right:PoliteWorker0 Component at position: 3, length: 1
+Buf: 8
+Left: Left: PoliteWorker0 Component at position: 0, length: 1 Right:PoliteWorker0 Component at position: 1, length: 1 Right:PoliteWorker0 Component at position: 2, length: 1
+Buf: 6
+Left: PoliteWorker0 Component at position: 0, length: 1 Right:PoliteWorker0 Component at position: 1, length: 1
+Buf: 4
+Left: Left: Left: Left: Left: Hammer_free Component at position: 5, length: 1 Right:Hammer_free Component at position: 6, length: 1 Right:Hammer_free Component at position: 7, length: 1 Right:Hammer_free Component at position: 8, length: 1 Right:Hammer_free Component at position: 9, length: 1 Right:Left: Left: Left: Left: Chisel_free Component at position: 10, length: 1 Right:Chisel_free Component at position: 11, length: 1 Right:Chisel_free Component at position: 12, length: 1 Right:Chisel_free Component at position: 13, length: 1 Right:Chisel_free Component at position: 14, length: 1
+Buf: 10
+Left: Left: Left: Left: Hammer_free Component at position: 5, length: 1 Right:Hammer_free Component at position: 6, length: 1 Right:Hammer_free Component at position: 7, length: 1 Right:Hammer_free Component at position: 8, length: 1 Right:Hammer_free Component at position: 9, length: 1
+Buf: 5
+Left: Left: Left: Hammer_free Component at position: 5, length: 1 Right:Hammer_free Component at position: 6, length: 1 Right:Hammer_free Component at position: 7, length: 1 Right:Hammer_free Component at position: 8, length: 1
+Buf: 4
+Left: Left: Hammer_free Component at position: 5, length: 1 Right:Hammer_free Component at position: 6, length: 1 Right:Hammer_free Component at position: 7, length: 1
+Buf: 3
+Left: Hammer_free Component at position: 5, length: 1 Right:Hammer_free Component at position: 6, length: 1
+Buf: 2
+Left: Left: Left: Left: Chisel_free Component at position: 10, length: 1 Right:Chisel_free Component at position: 11, length: 1 Right:Chisel_free Component at position: 12, length: 1 Right:Chisel_free Component at position: 13, length: 1 Right:Chisel_free Component at position: 14, length: 1
+Buf: 5
+Left: Left: Left: Chisel_free Component at position: 10, length: 1 Right:Chisel_free Component at position: 11, length: 1 Right:Chisel_free Component at position: 12, length: 1 Right:Chisel_free Component at position: 13, length: 1
+Buf: 4
+Left: Left: Chisel_free Component at position: 10, length: 1 Right:Chisel_free Component at position: 11, length: 1 Right:Chisel_free Component at position: 12, length: 1
+Buf: 3
+Left: Chisel_free Component at position: 10, length: 1 Right:Chisel_free Component at position: 11, length: 1
+Buf: 2
+State space size: 704645
+Elapsed derivation: 57094
+Run #2
+Left: Left: Left: Left: Left: PoliteWorker0 Component at position: 0, length: 1 Right:PoliteWorker0 Component at position: 1, length: 1 Right:PoliteWorker0 Component at position: 2, length: 1 Right:PoliteWorker0 Component at position: 3, length: 1 Right:SimpleWorker0 Component at position: 4, length: 1 Right:Left: Left: Left: Left: Left: Hammer_free Component at position: 5, length: 1 Right:Hammer_free Component at position: 6, length: 1 Right:Hammer_free Component at position: 7, length: 1 Right:Hammer_free Component at position: 8, length: 1 Right:Hammer_free Component at position: 9, length: 1 Right:Left: Left: Left: Left: Chisel_free Component at position: 10, length: 1 Right:Chisel_free Component at position: 11, length: 1 Right:Chisel_free Component at position: 12, length: 1 Right:Chisel_free Component at position: 13, length: 1 Right:Chisel_free Component at position: 14, length: 1
+Buf: 45
+Left: Left: Left: Left: PoliteWorker0 Component at position: 0, length: 1 Right:PoliteWorker0 Component at position: 1, length: 1 Right:PoliteWorker0 Component at position: 2, length: 1 Right:PoliteWorker0 Component at position: 3, length: 1 Right:SimpleWorker0 Component at position: 4, length: 1
+Buf: 9
+Left: Left: Left: PoliteWorker0 Component at position: 0, length: 1 Right:PoliteWorker0 Component at position: 1, length: 1 Right:PoliteWorker0 Component at position: 2, length: 1 Right:PoliteWorker0 Component at position: 3, length: 1
+Buf: 8
+Left: Left: PoliteWorker0 Component at position: 0, length: 1 Right:PoliteWorker0 Component at position: 1, length: 1 Right:PoliteWorker0 Component at position: 2, length: 1
+Buf: 6
+Left: PoliteWorker0 Component at position: 0, length: 1 Right:PoliteWorker0 Component at position: 1, length: 1
+Buf: 4
+Left: Left: Left: Left: Left: Hammer_free Component at position: 5, length: 1 Right:Hammer_free Component at position: 6, length: 1 Right:Hammer_free Component at position: 7, length: 1 Right:Hammer_free Component at position: 8, length: 1 Right:Hammer_free Component at position: 9, length: 1 Right:Left: Left: Left: Left: Chisel_free Component at position: 10, length: 1 Right:Chisel_free Component at position: 11, length: 1 Right:Chisel_free Component at position: 12, length: 1 Right:Chisel_free Component at position: 13, length: 1 Right:Chisel_free Component at position: 14, length: 1
+Buf: 10
+Left: Left: Left: Left: Hammer_free Component at position: 5, length: 1 Right:Hammer_free Component at position: 6, length: 1 Right:Hammer_free Component at position: 7, length: 1 Right:Hammer_free Component at position: 8, length: 1 Right:Hammer_free Component at position: 9, length: 1
+Buf: 5
+Left: Left: Left: Hammer_free Component at position: 5, length: 1 Right:Hammer_free Component at position: 6, length: 1 Right:Hammer_free Component at position: 7, length: 1 Right:Hammer_free Component at position: 8, length: 1
+Buf: 4
+Left: Left: Hammer_free Component at position: 5, length: 1 Right:Hammer_free Component at position: 6, length: 1 Right:Hammer_free Component at position: 7, length: 1
+Buf: 3
+Left: Hammer_free Component at position: 5, length: 1 Right:Hammer_free Component at position: 6, length: 1
+Buf: 2
+Left: Left: Left: Left: Chisel_free Component at position: 10, length: 1 Right:Chisel_free Component at position: 11, length: 1 Right:Chisel_free Component at position: 12, length: 1 Right:Chisel_free Component at position: 13, length: 1 Right:Chisel_free Component at position: 14, length: 1
+Buf: 5
+Left: Left: Left: Chisel_free Component at position: 10, length: 1 Right:Chisel_free Component at position: 11, length: 1 Right:Chisel_free Component at position: 12, length: 1 Right:Chisel_free Component at position: 13, length: 1
+Buf: 4
+Left: Left: Chisel_free Component at position: 10, length: 1 Right:Chisel_free Component at position: 11, length: 1 Right:Chisel_free Component at position: 12, length: 1
+Buf: 3
+Left: Chisel_free Component at position: 10, length: 1 Right:Chisel_free Component at position: 11, length: 1
+Buf: 2
+State space size: 704645
+Elapsed derivation: 52781
+Run #3
+Left: Left: Left: Left: Left: PoliteWorker0 Component at position: 0, length: 1 Right:PoliteWorker0 Component at position: 1, length: 1 Right:PoliteWorker0 Component at position: 2, length: 1 Right:PoliteWorker0 Component at position: 3, length: 1 Right:SimpleWorker0 Component at position: 4, length: 1 Right:Left: Left: Left: Left: Left: Hammer_free Component at position: 5, length: 1 Right:Hammer_free Component at position: 6, length: 1 Right:Hammer_free Component at position: 7, length: 1 Right:Hammer_free Component at position: 8, length: 1 Right:Hammer_free Component at position: 9, length: 1 Right:Left: Left: Left: Left: Chisel_free Component at position: 10, length: 1 Right:Chisel_free Component at position: 11, length: 1 Right:Chisel_free Component at position: 12, length: 1 Right:Chisel_free Component at position: 13, length: 1 Right:Chisel_free Component at position: 14, length: 1
+Buf: 45
+Left: Left: Left: Left: PoliteWorker0 Component at position: 0, length: 1 Right:PoliteWorker0 Component at position: 1, length: 1 Right:PoliteWorker0 Component at position: 2, length: 1 Right:PoliteWorker0 Component at position: 3, length: 1 Right:SimpleWorker0 Component at position: 4, length: 1
+Buf: 9
+Left: Left: Left: PoliteWorker0 Component at position: 0, length: 1 Right:PoliteWorker0 Component at position: 1, length: 1 Right:PoliteWorker0 Component at position: 2, length: 1 Right:PoliteWorker0 Component at position: 3, length: 1
+Buf: 8
+Left: Left: PoliteWorker0 Component at position: 0, length: 1 Right:PoliteWorker0 Component at position: 1, length: 1 Right:PoliteWorker0 Component at position: 2, length: 1
+Buf: 6
+Left: PoliteWorker0 Component at position: 0, length: 1 Right:PoliteWorker0 Component at position: 1, length: 1
+Buf: 4
+Left: Left: Left: Left: Left: Hammer_free Component at position: 5, length: 1 Right:Hammer_free Component at position: 6, length: 1 Right:Hammer_free Component at position: 7, length: 1 Right:Hammer_free Component at position: 8, length: 1 Right:Hammer_free Component at position: 9, length: 1 Right:Left: Left: Left: Left: Chisel_free Component at position: 10, length: 1 Right:Chisel_free Component at position: 11, length: 1 Right:Chisel_free Component at position: 12, length: 1 Right:Chisel_free Component at position: 13, length: 1 Right:Chisel_free Component at position: 14, length: 1
+Buf: 10
+Left: Left: Left: Left: Hammer_free Component at position: 5, length: 1 Right:Hammer_free Component at position: 6, length: 1 Right:Hammer_free Component at position: 7, length: 1 Right:Hammer_free Component at position: 8, length: 1 Right:Hammer_free Component at position: 9, length: 1
+Buf: 5
+Left: Left: Left: Hammer_free Component at position: 5, length: 1 Right:Hammer_free Component at position: 6, length: 1 Right:Hammer_free Component at position: 7, length: 1 Right:Hammer_free Component at position: 8, length: 1
+Buf: 4
+Left: Left: Hammer_free Component at position: 5, length: 1 Right:Hammer_free Component at position: 6, length: 1 Right:Hammer_free Component at position: 7, length: 1
+Buf: 3
+Left: Hammer_free Component at position: 5, length: 1 Right:Hammer_free Component at position: 6, length: 1
+Buf: 2
+Left: Left: Left: Left: Chisel_free Component at position: 10, length: 1 Right:Chisel_free Component at position: 11, length: 1 Right:Chisel_free Component at position: 12, length: 1 Right:Chisel_free Component at position: 13, length: 1 Right:Chisel_free Component at position: 14, length: 1
+Buf: 5
+Left: Left: Left: Chisel_free Component at position: 10, length: 1 Right:Chisel_free Component at position: 11, length: 1 Right:Chisel_free Component at position: 12, length: 1 Right:Chisel_free Component at position: 13, length: 1
+Buf: 4
+Left: Left: Chisel_free Component at position: 10, length: 1 Right:Chisel_free Component at position: 11, length: 1 Right:Chisel_free Component at position: 12, length: 1
+Buf: 3
+Left: Chisel_free Component at position: 10, length: 1 Right:Chisel_free Component at position: 11, length: 1
+Buf: 2
+State space size: 704645
+Elapsed derivation: 52578
+C:/Europa-Workspace/uk.ac.ed.inf.pepa/tests/state-space-exploration/static/deadlockfree/jobshop5.pepa
+Avg derivation: 54151.0
+Reading C:/Europa-Workspace/uk.ac.ed.inf.pepa/tests/state-space-exploration/production.pepa
+Run #1
+Left: Robot Component at position: 0, length: 1 Right:Left: Left: Left: Belt Component at position: 1, length: 1 Right:Table Component at position: 2, length: 1 Right:Press Component at position: 3, length: 1 Right:Left: DBelt_1 Component at position: 4, length: 1 Right:Crane Component at position: 5, length: 1
+Buf: 6
+Left: Left: Left: Belt Component at position: 1, length: 1 Right:Table Component at position: 2, length: 1 Right:Press Component at position: 3, length: 1 Right:Left: DBelt_1 Component at position: 4, length: 1 Right:Crane Component at position: 5, length: 1
+Buf: 6
+Left: Left: Belt Component at position: 1, length: 1 Right:Table Component at position: 2, length: 1 Right:Press Component at position: 3, length: 1
+Buf: 3
+Left: Belt Component at position: 1, length: 1 Right:Table Component at position: 2, length: 1
+Buf: 2
+Left: DBelt_1 Component at position: 4, length: 1 Right:Crane Component at position: 5, length: 1
+Buf: 3
+State space size: 17846
+Elapsed derivation: 250
+Run #2
+Left: Robot Component at position: 0, length: 1 Right:Left: Left: Left: Belt Component at position: 1, length: 1 Right:Table Component at position: 2, length: 1 Right:Press Component at position: 3, length: 1 Right:Left: DBelt_1 Component at position: 4, length: 1 Right:Crane Component at position: 5, length: 1
+Buf: 6
+Left: Left: Left: Belt Component at position: 1, length: 1 Right:Table Component at position: 2, length: 1 Right:Press Component at position: 3, length: 1 Right:Left: DBelt_1 Component at position: 4, length: 1 Right:Crane Component at position: 5, length: 1
+Buf: 6
+Left: Left: Belt Component at position: 1, length: 1 Right:Table Component at position: 2, length: 1 Right:Press Component at position: 3, length: 1
+Buf: 3
+Left: Belt Component at position: 1, length: 1 Right:Table Component at position: 2, length: 1
+Buf: 2
+Left: DBelt_1 Component at position: 4, length: 1 Right:Crane Component at position: 5, length: 1
+Buf: 3
+State space size: 17846
+Elapsed derivation: 266
+Run #3
+Left: Robot Component at position: 0, length: 1 Right:Left: Left: Left: Belt Component at position: 1, length: 1 Right:Table Component at position: 2, length: 1 Right:Press Component at position: 3, length: 1 Right:Left: DBelt_1 Component at position: 4, length: 1 Right:Crane Component at position: 5, length: 1
+Buf: 6
+Left: Left: Left: Belt Component at position: 1, length: 1 Right:Table Component at position: 2, length: 1 Right:Press Component at position: 3, length: 1 Right:Left: DBelt_1 Component at position: 4, length: 1 Right:Crane Component at position: 5, length: 1
+Buf: 6
+Left: Left: Belt Component at position: 1, length: 1 Right:Table Component at position: 2, length: 1 Right:Press Component at position: 3, length: 1
+Buf: 3
+Left: Belt Component at position: 1, length: 1 Right:Table Component at position: 2, length: 1
+Buf: 2
+Left: DBelt_1 Component at position: 4, length: 1 Right:Crane Component at position: 5, length: 1
+Buf: 3
+State space size: 17846
+Elapsed derivation: 250
+C:/Europa-Workspace/uk.ac.ed.inf.pepa/tests/state-space-exploration/production.pepa
+Avg derivation: 255.33333333333334

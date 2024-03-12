@@ -1,0 +1,122 @@
+// This example shows the subtleties of steady-state analysis.
+// ODE integration of the model over the first 40 time units,
+// observing the processor components PS1 and PS2 shows that
+// the system has reached an equilibrium regime. However,
+// calculating at this time point  the average response time of the clients 
+// gives a much differet value than the correct one  calculated
+// using automatic detection of steady-state based on the relative
+// error between two successive integration steps of the 
+// differential equation.
+nu = 50.0;
+
+r_cache = 20.0;
+r_int = 3.0;
+r_ext = 4.0;
+r_prep = 5.0;
+r_disp = 8.0;
+r_uni = 5.0;
+r_cur = 4.0;
+r_con = 4.0;
+r_reg = 3.5;
+
+r_read  = 5.0;
+r_write = 3.0;
+
+r_lgc = 3.0;
+r_lgd = 3.5;
+
+r_think = 0.08;
+
+p = 0.95;
+n_s = 200;
+n_p = 20;
+n_d = 15;
+n_l = 15;
+n_ps = 8;
+n_pd = 8;
+
+StdThink  = (think, r_think).StdBrowse;
+StdBrowse  = (request_student_browse, nu).
+		(reply_student_browse, nu).StdSelect; 
+StdSelect  = (request_student_select, nu).
+		(reply_student_select, nu).StdConfirm; 
+StdConfirm  = (request_student_confirm, nu).
+		(reply_student_confirm, nu).StdRegister; 
+StdRegister  = (request_student_register, nu).
+		(reply_student_register, nu).StdThink;
+
+
+/* University Portal */
+Portal  =  (request_student_browse, nu).Browse
+		+  (request_student_select, nu).Select 
+		+  (request_student_confirm, nu).Confirm
+		+  (request_student_register,nu).Register;
+Browse  = (acquire_ps, nu).Cache;
+Cache   = (cache, p * r_cache).Internal + (cache, (1 - p) * r_cache).External; 
+Internal  = (acquire_ps, nu).(internal, r_int).BrowseRep; 
+External  = (request_external_read, nu).
+				(reply_external_read, nu).
+					(acquire_ps, nu).(external, r_ext).BrowseRep; 
+BrowseRep  =  (reply_student_browse, nu).Portal;
+//
+Select  = (acquire_ps, nu).(prepare, r_prep).ForkPrepare; 
+ForkPrepare  = (fork, nu).JoinPrepare; 
+JoinPrepare  = (join, nu).Display; 
+Display  = (acquire_ps, nu).(display, r_disp).SelectRep; 
+SelectRep  = (reply_student_select, nu).Portal; 
+//
+ValUni  = (fork, nu).(acquire_ps, nu).
+			(validate_uni, r_uni).(join, nu).ValUni;
+//
+ValCur  = (fork, nu).(acquire_ps, nu).
+			(validate_cur, r_cur).(join, nu).ValCur; 
+//
+Confirm = (acquire_ps, nu).(confirm, r_con).LogStudent; 
+LogStudent  = (request_confirm_log, nu).
+				(reply_confirm_log, nu).
+					(reply_student_confirm, nu).Portal;
+//
+Register  = (acquire_ps, nu).(register, r_reg).Store;
+Store  = (request_register_write, nu).
+			(reply_register_write, nu).
+				(reply_student_register, nu).Portal;
+
+/* Database component */
+Database  =  (request_external_read, nu).Read 
+		  +  (request_register_write, nu).Write; 
+Read  =  (acquire_pd, nu).(read, r_read).ReadReply; 
+ReadReply  =  (reply_external_read, nu).Database; 
+Write  =  (acquire_pd, nu).(write, r_write).LogWrite; 
+LogWrite  =  (request_database_log, nu).
+				(reply_database_log, nu).WriteReply; 
+WriteReply  =  (reply_register_write, nu).Database; 
+
+/* Logger Service */
+Logger  =  (request_confirm_log, nu).LogConfirm 
+	    +  (request_database_log, nu).LogDatabase; 
+LogConfirm   =  (acquire_pd, nu).(log_conf, r_lgc).ReplyConfirm; 
+ReplyConfirm =  (reply_confirm_log, nu).Logger; 
+LogDatabase  =  (acquire_pd, nu).(log_db, r_lgd).ReplyDatabase;
+ReplyDatabase=  (reply_database_log, nu).Logger; 	
+
+/* Logger and Database processor */
+PD_1  =  (acquire_pd, nu).PD_2; 
+PD_2  =  (read, r_read).PD_1 +(write, r_write).PD_1 
+	  +  (log_conf, r_lgc).PD_1 +(log_db, r_lgd).PD_1; 
+	  
+/* University Portal Processor */
+PS_1  =  (acquire_ps, nu).PS_2; 
+PS_2  =  (cache, r_cache).PS_1 + (internal, r_int).PS_1 
+	  +  (external, r_ext).PS_1 + (prepare, r_prep).PS_1 
+	  +  (display, r_disp).PS_1 +  (validate_uni, r_uni).PS_1 
+	  +  (validate_cur, r_cur).PS_1 + (confirm, r_con).PS_1
+	  +  (register, r_reg).PS_1; 
+
+	 			  	
+StdThink[n_s] <*> ((Portal[n_p] <fork,join> ValUni[n_p] <fork,join> ValCur[n_p]) 
+	<request_external_read, reply_external_read,
+	 request_register_write,reply_register_write>
+	 	Database[n_d] <request_confirm_log, reply_confirm_log,
+	 			  request_database_log,reply_database_log> Logger[n_l]) 
+	 			  	<*> (PS_1[n_ps] <> PD_1[n_pd])
+	 			  	

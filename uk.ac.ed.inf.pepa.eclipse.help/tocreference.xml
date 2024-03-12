@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="Reference" link_to="toc.xml#reference"> 
+	<topic label="Analysis"> 
+		<topic label="Time Series Analysis" href="html/reference/timeSeriesAnalysis.html"/> 
+	</topic>
+ <topic label="Capacity Planning Tool">
+    <topic href="html/reference/CPT/componentPopulation.html" label="Component populations">
+    </topic>
+    <topic href="html/reference/CPT/costFunction.html" label="Cost function">
+    </topic>
+    <topic href="html/reference/CPT/dpso.html" label="dPSO">
+    </topic>
+    <topic href="html/reference/CPT/pso.html" label="PSO">
+    </topic>
+    <topic href="html/reference/CPT/psoParameters.html" label="PSO Parameters">
+    </topic>
+ </topic>
+</toc>

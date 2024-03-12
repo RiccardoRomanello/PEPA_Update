@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="Getting Started" link_to="toc.xml#gettingstarted"> 
+	<topic label="Perspective" 
+		href="html/gettingstarted/perspective.html"/> 
+	<topic label="Editor"
+		href="html/gettingstarted/editor.html">
+		<topic label="Basic Syntax" 
+			href="html/gettingstarted/syntax.html"/>
+	</topic>
+	<topic label="AST View"
+		href="html/gettingstarted/astview.html"/>
+	<topic label="Graph View"
+		href="html/gettingstarted/graphview.html"/>
+	<topic label="Markovian Analysis">
+		<topic label="State Space Derivation" 
+			href="html/gettingstarted/derivation.html"/>
+		<topic label="State Space View"
+			href="html/gettingstarted/statespacederivation.html">
+			<topic label="Filtering the State Space"
+				href="html/gettingstarted/statespacefilters.html"/>
+			<topic label="Single Step Navigator"
+				href="html/gettingstarted/singlestepnavigator.html"/>
+			<topic label="Exporting the State Space"
+				href="html/gettingstarted/exportingstatespace.html"/>
+		</topic>
+		<topic label="Steady-State Analysis"
+			href="html/gettingstarted/steadystateanalysis.html"/>
+		<topic label="Performance Evaluation View"
+			href="html/gettingstarted/performanceevaluationview.html"/>
+		<topic label="Experimentation" 
+			href="html/gettingstarted/experimentation.html"/>
+	</topic>
+	<topic label="Time Series Analysis"
+		href="html/gettingstarted/timeseriesanalysis.html"/>
+	<topic label="Importing from UML"
+		href="html/gettingstarted/importinguml.html"/>
+ <topic label="Capacity Planning">
+    <topic href="html/gettingstarted/capacityplanning/capacityplanning.html" label="Capacity Planning">
+    </topic>
+    <topic label="Capacity planning: Driven Particle Swarm Optimisation (dPSO)">
+       <topic href="html/gettingstarted/capacityplanning/driven.html" label="Driven Particle Swarm Optimisation (dPSO)">
+       </topic>
+       <topic href="html/gettingstarted/capacityplanning/hillClimbingPage.html" label="Hill Climbing page">
+       </topic>
+       <topic href="html/gettingstarted/capacityplanning/costFunctionPage.html" label="Cost Function page">
+       </topic>
+       <topic href="html/gettingstarted/capacityplanning/actionStateSelectionpage.html" label="Action/State selection page">
+       </topic>
+       <topic href="html/gettingstarted/capacityplanning/targetThresholdpage.html" label="Target/Threshold page">
+       </topic>
+       <topic href="html/gettingstarted/capacityplanning/odePage.html" label="ODE settings page">
+       </topic>
+       <topic href="html/gettingstarted/capacityplanning/componentPopulationPage.html" label="Component Populations page">
+       </topic>
+       <topic href="html/gettingstarted/capacityplanning/saveAsPage.html" label="Save as page">
+       </topic>
+    </topic>
+    <topic label="Capacity planning: Particle Swarm Optimisation (PSO)">
+       <topic href="html/gettingstarted/capacityplanning/single.html" label="Single Particle Swarm Optimisation (PSO)">
+       </topic>
+       <topic href="html/gettingstarted/capacityplanning/psoPage.html" label="Particle Swarm Optimisation page">
+       </topic>
+       <topic href="html/gettingstarted/capacityplanning/costFunctionPage.html" label="Cost Function page">
+       </topic>
+       <topic href="html/gettingstarted/capacityplanning/actionStateSelectionpage.html" label="Action/State selection page">
+       </topic>
+       <topic href="html/gettingstarted/capacityplanning/targetThresholdpage.html" label="Target/Threshold page">
+       </topic>
+       <topic href="html/gettingstarted/capacityplanning/odePage.html" label="ODE settings page">
+       </topic>
+       <topic href="html/gettingstarted/capacityplanning/componentPopulationPage.html" label="Component Populations page">
+       </topic>
+       <topic href="html/gettingstarted/capacityplanning/saveAsPage.html" label="Save as page">
+       </topic>
+    </topic>
+    <topic label="Capacity planning: The results">
+       <topic href="html/gettingstarted/capacityplanning/results.html" label="How to find the results">
+       </topic>
+       <topic href="html/gettingstarted/capacityplanning/tableView.html" label="Capacity Planning Table">
+       </topic>
+       <topic href="html/gettingstarted/capacityplanning/treeView.html" label="Capacity Planning Tree">
+       </topic>
+    </topic>
+ </topic>
+</toc>

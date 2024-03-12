@@ -1,0 +1,140 @@
+// Different implementation from working-model
+// Here, the lifelines are guarded by choice, 
+// whereas in working-model the threads are
+
+// placeholder for immediate rates
+immediate = 100000.0;
+
+// other rates
+r_admit = 1.0 / 1.8;
+r_alarm = 1.0 / 1.8;
+r_cache = 1 / 1.5;
+r_check_rights = 1.0 / 0.3;
+r_choice_door_open = 1.0;
+r_enter_building = 1.0;
+r_get_rights = 1.0 / 1.8;
+r_need_log = 1.0;
+r_open_door = 1 / 500;
+r_read_card = 1.0;
+r_read_rights = 1.0 / 1.8;
+r_read_data = 1.0 / 1.5;
+r_write_rec = 1 / 3.0;
+r_write_event = 1 / 1.8;
+
+// probabilities
+p_not_in_cache = 0.4;
+p_door_open = 0.99;
+p_need_log = 0.2;
+// *******************************************
+// User lifeline
+// *******************************************
+User0 = (start, 0.5).User1;
+User1 = (alarm, infty).User0 + (openDoor, infty).User2;
+User2 = (enterBuilding, infty).User0;
+// Ansynchronous message for user 0
+// --
+// guarded by the observation of action start
+ReadCard0 = (start, infty).ReadCard1;
+ReadCard1 = (readCard, r_read_card).ReadCard0;
+
+// *******************************************
+// Card Reader lifeline
+// *******************************************
+// Does nothing, but the execution of readCard
+// will trigger the asynchronous message admit
+CardReader0 = (readCard, infty).CardReader0;
+// Ansychronous thread for admit message
+Admit0 = (readCard, infty).Admit1;
+Admit1 = (admit, r_admit).Admit0;
+
+// *******************************************
+// Access Controller lifeline
+// *******************************************
+AC0 = (admit, infty).AC1;
+AC1 = (getRights, r_get_rights).AC2;
+AC2 = (readRights_send, immediate).AC3;
+AC3 = (readRights_rcv, immediate).AC4;
+AC4 = (checkRights, r_check_rights).AC5;
+// makes the choice if the door is open
+AC5 = (openDoor, r_choice_door_open * p_door_open).AC6 +
+	  (alarm, r_choice_door_open * (1 - p_door_open)).AC6;
+AC6 = (needLog_true, p_need_log * r_need_log).AC7 +
+ 	  (needLog_false, (1 - p_need_log) * r_need_log).AC0;
+// need log branch
+AC7 = (writeEvent_send, immediate).AC8;
+AC8 = (writeEvent_rcv, immediate).AC0;
+// Asynchronous openDoor message
+OpenDoor0 = (openDoor, infty).OpenDoor1 + (alarm, infty).OpenDoor0;
+OpenDoor1 = (doOpenDoor, r_open_door).OpenDoor0;
+// Asynchronous alarm message
+AlarmMsg0 = (openDoor, infty).AlarmMsg0 + (alarm, infty).AlarmMsg1;
+AlarmMsg1 = (doAlarm, r_alarm).AlarmMsg0;
+
+// *******************************************
+// DoorLock lifeline
+// *******************************************
+DoorLock0 = (openDoor, infty).DoorLock1 + (alarm, infty).DoorLock0;
+DoorLock1 = (doOpenDoor, infty).DoorLock0;
+// Enter building message
+EnterBuilding0 = (doOpenDoor, infty).EnterBuilding1;
+EnterBuilding1 = (enterBuilding, r_enter_building).EnterBuilding0;
+
+// *******************************************
+// Alarm lifeline
+// *******************************************
+Alarm0 = (openDoor, infty).Alarm0 + (alarm, infty).Alarm1;
+Alarm1 = (doAlarm, infty).Alarm0;
+
+// *******************************************
+// Database lifeline
+// *******************************************
+DB0 = (readRights_send, immediate).DB1;
+DB1 = (doReadRights, r_read_rights).DB2;
+DB2 = (notInCache_true, p_not_in_cache * r_cache).DB3 +
+	  (notInCache_false, (1 - p_not_in_cache) * r_cache).DB5;
+	// not in cache
+	DB3 = (readData_send, immediate).DB4;
+	DB4 = (readData_rcv, immediate).DB5;
+	
+DB5 = (readRights_rcv, immediate).DB6;
+DB6 = (needLog_true, infty).DB7 + (needLog_false, infty).DB0;
+DB7 = (writeEvent_send, immediate).DB8_DO;
+DB8_DO = (doWriteEvent, r_write_event).DB8;
+DB8 = (writeRec_send, immediate).DB9;
+DB9 = (writeRec_rcv, immediate).DB10;
+DB10 = (writeEvent_rcv, immediate).DB0;
+
+
+
+// *******************************************
+// Disk lifeline
+// *******************************************
+Disk0 = (notInCache_true, infty).Disk1 + (notInCache_false, infty).Disk3;
+	// not in cache
+	Disk1 = (readData_send, immediate).Disk1_DO;
+	Disk1_DO = (doReadData, r_read_data).Disk2;
+	Disk2 = (readData_rcv, immediate).Disk3;
+
+Disk3 = (needLog_true, infty).Disk4 + (needLog_false, infty).Disk0;
+Disk4 = (writeRec_send, immediate).Disk4_DO;
+Disk4_DO = (doWriteRec, r_write_rec).Disk5;
+Disk5 = (writeRec_rcv, immediate).Disk0;
+
+
+//User0[1] <*> ReadCard0[1] <*> CardReader0[1] <*> 
+//	Admit0[1] <*> AC0[1] <*> OpenDoor0[1] <*> 
+//	AlarmMsg0[1] <*> DoorLock0[1] <*> EnterBuilding0[1] <*> Alarm0[1] 
+//		<*> DB0[1] <*> Disk0[1] 
+
+(User0[2] <start> ReadCard0[1] <readCard> CardReader0[1]) 
+ 	<openDoor, alarm, enterBuilding,readCard> 
+	 (EnterBuilding0[1] <doOpenDoor> 
+	  (Admit0[1] <admit>	
+		(DoorLock0[1] <openDoor, alarm, doOpenDoor> 
+		(Alarm0[1] <openDoor, alarm, doAlarm>
+		 (OpenDoor0[1] <openDoor, alarm> AlarmMsg0[1] <openDoor, alarm>
+		  (AC0[1] <readRights_send, readRights_rcv, needLog_true, 
+				 needLog_false, writeEvent_send, writeEvent_rcv>
+     		(DB0[10] <notInCache_true, notInCache_false, readData_send, 
+	 	             readData_rcv, needLog_true, needLog_false, 
+	 	             writeRec_send, writeRec_rcv> Disk0[2])))))))

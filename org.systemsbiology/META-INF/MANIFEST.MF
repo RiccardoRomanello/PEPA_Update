@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Systems Biology
+Bundle-SymbolicName: org.systemsbiology
+Bundle-Version: 1.0.0
+Bundle-ClassPath: .,
+ lib/Jama.jar,
+ lib/odeToJava.jar,
+ lib/SBMLReader.jar,
+ lib/SBWCore.jar,
+ lib/ssj.jar,
+ lib/colt.jar
+Export-Package: org.systemsbiology.chem,
+ org.systemsbiology.chem.odetojava,
+ org.systemsbiology.chem.tp,
+ org.systemsbiology.data,
+ org.systemsbiology.data.tp,
+ org.systemsbiology.math,
+ org.systemsbiology.math.probability,
+ org.systemsbiology.math.probability.tp,
+ org.systemsbiology.math.tp,
+ org.systemsbiology.util

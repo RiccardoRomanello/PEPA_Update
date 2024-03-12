@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 TRANSITIONAL//EN">
+<html>
+	<head>
+		<title>Time Series Analysis</title>
+	</head>
+	<body>
+		<h3>Time Series Analysis</h3>
+		<p>
+			Time series analysis can be carried out on a PEPA model via two
+			different techniques: ODE and SSA. The former is the result of the
+			mapping of a PEPA model to a set of Ordinary Differential Equation,
+			the latter runs Stochastic Simulation Algorithms on a PEPA model.
+			These functionalities are available under the 
+			<b>PEPA > Time Series Analysis</b> menu and they share parts of the
+			user interface.
+		</p>
+		<p>
+			To perform ODE analysis, click <b>PEPA > Time Series Analysis > ODE...</b>.
+			You will be provided with a dialog box for configuring the ODE solver.
+			On the left hand side you are required to check the components you 
+			want to investigate. The time series of each component will be shown
+			as a different line on the 2D graph for this analysis. On the right
+			hand side you are asked to select the ODE solver and set its main
+			parameters (start time, stop time, step and tolerance). Output
+			options are available to export the data model to disk. The wizard
+			also let you save the intermediate CMDL file, which is the format
+			used by the underlying library featuring the ODE solvers.
+		</p>
+		<p>
+			To perform SSA analysis, click <b>PEPA > Time Series Analysis > SSA...</b>.
+			You will be provided with a similar dialog box to the ODE one. An
+			important SSA-related parameter to set here is the number of 
+			replications used during the simulation.
+		</p>
+	</body>
+</html>

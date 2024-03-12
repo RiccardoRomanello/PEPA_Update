@@ -1,0 +1,79 @@
+/*
+Tests use of wildcard in coop sets. High-low reagent-centric approach
+*/
+
+k1 = 0.53;
+k2 = 0.0072;
+k3 = 0.625;
+k4 = 0.00245;
+k5 = 0.0315;
+k6 = 0.8;
+k7 = 0.0075;
+k8 = 0.071; 
+k9 = 0.92;
+k10 = 0.00122;
+k11 = 0.87;
+k12 = 0.8;
+k13 = 0.09;
+k14 = 0.5;
+k15 = 0.08;
+/*
+raf_1_Star = 2; //m1
+rKIP = 2.5; //m2
+raf_1_Star__RKIP = 0; //m3
+raf_1_Star__RKIP__ERK_PP = 0; //mm4
+eRK_P = 0; //m5
+rKIP_P =0; //m6
+mEK_PP = 2.5; //m7
+mEK_PP__ERK = 0; //m8
+eRK_PP = 2.5; //m9
+rP = 3; //m10
+rKIP_P__RP = 0; //m11
+mEK = 0 //m12
+mEK__Raf_1_Star = 0 //m13
+*/
+
+Raf_1_Star_H = (k1react, k1). Raf_1_Star_L  + (k12react,k12).Raf_1_Star_L;
+Raf_1_Star_L = (k5product, k5).Raf_1_Star_H + (k2react, k2). Raf_1_Star_H + (k13react, k13).Raf_1_Star_H + (k14product,k14).Raf_1_Star_H ;
+
+RKIP_H = (k1react, k1). RKIP_L; 
+RKIP_L = (k11product, k11).RKIP_H + (k2react, k2). RKIP_H;
+
+MEK_H = (k12react,k12). MEK_L;
+MEK_L =  (k13react,k13).MEK_H + (k15product,k15).MEK_H;
+
+MEK_PP_H = (k6react, k6).MEK_PP_L  + (k15product,k15). MEK_PP_L;
+MEK_PP_L = (k8product, k8).MEK_PP_H   + (k7react,k7).MEK_PP_H + (k14product,k14).MEK_PP_H;
+          
+MEK__Raf_1_Star_H = (k14product,k14).MEK__Raf_1_Star_L  + (k13react,k13). MEK__Raf_1_Star_L;
+MEK__Raf_1_Star_L = (k12react,k12).MEK__Raf_1_Star_H;
+
+ERK_PP_H = (k3react, k3).ERK_PP_L; 
+ERK_PP_L = (k8product, k8).ERK_PP_H + (k4react,k4).ERK_PP_H;
+
+ERK_P_H = (k6react, k6).ERK_P_L; 
+ERK_P_L = (k5product, k5).ERK_P_H + (k7react, k7).ERK_P_H;
+
+MEK_PP__ERK_P_H = (k8product, k8).MEK_PP__ERK_P_L + (k7react, k7).MEK_PP__ERK_P_L; 
+MEK_PP__ERK_P_L = (k6react, k6).MEK_PP__ERK_P_H;
+
+Raf_1_Star__RKIP_H = (k3react, k3).Raf_1_Star__RKIP_L + (k2react, k2).Raf_1_Star__RKIP_L; 
+Raf_1_Star__RKIP_L = (k1react, k1).Raf_1_Star__RKIP_H + (k4react, k4).Raf_1_Star__RKIP_H;
+
+Raf_1_Star__RKIP__ERK_PP_H = (k5product, k5).Raf_1_Star__RKIP__ERK_PP_L + (k4react, k4).Raf_1_Star__RKIP__ERK_PP_L; 
+Raf_1_Star__RKIP__ERK_PP_L = (k3react, k3).Raf_1_Star__RKIP__ERK_PP_H;
+
+RKIP_P_H = (k9react, k9).RKIP_P_L; 
+RKIP_P_L =  (k5product, k5).RKIP_P_H + (k10react, k10).RKIP_P_H;
+
+RP_H = (k9react, k9).RP_L; 
+RP_L = (k11product, k11).RP_H + (k10react, k10).RP_H;
+
+RKIP_P__RP_H = (k11product, k11).RKIP_P__RP_L + (k10react, k10).RKIP_P__RP_L; 
+RKIP_P__RP_L = (k9react, k9).RKIP_P__RP_H;
+
+
+Raf_1_Star_H[10] <*> RKIP_H[10] <*> Raf_1_Star__RKIP_L[5] <*> Raf_1_Star__RKIP__ERK_PP_L[3]
+	<*>
+	ERK_P_L[2] <*> RKIP_P_L[2] <*> RKIP_P__RP_L[3] <*> RP_H[7] <*> MEK_L[3] <*> MEK__Raf_1_Star_L[3] <*>
+     MEK_PP_H[8] <*> MEK_PP__ERK_P_L[3] <*> ERK_PP_H[8]

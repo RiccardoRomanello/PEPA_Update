@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 TRANSITIONAL//EN">
+<html>
+	<head>
+		<title>Driven Particle Swarm Optimisation (dPSO)</title>
+	</head>
+	<body>
+	
+		<h3>Starting a dPSO</h3>
+	
+		<center><img src="img/driven.png"></center>
+		
+		<br>
+		<p>
+		The above is a screen shot of the dPSO options menu being highlighted in the PEPA Eclipse plug-in project.
+		To start a dPSO go to the PEPA menu, select capacity planning, dPSO and then the type of performance you would like to evaluate.
+		</p>
+		
+	<h3>Overview</h3>
+	
+	<p>
+	Not all designers will have experience of using PSOs, and therefore the user may not know how to set the PSO
+	parameters for a capacity planning search. A dPSO uses a Hill Climbing algorithm (HC) to 'drive' many 
+	PSO searches. The HC has two settings, experiment count and generations. The more experiments and 
+	generations that the HC is allowed, the higher the chance of finding good solutions, but the longer 
+	the search will take to return results. This is an automated heuristic and it will work on behalf 
+	of the designer to find the best PSO parameters for an optimal model configuration search. It returns
+	with all the model configurations evaluated, but also the PSO parameters used to find these configurations.
+	This means the designer can use these PSO parameters in the future to run faster Single PSO searches.
+	</p>
+	
+		<center><img src="img/CPTdPSOOverView.png"></center>
+		
+		<ol>
+		<li> A Hill Climbing Lab creates a number of Hill Climbing experiments, each experiment is an HC	run. 
+		The designer can define the number of experiments to run; HC and PSO are stochastic heuristics, running a number 
+		of experiments increases the chance of a good outcome.
+		<li> A Hill Climbing Algorithm (each experiment) then iterates for a user-defined number of generations. Each generation is 
+		a HC search to configure the six parameters needed to create a PSO Lab: We expect the HC search to test for a better PSO Lab each generation. 
+		The HC determines the parameters for the PSO Lab, and then starts the PSO Lab experiments.
+		<li> A PSO Lab returns with the model configurations found by its underlying PSO.
+		</ol>
+		
+	</body>
+</html>

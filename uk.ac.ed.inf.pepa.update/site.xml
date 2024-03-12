@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/uk.ac.ed.inf.common.feature_0.0.13.jar" id="uk.ac.ed.inf.common.feature" version="0.0.13">
+      <category name="pepa"/>
+   </feature>
+   <feature url="features/uk.ac.ed.inf.biopepa_0.2.4.jar" id="uk.ac.ed.inf.biopepa" version="0.2.4">
+      <category name="pepa"/>
+   </feature>
+   <feature url="features/uk.ac.ed.inf.pepa.feature_0.0.27.jar" id="uk.ac.ed.inf.pepa.feature" version="0.0.27">
+      <category name="pepa"/>
+   </feature>
+   <category-def name="pepa" label="BioPEPA/PEPA"/>
+</site>

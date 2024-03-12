@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Ecore="http://www.eclipse.org/uml2/schemas/Ecore/3" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/2.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/uml2/schemas/Ecore/3 pathmap://UML_PROFILES/Ecore.profile.uml#_vy-HUYinEdqtvbnfB2L_5w">
+  <uml:Model xmi:id="_nM3nEK1FEduYDbadpxyu3g" name="emf">
+    <packagedElement xmi:type="uml:Class" xmi:id="_nM3nEa1FEduYDbadpxyu3g" name="Action" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nM3nEq1FEduYDbadpxyu3g" name="Activity">
+      <ownedAttribute xmi:id="_nM3nE61FEduYDbadpxyu3g" name="rate" type="_nM3nFa1FEduYDbadpxyu3g" isOrdered="true" aggregation="composite" association="_nM3nFq1FEduYDbadpxyu3g"/>
+      <ownedAttribute xmi:id="_nM3nFK1FEduYDbadpxyu3g" name="action" type="_nM3nEa1FEduYDbadpxyu3g" isOrdered="true" aggregation="composite" association="_nM3nGK1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nM3nFa1FEduYDbadpxyu3g" name="Rate" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_nM3nFq1FEduYDbadpxyu3g" memberEnd="_nM3nE61FEduYDbadpxyu3g _nM3nF61FEduYDbadpxyu3g">
+      <ownedEnd xmi:id="_nM3nF61FEduYDbadpxyu3g" type="_nM3nEq1FEduYDbadpxyu3g" association="_nM3nFq1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_nM3nGK1FEduYDbadpxyu3g" memberEnd="_nM3nFK1FEduYDbadpxyu3g _nM3nGa1FEduYDbadpxyu3g">
+      <ownedEnd xmi:id="_nM3nGa1FEduYDbadpxyu3g" type="_nM3nEq1FEduYDbadpxyu3g" association="_nM3nGK1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nM3nGq1FEduYDbadpxyu3g" name="Aggregation">
+      <generalization xmi:id="_nM3nG61FEduYDbadpxyu3g" general="_nM3nHq1FEduYDbadpxyu3g"/>
+      <ownedAttribute xmi:id="_nM3nHK1FEduYDbadpxyu3g" name="process" type="_nM3nI61FEduYDbadpxyu3g" isOrdered="true" aggregation="composite" association="_nM3nJq1FEduYDbadpxyu3g"/>
+      <ownedAttribute xmi:id="_nM3nHa1FEduYDbadpxyu3g" name="copies" visibility="public" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nM3nHq1FEduYDbadpxyu3g" name="ProcessWithSet" isAbstract="true">
+      <generalization xmi:id="_nM3nH61FEduYDbadpxyu3g" general="_nM3nI61FEduYDbadpxyu3g"/>
+      <ownedAttribute xmi:id="_nM3nIK1FEduYDbadpxyu3g" name="actions" type="_nM3nEa1FEduYDbadpxyu3g" isOrdered="true" aggregation="composite" association="_nM3nJK1FEduYDbadpxyu3g">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_nM3nIa1FEduYDbadpxyu3g" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nM3nIq1FEduYDbadpxyu3g"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nM3nI61FEduYDbadpxyu3g" name="Process" isAbstract="true"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_nM3nJK1FEduYDbadpxyu3g" memberEnd="_nM3nIK1FEduYDbadpxyu3g _nM3nJa1FEduYDbadpxyu3g">
+      <ownedEnd xmi:id="_nM3nJa1FEduYDbadpxyu3g" type="_nM3nHq1FEduYDbadpxyu3g" association="_nM3nJK1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_nM3nJq1FEduYDbadpxyu3g" memberEnd="_nM3nHK1FEduYDbadpxyu3g _nM3nJ61FEduYDbadpxyu3g">
+      <ownedEnd xmi:id="_nM3nJ61FEduYDbadpxyu3g" type="_nM3nGq1FEduYDbadpxyu3g" association="_nM3nJq1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nM3nKK1FEduYDbadpxyu3g" name="BinaryOperator" isAbstract="true">
+      <generalization xmi:id="_nM3nKa1FEduYDbadpxyu3g" general="_nM3nI61FEduYDbadpxyu3g"/>
+      <ownedAttribute xmi:id="_nM3nKq1FEduYDbadpxyu3g" name="rightHandSide" type="_nM3nI61FEduYDbadpxyu3g" isOrdered="true" aggregation="composite" association="_nM3nLK1FEduYDbadpxyu3g"/>
+      <ownedAttribute xmi:id="_nM3nK61FEduYDbadpxyu3g" name="leftHandSide" type="_nM3nI61FEduYDbadpxyu3g" isOrdered="true" aggregation="composite" association="_nM3nLq1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_nM3nLK1FEduYDbadpxyu3g" memberEnd="_nM3nKq1FEduYDbadpxyu3g _nM3nLa1FEduYDbadpxyu3g">
+      <ownedEnd xmi:id="_nM3nLa1FEduYDbadpxyu3g" type="_nM3nKK1FEduYDbadpxyu3g" association="_nM3nLK1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_nM3nLq1FEduYDbadpxyu3g" memberEnd="_nM3nK61FEduYDbadpxyu3g _nM3nL61FEduYDbadpxyu3g">
+      <ownedEnd xmi:id="_nM3nL61FEduYDbadpxyu3g" type="_nM3nKK1FEduYDbadpxyu3g" association="_nM3nLq1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nM3nMK1FEduYDbadpxyu3g" name="Choice">
+      <generalization xmi:id="_nM3nMa1FEduYDbadpxyu3g" general="_nM3nKK1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nM3nMq1FEduYDbadpxyu3g" name="Cooperation">
+      <generalization xmi:id="_nM3nM61FEduYDbadpxyu3g" general="_nM3nKK1FEduYDbadpxyu3g"/>
+      <generalization xmi:id="_nM3nNK1FEduYDbadpxyu3g" general="_nM3nHq1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nM3nNa1FEduYDbadpxyu3g" name="FiniteRate" isAbstract="true">
+      <generalization xmi:id="_nM3nNq1FEduYDbadpxyu3g" general="_nM3nFa1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nM3nN61FEduYDbadpxyu3g" name="Hiding">
+      <generalization xmi:id="_nM3nOK1FEduYDbadpxyu3g" general="_nM3nHq1FEduYDbadpxyu3g"/>
+      <ownedAttribute xmi:id="_nM3nOa1FEduYDbadpxyu3g" name="hiddenProcess" type="_nM3nI61FEduYDbadpxyu3g" isOrdered="true" aggregation="composite" association="_nM3nOq1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_nM3nOq1FEduYDbadpxyu3g" memberEnd="_nM3nOa1FEduYDbadpxyu3g _nM3nO61FEduYDbadpxyu3g">
+      <ownedEnd xmi:id="_nM3nO61FEduYDbadpxyu3g" type="_nM3nN61FEduYDbadpxyu3g" association="_nM3nOq1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nM3nPK1FEduYDbadpxyu3g" name="Model">
+      <ownedAttribute xmi:id="_nM3nPa1FEduYDbadpxyu3g" name="systemEquation" type="_nM3nI61FEduYDbadpxyu3g" isOrdered="true" aggregation="composite" association="_nM3nRK1FEduYDbadpxyu3g"/>
+      <ownedAttribute xmi:id="_nM3nPq1FEduYDbadpxyu3g" name="processAssignments" type="_nM3nRq1FEduYDbadpxyu3g" isOrdered="true" aggregation="composite" association="_nM3nUK1FEduYDbadpxyu3g">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_nM3nP61FEduYDbadpxyu3g" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nM3nQK1FEduYDbadpxyu3g"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_nM3nQa1FEduYDbadpxyu3g" name="rateAssignments" type="_nM3nUq1FEduYDbadpxyu3g" isOrdered="true" aggregation="composite" association="_nM3nXa1FEduYDbadpxyu3g">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_nM3nQq1FEduYDbadpxyu3g" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nM3nQ61FEduYDbadpxyu3g"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_nM3nRK1FEduYDbadpxyu3g" memberEnd="_nM3nPa1FEduYDbadpxyu3g _nM3nRa1FEduYDbadpxyu3g">
+      <ownedEnd xmi:id="_nM3nRa1FEduYDbadpxyu3g" type="_nM3nPK1FEduYDbadpxyu3g" association="_nM3nRK1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nM3nRq1FEduYDbadpxyu3g" name="ProcessAssignment">
+      <ownedAttribute xmi:id="_nM3nR61FEduYDbadpxyu3g" name="processIdentifier" type="_nM3nSa1FEduYDbadpxyu3g" isOrdered="true" aggregation="composite" association="_nM3nTK1FEduYDbadpxyu3g"/>
+      <ownedAttribute xmi:id="_nM3nSK1FEduYDbadpxyu3g" name="process" type="_nM3nI61FEduYDbadpxyu3g" isOrdered="true" aggregation="composite" association="_nM3nTq1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nM3nSa1FEduYDbadpxyu3g" name="ProcessIdentifier">
+      <generalization xmi:id="_nM3nSq1FEduYDbadpxyu3g" general="_nM3nI61FEduYDbadpxyu3g"/>
+      <ownedAttribute xmi:id="_nM3nS61FEduYDbadpxyu3g" name="name" visibility="public" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EString"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_nM3nTK1FEduYDbadpxyu3g" memberEnd="_nM3nR61FEduYDbadpxyu3g _nM3nTa1FEduYDbadpxyu3g">
+      <ownedEnd xmi:id="_nM3nTa1FEduYDbadpxyu3g" type="_nM3nRq1FEduYDbadpxyu3g" association="_nM3nTK1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_nM3nTq1FEduYDbadpxyu3g" memberEnd="_nM3nSK1FEduYDbadpxyu3g _nM3nT61FEduYDbadpxyu3g">
+      <ownedEnd xmi:id="_nM3nT61FEduYDbadpxyu3g" type="_nM3nRq1FEduYDbadpxyu3g" association="_nM3nTq1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_nM3nUK1FEduYDbadpxyu3g" memberEnd="_nM3nPq1FEduYDbadpxyu3g _nM3nUa1FEduYDbadpxyu3g">
+      <ownedEnd xmi:id="_nM3nUa1FEduYDbadpxyu3g" type="_nM3nPK1FEduYDbadpxyu3g" association="_nM3nUK1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nM3nUq1FEduYDbadpxyu3g" name="RateAssignment">
+      <ownedAttribute xmi:id="_nM3nU61FEduYDbadpxyu3g" name="rateIdentifier" type="_nM3nVa1FEduYDbadpxyu3g" isOrdered="true" aggregation="composite" association="_nM3nWa1FEduYDbadpxyu3g"/>
+      <ownedAttribute xmi:id="_nM3nVK1FEduYDbadpxyu3g" name="rate" type="_nM3nNa1FEduYDbadpxyu3g" isOrdered="true" aggregation="composite" association="_nM3nW61FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nM3nVa1FEduYDbadpxyu3g" name="RateIdentifier">
+      <generalization xmi:id="_nM3nVq1FEduYDbadpxyu3g" general="_nM3nNa1FEduYDbadpxyu3g"/>
+      <ownedAttribute xmi:id="_nM3nV61FEduYDbadpxyu3g" name="name" visibility="public" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EString"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nM3nWK1FEduYDbadpxyu3g"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_nM3nWa1FEduYDbadpxyu3g" memberEnd="_nM3nU61FEduYDbadpxyu3g _nM3nWq1FEduYDbadpxyu3g">
+      <ownedEnd xmi:id="_nM3nWq1FEduYDbadpxyu3g" type="_nM3nUq1FEduYDbadpxyu3g" association="_nM3nWa1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_nM3nW61FEduYDbadpxyu3g" memberEnd="_nM3nVK1FEduYDbadpxyu3g _nM3nXK1FEduYDbadpxyu3g">
+      <ownedEnd xmi:id="_nM3nXK1FEduYDbadpxyu3g" type="_nM3nUq1FEduYDbadpxyu3g" association="_nM3nW61FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_nM3nXa1FEduYDbadpxyu3g" memberEnd="_nM3nQa1FEduYDbadpxyu3g _nM3nXq1FEduYDbadpxyu3g">
+      <ownedEnd xmi:id="_nM3nXq1FEduYDbadpxyu3g" type="_nM3nPK1FEduYDbadpxyu3g" association="_nM3nXa1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nM3nX61FEduYDbadpxyu3g" name="PassiveRate">
+      <generalization xmi:id="_nM3nYK1FEduYDbadpxyu3g" general="_nM3nFa1FEduYDbadpxyu3g"/>
+      <ownedAttribute xmi:id="_nM3nYa1FEduYDbadpxyu3g" name="weight" visibility="public" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nM3nYq1FEduYDbadpxyu3g"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nM3nY61FEduYDbadpxyu3g" name="Prefix">
+      <generalization xmi:id="_nM3nZK1FEduYDbadpxyu3g" general="_nM3nI61FEduYDbadpxyu3g"/>
+      <ownedAttribute xmi:id="_nM3nZa1FEduYDbadpxyu3g" name="targetProcess" type="_nM3nI61FEduYDbadpxyu3g" isOrdered="true" aggregation="composite" association="_nM3nZ61FEduYDbadpxyu3g"/>
+      <ownedAttribute xmi:id="_nM3nZq1FEduYDbadpxyu3g" name="activity" type="_nM3nEq1FEduYDbadpxyu3g" isOrdered="true" aggregation="composite" association="_nM3naa1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_nM3nZ61FEduYDbadpxyu3g" memberEnd="_nM3nZa1FEduYDbadpxyu3g _nM3naK1FEduYDbadpxyu3g">
+      <ownedEnd xmi:id="_nM3naK1FEduYDbadpxyu3g" type="_nM3nY61FEduYDbadpxyu3g" association="_nM3nZ61FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_nM3naa1FEduYDbadpxyu3g" memberEnd="_nM3nZq1FEduYDbadpxyu3g _nM3naq1FEduYDbadpxyu3g">
+      <ownedEnd xmi:id="_nM3naq1FEduYDbadpxyu3g" type="_nM3nY61FEduYDbadpxyu3g" association="_nM3naa1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nM3na61FEduYDbadpxyu3g" name="SilentAction">
+      <generalization xmi:id="_nM3nbK1FEduYDbadpxyu3g" general="_nM3nEa1FEduYDbadpxyu3g"/>
+      <ownedAttribute xmi:id="_nM3nba1FEduYDbadpxyu3g" name="hiddenAction" type="_nM3nb61FEduYDbadpxyu3g" isOrdered="true" aggregation="composite" association="_nM3ncq1FEduYDbadpxyu3g">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nM3nbq1FEduYDbadpxyu3g"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nM3nb61FEduYDbadpxyu3g" name="ActionIdentifier">
+      <generalization xmi:id="_nM3ncK1FEduYDbadpxyu3g" general="_nM3nEa1FEduYDbadpxyu3g"/>
+      <ownedAttribute xmi:id="_nM3nca1FEduYDbadpxyu3g" name="name" visibility="public" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EString"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_nM3ncq1FEduYDbadpxyu3g" memberEnd="_nM3nba1FEduYDbadpxyu3g _nM3nc61FEduYDbadpxyu3g">
+      <ownedEnd xmi:id="_nM3nc61FEduYDbadpxyu3g" type="_nM3na61FEduYDbadpxyu3g" association="_nM3ncq1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nM3ndK1FEduYDbadpxyu3g" name="NumberLiteral">
+      <generalization xmi:id="_nM3nda1FEduYDbadpxyu3g" general="_nM3nNa1FEduYDbadpxyu3g"/>
+      <ownedAttribute xmi:id="_nM3ndq1FEduYDbadpxyu3g" name="value" visibility="public" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDouble"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nM3nd61FEduYDbadpxyu3g"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_nM3neK1FEduYDbadpxyu3g" name="RateExpression">
+      <generalization xmi:id="_nM3nea1FEduYDbadpxyu3g" general="_nM3nNa1FEduYDbadpxyu3g"/>
+      <ownedAttribute xmi:id="_nM3neq1FEduYDbadpxyu3g" name="leftHandSide" type="_nM3nNa1FEduYDbadpxyu3g" isOrdered="true" aggregation="composite" association="_nM3nfq1FEduYDbadpxyu3g"/>
+      <ownedAttribute xmi:id="_nM3ne61FEduYDbadpxyu3g" name="rightHandSide" type="_nM3nNa1FEduYDbadpxyu3g" isOrdered="true" aggregation="composite" association="_nM3ngK1FEduYDbadpxyu3g"/>
+      <ownedAttribute xmi:id="_nM3nfK1FEduYDbadpxyu3g" name="operator" visibility="public" type="_nM3ngq1FEduYDbadpxyu3g" isOrdered="true">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nM3nfa1FEduYDbadpxyu3g"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_nM3nfq1FEduYDbadpxyu3g" memberEnd="_nM3neq1FEduYDbadpxyu3g _nM3nf61FEduYDbadpxyu3g">
+      <ownedEnd xmi:id="_nM3nf61FEduYDbadpxyu3g" type="_nM3neK1FEduYDbadpxyu3g" association="_nM3nfq1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_nM3ngK1FEduYDbadpxyu3g" memberEnd="_nM3ne61FEduYDbadpxyu3g _nM3nga1FEduYDbadpxyu3g">
+      <ownedEnd xmi:id="_nM3nga1FEduYDbadpxyu3g" type="_nM3neK1FEduYDbadpxyu3g" association="_nM3ngK1FEduYDbadpxyu3g"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Enumeration" xmi:id="_nM3ngq1FEduYDbadpxyu3g" name="RateOperator">
+      <ownedLiteral xmi:id="_nM3ng61FEduYDbadpxyu3g" name="Plus"/>
+      <ownedLiteral xmi:id="_nM3nhK1FEduYDbadpxyu3g" name="Minus"/>
+      <ownedLiteral xmi:id="_nM3nha1FEduYDbadpxyu3g" name="Divide"/>
+      <ownedLiteral xmi:id="_nM3nhq1FEduYDbadpxyu3g" name="Times"/>
+    </packagedElement>
+    <profileApplication xmi:id="_nM3nh61FEduYDbadpxyu3g">
+      <eAnnotations xmi:id="_nM3niK1FEduYDbadpxyu3g" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://UML_PROFILES/Ecore.profile.uml#_vy-HUYinEdqtvbnfB2L_5w"/>
+      </eAnnotations>
+      <appliedProfile href="pathmap://UML_PROFILES/Ecore.profile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <Ecore:EPackage xmi:id="_nM3nia1FEduYDbadpxyu3g" base_Package="_nM3nEK1FEduYDbadpxyu3g" nsPrefix="uk.ac.ed.inf.pepa.emf" nsURI="http:///uk/ac/ed/inf/pepa/emf.ecore"/>
+  <Ecore:EClass xmi:id="_nM3niq1FEduYDbadpxyu3g" base_Class="_nM3nEa1FEduYDbadpxyu3g"/>
+  <Ecore:EClass xmi:id="_nM3ni61FEduYDbadpxyu3g" base_Class="_nM3nEq1FEduYDbadpxyu3g"/>
+  <Ecore:EReference xmi:id="_nM3njK1FEduYDbadpxyu3g" base_Property="_nM3nE61FEduYDbadpxyu3g" isResolveProxies="false"/>
+  <Ecore:EReference xmi:id="_nM3nja1FEduYDbadpxyu3g" base_Property="_nM3nFK1FEduYDbadpxyu3g" isResolveProxies="false"/>
+  <Ecore:EClass xmi:id="_nM3njq1FEduYDbadpxyu3g" base_Class="_nM3nFa1FEduYDbadpxyu3g"/>
+  <Ecore:EClass xmi:id="_nM3nj61FEduYDbadpxyu3g" base_Class="_nM3nGq1FEduYDbadpxyu3g"/>
+  <Ecore:EReference xmi:id="_nM3nkK1FEduYDbadpxyu3g" base_Property="_nM3nHK1FEduYDbadpxyu3g" isResolveProxies="false"/>
+  <Ecore:EAttribute xmi:id="_nM3nka1FEduYDbadpxyu3g" base_Property="_nM3nHa1FEduYDbadpxyu3g"/>
+  <Ecore:EClass xmi:id="_nM3nkq1FEduYDbadpxyu3g" base_Class="_nM3nHq1FEduYDbadpxyu3g"/>
+  <Ecore:EReference xmi:id="_nM3nk61FEduYDbadpxyu3g" base_Property="_nM3nIK1FEduYDbadpxyu3g" isResolveProxies="false"/>
+  <Ecore:EClass xmi:id="_nM3nlK1FEduYDbadpxyu3g" base_Class="_nM3nI61FEduYDbadpxyu3g"/>
+  <Ecore:EClass xmi:id="_nM3nla1FEduYDbadpxyu3g" base_Class="_nM3nKK1FEduYDbadpxyu3g"/>
+  <Ecore:EReference xmi:id="_nM3nlq1FEduYDbadpxyu3g" base_Property="_nM3nKq1FEduYDbadpxyu3g" isResolveProxies="false"/>
+  <Ecore:EReference xmi:id="_nM3nl61FEduYDbadpxyu3g" base_Property="_nM3nK61FEduYDbadpxyu3g" isResolveProxies="false"/>
+  <Ecore:EClass xmi:id="_nM3nmK1FEduYDbadpxyu3g" base_Class="_nM3nMK1FEduYDbadpxyu3g"/>
+  <Ecore:EClass xmi:id="_nM3nma1FEduYDbadpxyu3g" base_Class="_nM3nMq1FEduYDbadpxyu3g"/>
+  <Ecore:EClass xmi:id="_nM3nmq1FEduYDbadpxyu3g" base_Class="_nM3nNa1FEduYDbadpxyu3g"/>
+  <Ecore:EClass xmi:id="_nM3nm61FEduYDbadpxyu3g" base_Class="_nM3nN61FEduYDbadpxyu3g"/>
+  <Ecore:EReference xmi:id="_nM3nnK1FEduYDbadpxyu3g" base_Property="_nM3nOa1FEduYDbadpxyu3g" isResolveProxies="false"/>
+  <Ecore:EClass xmi:id="_nM3nna1FEduYDbadpxyu3g" base_Class="_nM3nPK1FEduYDbadpxyu3g"/>
+  <Ecore:EReference xmi:id="_nM3nnq1FEduYDbadpxyu3g" base_Property="_nM3nPa1FEduYDbadpxyu3g" isResolveProxies="false"/>
+  <Ecore:EReference xmi:id="_nM3nn61FEduYDbadpxyu3g" base_Property="_nM3nPq1FEduYDbadpxyu3g" isResolveProxies="false"/>
+  <Ecore:EReference xmi:id="_nM3noK1FEduYDbadpxyu3g" base_Property="_nM3nQa1FEduYDbadpxyu3g" isResolveProxies="false"/>
+  <Ecore:EClass xmi:id="_nM3noa1FEduYDbadpxyu3g" base_Class="_nM3nRq1FEduYDbadpxyu3g"/>
+  <Ecore:EReference xmi:id="_nM3noq1FEduYDbadpxyu3g" base_Property="_nM3nR61FEduYDbadpxyu3g" isResolveProxies="false"/>
+  <Ecore:EReference xmi:id="_nM3no61FEduYDbadpxyu3g" base_Property="_nM3nSK1FEduYDbadpxyu3g" isResolveProxies="false"/>
+  <Ecore:EClass xmi:id="_nM3npK1FEduYDbadpxyu3g" base_Class="_nM3nSa1FEduYDbadpxyu3g"/>
+  <Ecore:EAttribute xmi:id="_nM3npa1FEduYDbadpxyu3g" base_Property="_nM3nS61FEduYDbadpxyu3g"/>
+  <Ecore:EClass xmi:id="_nM3npq1FEduYDbadpxyu3g" base_Class="_nM3nUq1FEduYDbadpxyu3g"/>
+  <Ecore:EReference xmi:id="_nM3np61FEduYDbadpxyu3g" base_Property="_nM3nU61FEduYDbadpxyu3g" isResolveProxies="false"/>
+  <Ecore:EReference xmi:id="_nM3nqK1FEduYDbadpxyu3g" base_Property="_nM3nVK1FEduYDbadpxyu3g" isResolveProxies="false"/>
+  <Ecore:EClass xmi:id="_nM3nqa1FEduYDbadpxyu3g" base_Class="_nM3nVa1FEduYDbadpxyu3g"/>
+  <Ecore:EAttribute xmi:id="_nM3nqq1FEduYDbadpxyu3g" base_Property="_nM3nV61FEduYDbadpxyu3g"/>
+  <Ecore:EClass xmi:id="_nM3nq61FEduYDbadpxyu3g" base_Class="_nM3nX61FEduYDbadpxyu3g"/>
+  <Ecore:EAttribute xmi:id="_nM3nrK1FEduYDbadpxyu3g" base_Property="_nM3nYa1FEduYDbadpxyu3g"/>
+  <Ecore:EClass xmi:id="_nM3nra1FEduYDbadpxyu3g" base_Class="_nM3nY61FEduYDbadpxyu3g"/>
+  <Ecore:EReference xmi:id="_nM3nrq1FEduYDbadpxyu3g" base_Property="_nM3nZa1FEduYDbadpxyu3g" isResolveProxies="false"/>
+  <Ecore:EReference xmi:id="_nM3nr61FEduYDbadpxyu3g" base_Property="_nM3nZq1FEduYDbadpxyu3g" isResolveProxies="false"/>
+  <Ecore:EClass xmi:id="_nM3nsK1FEduYDbadpxyu3g" base_Class="_nM3na61FEduYDbadpxyu3g"/>
+  <Ecore:EReference xmi:id="_nM3nsa1FEduYDbadpxyu3g" base_Property="_nM3nba1FEduYDbadpxyu3g" isResolveProxies="false"/>
+  <Ecore:EClass xmi:id="_nM3nsq1FEduYDbadpxyu3g" base_Class="_nM3nb61FEduYDbadpxyu3g"/>
+  <Ecore:EAttribute xmi:id="_nM3ns61FEduYDbadpxyu3g" base_Property="_nM3nca1FEduYDbadpxyu3g"/>
+  <Ecore:EClass xmi:id="_nM3ntK1FEduYDbadpxyu3g" base_Class="_nM3ndK1FEduYDbadpxyu3g"/>
+  <Ecore:EAttribute xmi:id="_nM3nta1FEduYDbadpxyu3g" base_Property="_nM3ndq1FEduYDbadpxyu3g"/>
+  <Ecore:EClass xmi:id="_nM3ntq1FEduYDbadpxyu3g" base_Class="_nM3neK1FEduYDbadpxyu3g"/>
+  <Ecore:EReference xmi:id="_nM3nt61FEduYDbadpxyu3g" base_Property="_nM3neq1FEduYDbadpxyu3g" isResolveProxies="false"/>
+  <Ecore:EReference xmi:id="_nM3nuK1FEduYDbadpxyu3g" base_Property="_nM3ne61FEduYDbadpxyu3g" isResolveProxies="false"/>
+  <Ecore:EAttribute xmi:id="_nM3nua1FEduYDbadpxyu3g" base_Property="_nM3nfK1FEduYDbadpxyu3g"/>
+  <Ecore:EEnum xmi:id="_nM3nuq1FEduYDbadpxyu3g" base_Enumeration="_nM3ngq1FEduYDbadpxyu3g"/>
+  <Ecore:EEnumLiteral xmi:id="_nM3nu61FEduYDbadpxyu3g" base_EnumerationLiteral="_nM3ng61FEduYDbadpxyu3g"/>
+  <Ecore:EEnumLiteral xmi:id="_nM3nvK1FEduYDbadpxyu3g" base_EnumerationLiteral="_nM3nhK1FEduYDbadpxyu3g"/>
+  <Ecore:EEnumLiteral xmi:id="_nM3nva1FEduYDbadpxyu3g" base_EnumerationLiteral="_nM3nha1FEduYDbadpxyu3g"/>
+  <Ecore:EEnumLiteral xmi:id="_nM3nvq1FEduYDbadpxyu3g" base_EnumerationLiteral="_nM3nhq1FEduYDbadpxyu3g"/>
+</xmi:XMI>

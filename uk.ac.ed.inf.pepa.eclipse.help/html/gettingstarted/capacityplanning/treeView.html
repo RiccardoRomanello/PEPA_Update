@@ -1,0 +1,49 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 TRANSITIONAL//EN">
+<html>
+	<head>
+		<title>CPT Tree View</title>
+	</head>
+	<body>
+	
+		<h3>The Tree view</h3>
+	
+		<center><img src="img/treeView.png"></center>
+		
+		<br>
+		<p>
+		The above is a screen shot of the CPT Tree View in the PEPA Eclipse plug-in project.
+		</p>
+		
+	<h3>Overview</h3>
+	
+	<p> This view complements the List View, and provides more detail about the search. It provides a summary of the results at the top of the Tree, and the individual details of each model configuration.</p>
+
+<h3>1. Results Evaluation details</h3>
+
+<ol>
+<li> Results evaluation: MET TARGET PERFORMANCE. This means the search returned at least one model configuration which meets the user defined performance target.
+<li> Number of model configurations which met the target
+<li>Percentage of models that converged. This gives some indication of how many of the ODE evaluations converged, if an ODE evaluation did not converge the fitness is set to 10000, as the cost function has to assume the evaluation failed.
+<li> Total results. Total number of model configurations found.
+<li> Average model population. The average summed total population.
+</ol>
+
+<h3>2. Model configuration details</h3>
+
+<ol>
+<li> ModelConfigurationCandidate-X MET TARGET PERFORMANCE. Indicates if this model configuration has managed to meet the target.
+<li> Component population. 
+<li> Total cost. The value of the model configuration's cost as determined by the cost function. The output of the cost function.
+<li> Measured performance. The measured performance of the model configuration.
+<li> Performance target. The performance the user defined.
+<li> Percentage of targets met. If the user had set more than one performance target this reports what percentage of them met their target.
+<li> Performance cost. This model configuration's performance cost in terms of the cost function.
+<li> Population cost. This model configuration's population cost in terms of the cost function.
+<li> Total population.
+<li> PSO parameters. The parameters used to find this model configuration. This is useful if the search was a driven search, the user can use these values to perform a single PSO search.
+<li> Converged. Did the ODE evaluation converge.
+<li> Run time. How long did this model configuration take to evaluate.
+</ol>
+		
+	</body>
+</html>

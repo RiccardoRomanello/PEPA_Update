@@ -1,0 +1,346 @@
+// ACS and BSS Scenarios togheter
+immediate = 100000.0;
+
+// ****************************************
+// ACS Rates
+// ****************************************
+// other rates
+r_arrival_rate = 1 / 500; 
+r_admit = 1.0 / 1.8;
+r_cache = 10;
+r_check_rights = 1.0 / 0.3;
+r_choice_door_open = 100;
+r_get_rights = 1.0 / 1.8;
+r_need_log = 10;
+r_log_event = 1 / 0.2;
+r_open_door = 1 / 500;
+r_read_card = 1.0 / 1.0;
+r_read_rights = 1.0 / 1.8;
+r_read_data = 1.0 / 1.5;
+r_write_rec = 1 / 3;
+r_write_event = 1 / 1.8;
+
+// probabilities
+p_not_in_cache = 0.4;
+p_door_open = 0.99999;
+p_need_log = 0.2;
+
+
+// ****************************************
+// BSS Rates
+// ****************************************
+r_loop = 100;
+iterations = 10;
+r_control = 1 / 1.8;
+r_get_buffer = 1 / 1.5;
+r_get_image = 1 / 1.5;
+r_pass_image = 1 / 0.9;
+r_alloc_buf = 1 / 0.5;
+r_release_buf = 1 / 0.5;
+r_free_buf = 1 / 0.2;
+r_write_img = 1 / 0.9;
+r_store = 1 / 2;
+p = 8;
+b = 8;
+
+// ****************************************
+// ACS Components
+// ****************************************
+Queue0 = (arrive, r_arrival_rate).Queue1;
+Queue1 = (arrive, r_arrival_rate).Queue2 + 
+		 (start, immediate).Queue0;
+Queue2 = (arrive, r_arrival_rate).Queue3 + 
+		 (start, immediate).Queue1;
+Queue3 = (arrive, r_arrival_rate).Queue4 + 
+		 (start, immediate).Queue2;
+Queue4 = (arrive, r_arrival_rate).Queue5 + 
+		 (start, immediate).Queue3;
+Queue5 = (arrive, r_arrival_rate).Queue6 + 
+		 (start, immediate).Queue4;
+Queue6 = (arrive, r_arrival_rate).Queue7 + 
+		 (start, immediate).Queue5;
+Queue7 = (arrive, r_arrival_rate).Queue8 + 
+		 (start, immediate).Queue6;
+Queue8 = (arrive, r_arrival_rate).Queue9 + 
+		 (start, immediate).Queue7;
+Queue9 = (arrive, r_arrival_rate).Queue10 + 
+		 (start, immediate).Queue8;
+Queue10 = (start, immediate).Queue9;		 
+		 
+		 
+
+// *******************************************
+// User lifeline
+// *******************************************
+User0 = (start, immediate).User1;
+User1 = (alarm, infty).User0 + (openDoor, infty).User2;
+User2 = (enterBuilding, immediate).User0;
+// Ansynchronous message for user 0
+// --
+// guarded by the observation of action start
+ReadCard0 = (start, immediate).ReadCard1;
+ReadCard1 = (readCard, immediate).ReadCard0;
+
+// *******************************************
+// Card Reader lifeline
+// *******************************************
+// The execution of readCard will trigger the 
+// asynchronous message admit
+CardReader0 = (readCard, immediate).CardReader1;
+CardReader1 = (doReadCard, infty).CardReader0;
+// Ansychronous thread for admit message. It must 
+// observe readCard before sending the message.
+// doReadCard and admit may be performed in parallel
+// if the two actions are scheduled on separate 
+// resources
+Admit0 = (readCard, immediate).Admit1;
+Admit1 = (admit, immediate).Admit0;
+
+
+
+			  
+
+// *******************************************
+// Access Controller lifeline
+// *******************************************
+AC0 = (admit, immediate).AC_DO_ADMIT;
+AC_DO_ADMIT = (doAdmit, infty).AC1;
+AC1 = (getRights, infty).AC2;
+AC2 = (readRights_send, immediate).AC3;
+AC3 = (readRights_rcv, immediate).AC4;
+AC4 = (checkRights,infty).AC5;
+// makes the choice if the door is open
+AC5 = (openDoor, infty).AC_OpenDoor +
+	  (alarm, infty).AC_Alarm;
+// synchronous call to open door
+AC_OpenDoor = (openDoor_send, immediate).AC_WaitOpen;
+AC_WaitOpen = (openDoor_rcv, immediate).AC6;
+// synchronous call to send alarm
+AC_Alarm = (alarm_send, immediate).AC_WaitAlarm;
+AC_WaitAlarm = (alarm_rcv, immediate).AC6;
+AC6 = (needLog_true, infty).AC7 +
+ 	  (needLog_false, infty).AC0;
+// need log branch
+AC7 = (logEvent, infty).AC8;
+AC8 = (writeEvent_send, immediate).AC9;
+AC9 = (writeEvent_rcv, immediate).AC0;
+
+// *******************************************
+// DoorLock lifeline
+// *******************************************
+// alt fragment
+DoorLock0 = (openDoor, infty).DoorLock1 + (alarm, infty).DoorLock0;
+// receives the message
+DoorLock1 = (openDoor_send, immediate).DoorLock2;
+// performs the action
+DoorLock2 = (doOpenDoor, infty).DoorLock3;
+// returns
+DoorLock3 = (openDoor_rcv, immediate).DoorLock0;
+// Enter building message
+// synchronises over the last synchronous message
+// of the parent lifeline, i.e. openDoor_send
+EnterBuilding0 = (openDoor_send, immediate).EnterBuilding1;
+EnterBuilding1 = (enterBuilding, immediate).EnterBuilding0;
+
+// *******************************************
+// Alarm lifeline
+// *******************************************
+Alarm0 = (openDoor, infty).Alarm0 + (alarm, infty).Alarm1;
+// the lifeline receives an immediate action but 
+// does not perform any action
+Alarm1 = (alarm_send, immediate).Alarm2;
+Alarm2 = (doAlarm, immediate).Alarm3;
+Alarm3 = (alarm_rcv, immediate).Alarm0;
+
+
+// *******************************************
+// Database lifeline
+// *******************************************
+DB0 = (readRights_send, immediate).DB1;
+DB1 = (doReadRights, infty).DB2;
+DB2 = (notInCache_true, infty).DB3 +
+	  (notInCache_false, infty).DB5;
+	// not in cache
+	DB3 = (readData_send, immediate).DB4;
+	DB4 = (readData_rcv, immediate).DB5;
+	
+DB5 = (readRights_rcv, immediate).DB6;
+DB6 = (needLog_true, infty).DB7 + (needLog_false, infty).DB0;
+DB7 = (writeEvent_send, immediate).DB8_DO;
+DB8_DO = (doWriteEvent, infty).DB8;
+DB8 = (writeRec_send, immediate).DB9;
+DB9 = (writeRec_rcv, immediate).DB10;
+DB10 = (writeEvent_rcv, immediate).DB0;
+
+
+// *******************************************
+// Disk lifeline
+// *******************************************
+Disk0 = (notInCache_true, infty).Disk1 + (notInCache_false, infty).Disk3;
+	// not in cache
+	Disk1 = (readData_send, immediate).Disk1_DO;
+	Disk1_DO = (doReadData, infty).Disk2;
+	Disk2 = (readData_rcv, immediate).Disk3;
+
+Disk3 = (needLog_true, infty).Disk4 + (needLog_false, infty).Disk0;
+Disk4 = (writeRec_send, immediate).Disk4_DO;
+Disk4_DO = (doWriteRec, r_write_rec).Disk5;
+Disk5 = (writeRec_rcv, immediate).Disk0;
+
+// ****************************************
+// BSS Components
+// ****************************************
+
+// ****************************************************
+// Video Controller
+// ****************************************************
+VC0 = (loop, infty).VC1 +
+	  (exit, infty).(reset,immediate).VC0;
+
+VC1 = (doControl, infty).VC2;
+VC2 = (procOneImage_send, immediate).VC3;
+VC3 = (procOneImage_rcv, immediate).VC0;
+
+
+// ****************************************************
+// AcquireProc
+// ****************************************************
+AP0 = (procOneImage_send, immediate).AP1;
+AP1 = (getBuffer, infty).AP2;
+AP2 = (allocBuf_send, immediate).AP3;
+AP3 = (allocBuf_rcv, immediate).AP4;
+AP4 = (getImage,infty).AP5;
+AP5 = (passImage, r_pass_image).AP6;
+AP6 = (procOneImage_rcv, immediate).AP0;
+// Asynchronous message, observing passImage
+StoreImageMsg0 = (passImage, infty).StoreImageMsg1;
+StoreImageMsg1 = (storeImage, immediate).StoreImageMsg0;
+
+// ****************************************************
+// BufferManager
+// ****************************************************
+BM0 = (allocBuf_send, immediate).BM1;
+BM1 = (doAllocBuf, infty).BM2;
+BM2 = (allocBuf_rcv, immediate).BM3;
+BM3 = (releaseBuf_send, immediate).BM4;
+BM4 = (doReleaseBuf, infty).BM5;
+BM5 = (releaseBuf_rcv, immediate).BM0;
+
+// ****************************************************
+// StoreProc
+// ****************************************************
+SP0 = (storeImage, immediate).SP1;
+SP1 = (store, infty).SP2;
+SP2 = (writeImg_send, immediate).SP3;
+SP3 = (writeImg_rcv, immediate).SP4;
+SP4 = (freeBuf, infty).SP5;
+SP5 = (releaseBuf_send, immediate).SP6;
+SP6 = (releaseBuf_rcv, immediate).SP0;
+
+
+			 
+// ****************************************************
+// DataBase
+// ****************************************************
+DB0_BSS = (writeImg_send, immediate).DB1_BSS;
+DB1_BSS = (doWriteImg, infty).DB2_BSS;
+DB2_BSS = (writeImg_rcv, immediate).DB0_BSS;
+
+
+
+// ****************************************************
+// Host Sections
+// ****************************************************
+AppCPUHost = 
+			 // **********************
+			 // BSS
+			 // **********************
+			 // Video Controller
+			 (doControl, r_control).AppCPUHost +
+			 (loop, iterations / (iterations + 1) * r_loop).AppCPUHost +
+			 (exit, 1 / (iterations + 1) * r_loop).AppCPUHost +
+			 // Buffer
+			 (getBuffer, r_get_buffer).AppCPUHost +
+			 (getImage,  r_get_image * 1 / p).AppCPUHost +
+			 (doAllocBuf, r_alloc_buf).AppCPUHost + 
+			 (doReleaseBuf, r_release_buf).AppCPUHost +
+			 // StoreProc
+			 (store, r_store).AppCPUHost +
+			 (freeBuf, r_free_buf).AppCPUHost +
+			 // **********************
+			 // ACS
+			 // **********************
+			 (doAdmit, r_admit).AppCPUHost + 
+			 (getRights, r_get_rights).AppCPUHost +
+			 (checkRights, r_check_rights).AppCPUHost +
+			 (openDoor, r_choice_door_open * p_door_open).AppCPUHost +
+			 (alarm, r_choice_door_open * (1 - p_door_open)).AppCPUHost +
+			 (needLog_true, p_need_log * r_need_log).AppCPUHost + 
+			 (needLog_false, (1 - p_need_log) * r_need_log).AppCPUHost +
+			 (logEvent, r_log_event).AppCPUHost;
+			 
+DBHost =	 // **********************
+			 // BCS
+			 // **********************
+			 (doWriteImg, r_write_img * 1 / b).DBHost +
+			 // **********************
+			 // ACS
+			 // **********************
+			 (doReadRights, r_read_rights).DBHost +
+		 	 (notInCache_true, p_not_in_cache * r_cache).DBHost +
+		 	 (notInCache_false, (1 - p_not_in_cache) * r_cache).DBHost +
+		 	 (doWriteEvent, r_write_event).DBHost;
+// *******************************************
+// HOST SECTION ACS
+// *******************************************
+CardReaderHost = (doReadCard, r_read_card).CardReaderHost;
+DoorLockHost = (doOpenDoor, r_open_door).DoorLockHost;
+DiskHost = (doReadData, r_read_data).DiskHost +
+		   (doWriteRec, r_write_rec).DiskHost;
+
+ 
+ // BSS System
+ (VC0 <procOneImage_send, procOneImage_rcv> 
+	
+	(
+		( (AP0 <passImage> StoreImageMsg0) 
+				<allocBuf_send, allocBuf_rcv> 
+		   BM0
+	 	 )
+		
+		<storeImage, releaseBuf_send, releaseBuf_rcv> 
+		
+		(SP0 <writeImg_send, writeImg_rcv> DB0_BSS)
+	))
+
+	<> // parallel between BSS System Equation and ACS SE
+
+// ASS System
+(Queue0 <start> 
+ (User0[1] <start> ReadCard0[1] <readCard> CardReader0[1]) 
+ 	<openDoor, alarm, enterBuilding,readCard> 
+	 (EnterBuilding0[1] <openDoor_send> 
+	  (Admit0[1] <admit>	
+		(DoorLock0[1] <openDoor, alarm, openDoor_send, openDoor_rcv> 
+		(Alarm0[1] <openDoor, alarm, alarm_send, alarm_rcv>
+		 ((AC0[1] <readRights_send, readRights_rcv, needLog_true, 
+				 needLog_false, writeEvent_send, writeEvent_rcv>
+     		(DB0[1] <notInCache_true, notInCache_false, readData_send, 
+	 	             readData_rcv, needLog_true, needLog_false, 
+	 	             writeRec_send, writeRec_rcv> Disk0[1]))))))))
+	
+	// HOST Contribution
+	<loop,exit,doControl,getBuffer, getImage, doAllocBuf,
+	 doReleaseBuf, store, freeBuf, doAdmit,getRights,
+	 checkRights,openDoor,alarm, needLog_true, needLog_false, 
+	 logEvent> AppCPUHost 
+	 	
+	 	<doReadRights,notInCache_true,
+	 	 notInCache_false,doWriteEvent,doWriteImg> DBHost[10]
+	 		
+	 		<doReadCard> CardReaderHost 
+	 	  		
+	 	  		<doOpenDoor> DoorLockHost
+	 	  		   
+	 	  		   <doReadData, doWriteRec> DiskHost[2]
+	 	             
