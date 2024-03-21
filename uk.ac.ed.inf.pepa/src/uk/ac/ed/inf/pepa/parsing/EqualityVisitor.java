@@ -20,7 +20,11 @@ public class EqualityVisitor implements ASTVisitor {
 	}
 	
 	private boolean checkEquality() {
-		node1.accept(this);
+		if (node1 == null) {
+			isEqual = false;
+		} else {
+			node1.accept(this);
+		}
 		return isEqual;
 	}
 	
