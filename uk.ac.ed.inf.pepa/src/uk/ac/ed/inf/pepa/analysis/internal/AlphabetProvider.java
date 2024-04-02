@@ -76,6 +76,10 @@ public class AlphabetProvider implements IAlphabetProvider {
  */
 class AlphabetVisitor extends MoveOnVisitor {
 
+	private HashSet<String> high_actions;
+
+	private HashSet<String> low_actions;
+	
 	private HashSet<String> actions;
 
 	private HashSet<String> processes;
@@ -157,6 +161,10 @@ class AlphabetVisitor extends MoveOnVisitor {
 				.processDefinitions().size());
 		processMap = new HashMap<String, HashSet<String>>();
 		processesWithHidden = new HashMap<String, ProcessNode>();
+
+		high_actions = new HashSet<String>();
+		low_actions = new HashSet<String>();
+		
 		String name;
 		for (ProcessDefinitionNode pdn : model.processDefinitions()) {
 			actions = new HashSet<String>();

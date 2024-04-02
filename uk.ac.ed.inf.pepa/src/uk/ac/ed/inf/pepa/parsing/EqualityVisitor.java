@@ -7,6 +7,8 @@
  *******************************************************************************/
 package uk.ac.ed.inf.pepa.parsing;
 
+import java.util.LinkedList;
+
 public class EqualityVisitor implements ASTVisitor {
 
 	private ASTNode node1;
@@ -124,6 +126,45 @@ public class EqualityVisitor implements ASTVisitor {
 			isEqual = isEqual && compare(node.getActionSet().get(i), otherNode.getActionSet().get(i)); 
 		}
 	}
+	
+	private static <T extends ASTNode> boolean compare(LinkedList<T> A, LinkedList<T> B)
+	{
+		if (A == null) {
+			return (B == null);
+		}
+		
+		if (B == null) {
+			return false;
+		}
+		
+		if (A.size() != B.size()) {
+			return false;
+		}
+		for (int i = 0; i < A.size(); i++) {
+			if (!compare(A.get(i), B.get(i))) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	private boolean compare(LevelDeclarations A, LevelDeclarations B)
+	{
+		if (A.default_level != B.default_level) {
+			return false;
+		}
+		
+		if (!compare(A.getHigh(), B.getHigh())) {
+			return false;
+		}
+		
+		if (!compare(A.getLow(), B.getLow())) {
+			return false;
+		}
+
+		return true;
+	}
 
 	public void visitModelNode(ModelNode node) {
 		if (!(node2 instanceof ModelNode)) {
@@ -131,16 +172,38 @@ public class EqualityVisitor implements ASTVisitor {
 			return;
 		}
 		ModelNode otherNode = (ModelNode) node2;
-		boolean compare1 = compare(node.getSystemEquation(), otherNode.getSystemEquation());
-		boolean compare2 = node.rateDefinitions().size() == otherNode.rateDefinitions().size();
-		boolean compare3 = node.processDefinitions().size() == otherNode.processDefinitions().size();
-		isEqual = compare1 && compare2 && compare3;
+		if (!compare(node.getSystemEquation(), otherNode.getSystemEquation())) {
+			isEqual = false;
+			return;
+		}
+		if (node.rateDefinitions().size() != otherNode.rateDefinitions().size()) {
+			isEqual = false;
+			return;
+		}
 		for (int i = 0; i < node.rateDefinitions().size(); i++) {
-			isEqual = isEqual && compare(node.rateDefinitions().get(i), otherNode.rateDefinitions().get(i)); 
+			if (!compare(node.rateDefinitions().get(i), otherNode.rateDefinitions().get(i))) {
+				isEqual = false;
+				return;
+			}
+		}
+
+		if (!compare(node.levelDeclarations(), otherNode.levelDeclarations())) {
+			isEqual = false;
+			return;
+		}
+
+		if (node.processDefinitions().size() != otherNode.processDefinitions().size()) {
+			isEqual = false;
+			return;
 		}
 		for (int i = 0; i < node.processDefinitions().size(); i++) {
-			isEqual = isEqual && compare(node.processDefinitions().get(i), otherNode.processDefinitions().get(i)); 
+			if (!compare(node.processDefinitions().get(i), otherNode.processDefinitions().get(i))) {
+				isEqual = false;
+				return;	
+			}
 		}
+		
+		isEqual = true;
 	}
 
 	public void visitPassiveRateNode(PassiveRateNode node) {

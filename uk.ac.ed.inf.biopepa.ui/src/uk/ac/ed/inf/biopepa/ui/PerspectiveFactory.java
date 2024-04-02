@@ -27,7 +27,7 @@ public class PerspectiveFactory implements IPerspectiveFactory {
 		if(ivr.find(SBSI_VISUAL_PROJECTVIEW_ID) != null)
 			folder.addView(SBSI_VISUAL_PROJECTVIEW_ID);
 		else
-			folder.addView(IPageLayout.ID_RES_NAV);
+			folder.addView(IPageLayout.ID_PROJECT_EXPLORER);
 		folder.addView(IPageLayout.ID_OUTLINE);
 		folder = layout.createFolder("uk.ac.ed.inf.biopepa.ui.perspective.bottom", IPageLayout.BOTTOM, 0.6f, "uk.ac.ed.inf.biopepa.ui.perspective.left");
 		folder.addView(IPageLayout.ID_PROBLEM_VIEW);

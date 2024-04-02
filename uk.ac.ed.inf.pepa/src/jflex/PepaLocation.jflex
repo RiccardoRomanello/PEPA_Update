@@ -112,6 +112,18 @@ DOUBLE_NUMBER=[0-9]+(\.[0-9]*)?
 
 	"infty" { return symbol("TOP", PepaToken.TOP); }
 	
+	"high"  { 
+		return symbol("HIGH", PepaToken.HIGH);
+	}
+	
+	"low"  { 
+		return symbol("LOW", PepaToken.LOW); 
+	}
+
+	"set_default_level"  {
+		return symbol("SET_DEFAULT_LEVEL", PepaToken.SET_DEFAULT_LEVEL); 
+	}
+	
 	"T" 	{ return symbol("TOP", PepaToken.TOP); } 
 	
 	"(" 	{ return symbol("LPAREN", PepaToken.LPAREN); }

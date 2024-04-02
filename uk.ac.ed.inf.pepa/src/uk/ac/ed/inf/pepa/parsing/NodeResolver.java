@@ -11,6 +11,8 @@ public interface NodeResolver {
 
 	public ASTNode getProcessDefinition(String name);
 
+	public ASTNode[] getActionLevelDeclarations(String name);
+	
 	public ASTNode getRateDefinition(String name);
 
 	public ASTNode[] getConstantUsage(String name);

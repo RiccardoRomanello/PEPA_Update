@@ -39,6 +39,8 @@ public interface IProblem {
 	public final int Syntax = 0x040000;
 	
 	/* Error types */
+	public final int UndefinedError = Error + 0;
+	
 	public final int UndefinedRate = Error + RateRelated + 1;
 
 	public final int DuplicatedRate = Error + RateRelated + 2;
@@ -64,8 +66,10 @@ public interface IProblem {
 	public final int DuplicatedProcess = Error + ProcessRelated + 12;
 	
 	public final int CooperationLoop = Error + ProcessRelated + 13;
-	
-	public final int UndefinedError = Error + 14;
+
+	public final int LevelConflict = Error + ActionRelated + 14;
+
+	public final int RedudantLevel = Warning + ActionRelated + 15;
 	
 
 	/**

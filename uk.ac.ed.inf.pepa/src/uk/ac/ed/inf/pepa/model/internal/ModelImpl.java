@@ -17,6 +17,7 @@ import java.util.LinkedHashSet;
 import uk.ac.ed.inf.pepa.model.Constant;
 import uk.ac.ed.inf.pepa.model.Model;
 import uk.ac.ed.inf.pepa.model.NamedRate;
+import uk.ac.ed.inf.pepa.model.NamedAction;
 import uk.ac.ed.inf.pepa.model.Process;
 import uk.ac.ed.inf.pepa.parsing.ModelNode;
 
@@ -29,7 +30,11 @@ public class ModelImpl implements Model {
 	private Process process;
 	
 	private ModelNode modelNode;
-	
+
+	private LinkedHashSet<NamedAction> high_actions = new LinkedHashSet<NamedAction>();
+
+	private LinkedHashSet<NamedAction> low_actions = new LinkedHashSet<NamedAction>();
+
 	private LinkedHashSet<NamedRate> rates = new LinkedHashSet<NamedRate>();
 
 	private LinkedHashSet<Constant> constants = new LinkedHashSet<Constant>();
@@ -62,9 +67,18 @@ public class ModelImpl implements Model {
 		return this.constants;
 	}
 
+	public Collection<NamedAction> getHighActionDefinitions() {
+		return this.high_actions;
+	}
+	
+	public Collection<NamedAction> getLowActionDefinitions() {
+		return this.low_actions;
+	}
+	
 	public Collection<NamedRate> getRateDefinitions() {
 		return this.rates;
 	}
+
 	public ModelNode getASTModel() {
 		return this.modelNode;
 	}

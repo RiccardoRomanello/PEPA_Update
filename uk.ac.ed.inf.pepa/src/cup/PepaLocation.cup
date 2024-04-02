@@ -92,6 +92,9 @@ parser code {:
                  case PepaToken.ACTIVITY_STRN:  { str=" identifier "; break; }
                  case PepaToken.RPAREN:         { str=" ) "; break; }
              case PepaToken.TAU:				{ str=" TAU "; break; }
+             case PepaToken.HIGH:				{ str=" HIGH "; break; }
+             case PepaToken.LOW:				{ str=" LOW "; break; }
+             case PepaToken.SET_DEFAULT_LEVEL:	{ str=" SET_DEFAULT_LEVEL "; break; }
 	         case PepaToken.SEMI:           { str=" ; "; break; }
 	         case PepaToken.SUM:            { str=" + "; break; }
 	         case PepaToken.LPAREN:         { str=" ( "; break; }
@@ -188,7 +191,7 @@ parser code {:
 
 terminal            COMMA, DOT, TOP, LPAREN, RPAREN, SEMI, EQUALS, PAR, RATE_EQUALS;
 terminal            COOP, LCOOP, RCOOP, MINUS, MULT, SUM, DIVIDE, HASH, PERC;
-terminal            LSET, RSET, LSQUARE, RSQUARE, TAU;
+terminal            LSET, RSET, LSQUARE, RSQUARE, TAU, HIGH, LOW, SET_DEFAULT_LEVEL;
 terminal 	Integer	PASSIVE_MULTIPLIER;
 terminal    String  ACTIVITY_STRN, PROCESS_STRN, QUOTED_STRN;
 terminal    Double  DOUBLE_NUMBER;
@@ -210,6 +213,8 @@ non terminal ActionTypeNode      	action_type;
 non terminal ActivityNode			activity;
 non terminal Actions				action_set;
 non terminal             			rate_assignment_token;
+non terminal						action_type_level_def;
+non terminal						action_type_levels;
 non terminal RateDefinitionNode		basic_rate_definition, rate_definition, rate_definition_list, action_list;
 non terminal ProcessDefinitionNode	basic_process_definition, process_definition, process_definition_list;
 
@@ -232,12 +237,38 @@ precedence left     MULT, DIVIDE;			// precedence of HIDE
 
 start with model;
 
-model	 				::= rate_definition_list process_definition_list process:equation
+model	 				::= rate_definition_list action_type_levels process_definition_list process:equation
 
 	                       {: 	model.setSystemEquation(equation);
 	                       		RESULT = model;
 	                        :}
 	                     ;                  
+
+action_type_level_def	::= action_type_level_def LOW action_list SEMI
+							{:
+								model.levelDeclarations().getLow().addAll(actionManager.get());
+							:}
+						  | action_type_level_def HIGH action_list SEMI
+							{:
+								model.levelDeclarations().getHigh().addAll(actionManager.get());
+							:}
+					   	  |
+						 ;
+
+action_type_levels		::= SET_DEFAULT_LEVEL LOW SEMI action_type_level_def
+							{:
+								model.levelDeclarations().default_level = LevelDeclarations.LOW_LEVEL;
+							:}
+						  | SET_DEFAULT_LEVEL HIGH SEMI action_type_level_def
+							{:
+								model.levelDeclarations().default_level = LevelDeclarations.HIGH_LEVEL;
+							:}
+						  | action_type_level_def
+							{:
+								model.levelDeclarations().default_level = LevelDeclarations.LOW_LEVEL;
+							:}
+						  ;
+						 
 
 rate_definition_list 	::= rate_definition_list rate_definition | ;
        

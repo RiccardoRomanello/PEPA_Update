@@ -10,8 +10,10 @@ package uk.ac.ed.inf.pepa.analysis.internal;
 import uk.ac.ed.inf.pepa.parsing.*;
 
 public class ReferenceCounterVisitor extends MoveOnVisitor {
-	
+
 	private RateUsageManager rateManager;
+
+	private ActionLevelManager levelManager;
 
 	private ProcessUsageManager processManager;
 	
@@ -24,6 +26,7 @@ public class ReferenceCounterVisitor extends MoveOnVisitor {
 
 	public ReferenceCounterVisitor(ProblemManager problemManager) {
 		rateManager = new RateUsageManager(problemManager);
+		levelManager = new ActionLevelManager(problemManager);
 		processManager = new ProcessUsageManager(problemManager);
 		this.problemManager = problemManager;
 	}
@@ -34,6 +37,10 @@ public class ReferenceCounterVisitor extends MoveOnVisitor {
 
 	public RateUsageManager getRateManager() {
 		return rateManager;
+	}
+	
+	public ActionLevelManager getActionLevelManager() {
+		return levelManager;
 	}
 
 	public void visitActivityNode(ActivityNode activity) {
@@ -57,6 +64,14 @@ public class ReferenceCounterVisitor extends MoveOnVisitor {
 		for (RateDefinitionNode rateDef : model.rateDefinitions())
 			rateDef.accept(this);
 		this.investigatingRateDefinition = false;
+
+		for (ActionTypeNode high_action : model.levelDeclarations().getHigh()) {
+			levelManager.declare(high_action.getType(), LevelDeclarations.HIGH_LEVEL);
+		}
+
+		for (ActionTypeNode low_action : model.levelDeclarations().getLow()) {
+			levelManager.declare(low_action.getType(), LevelDeclarations.LOW_LEVEL);
+		}
 		
 		for (ProcessDefinitionNode processDef : model
 				.processDefinitions())
@@ -65,6 +80,7 @@ public class ReferenceCounterVisitor extends MoveOnVisitor {
 		model.getSystemEquation().accept(this);
 		/* generates warnings */
 		rateManager.warn();
+		levelManager.warn();
 		processManager.warn();
 	}
 

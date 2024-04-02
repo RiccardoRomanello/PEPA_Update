@@ -24,6 +24,24 @@ public class Resolver implements NodeResolver {
 		return null;
 	}
 
+	public ASTNode[] getActionLevelDeclarations(String type)
+	{
+		final LinkedList<ASTNode> usage = new LinkedList<ASTNode>();
+		
+		model.accept(new uk.ac.ed.inf.pepa.parsing.MoveOnVisitor() {
+			public void visitModelNode(ModelNode model) {
+				for (Actions actions : model.levelDeclarations().levelDefinitions) {
+					for (ActionTypeNode action : actions) {
+						if (action.getType().equals(type)) {
+							usage.add(action);
+						}
+					}
+				}
+			}
+		});
+		return usage.toArray(new ASTNode[usage.size()]);
+	}
+
 	public ASTNode getRateDefinition(String name) {
 		for (RateDefinitionNode def : model.rateDefinitions())
 			if (def.getName().getName().equals(name))

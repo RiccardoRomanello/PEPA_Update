@@ -180,6 +180,12 @@ public class ASTView extends AbstractView {
 			TreeItem rates = new TreeItem(tree, 0);
 			rates.setText("RATES (" + model.rateDefinitions().size()
 					+ ")");
+			TreeItem high_level = new TreeItem(tree, 0);
+			high_level.setText("HIGH LEVEL ACTIONS ("
+					+ model.levelDeclarations().getHigh().size() + ")");
+			TreeItem low_level = new TreeItem(tree, 0);
+			low_level.setText("LOW LEVEL ACTIONS ("
+					+ model.levelDeclarations().getLow().size() + ")");
 			TreeItem processes = new TreeItem(tree, 0);
 			processes.setText("PROCESSES ("
 					+ model.processDefinitions().size() + ")");
@@ -188,6 +194,15 @@ public class ASTView extends AbstractView {
 			TreeItem problems = new TreeItem(tree, 0);
 			problems.setText("PROBLEMS (" + model.getProblems().length
 					+ ")");
+			for (ActionTypeNode high_level_action : model.levelDeclarations().getHigh()) {
+				high_level_action.accept(new TreeVisitor(high_level));
+			}
+			for (ActionTypeNode low_level_action : model.levelDeclarations().getLow()) {
+				low_level_action.accept(new TreeVisitor(low_level));
+			}
+			for (RateDefinitionNode rateDefinition : model
+					.rateDefinitions())
+				rateDefinition.accept(new TreeVisitor(rates));
 			for (RateDefinitionNode rateDefinition : model
 					.rateDefinitions())
 				rateDefinition.accept(new TreeVisitor(rates));

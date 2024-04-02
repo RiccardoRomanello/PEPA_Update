@@ -24,6 +24,8 @@ public class ModelNode extends ASTNode {
 	@SuppressWarnings("unused")
 	private static Logger logger = Logger.getLogger(ModelNode.class);
 
+	private LevelDeclarations levelDeclarations = new LevelDeclarations();
+	
 	private RateDefinitions rateDefinitions = new RateDefinitions();
 
 	private ProcessDefinitions processDefinitions = new ProcessDefinitions();
@@ -46,6 +48,16 @@ public class ModelNode extends ASTNode {
 	protected void accept0(ASTVisitor v) {
 		v.visitModelNode(this);
 	}
+
+	/**
+	 * The action level declarations for this model. 
+	 * 
+	 * @return the action level declarations of this model
+	 */
+	public LevelDeclarations levelDeclarations() {
+		return levelDeclarations;
+	}
+
 
 	/**
 	 * The rate definitions for this model. This property is a list-property of

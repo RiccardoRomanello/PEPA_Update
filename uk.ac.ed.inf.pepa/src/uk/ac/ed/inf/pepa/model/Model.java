@@ -40,6 +40,20 @@ public interface Model {
 	public Collection<Constant> getProcessDefinitions();
 
 	/**
+	 * Retrieves the high action level definitions of this model
+	 * 
+	 * @return the collection of high action level definitions
+	 */
+	public Collection<NamedAction> getHighActionDefinitions();
+
+	/**
+	 * Retrieves the high action level definitions of this model
+	 * 
+	 * @return the collection of high action level definitions
+	 */
+	public Collection<NamedAction> getLowActionDefinitions();
+
+	/**
 	 * Retrieves the rate definitions of this model
 	 * 
 	 * @return the collection of rate definitions

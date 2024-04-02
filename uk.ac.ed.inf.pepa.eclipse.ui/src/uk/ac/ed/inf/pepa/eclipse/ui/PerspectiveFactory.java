@@ -43,7 +43,7 @@ public class PerspectiveFactory implements IPerspectiveFactory {
 		
 		String editorArea = layout.getEditorArea();
 		/* Resource Navigator on the left */
-		layout.addView(IPageLayout.ID_RES_NAV, IPageLayout.LEFT, 0.25f, editorArea);
+		layout.addView(IPageLayout.ID_PROJECT_EXPLORER, IPageLayout.LEFT, 0.25f, editorArea);
 		/* Folder layout for bottom views */
 		IFolderLayout bottom = layout.createFolder("bottom", IPageLayout.BOTTOM, 0.66f, editorArea);
 		bottom.addView(IPageLayout.ID_PROBLEM_VIEW);

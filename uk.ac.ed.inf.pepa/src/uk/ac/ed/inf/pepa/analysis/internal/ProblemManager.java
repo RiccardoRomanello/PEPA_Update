@@ -92,6 +92,26 @@ public class ProblemManager {
 					IProblem.UndefinedRate, node, message));
 
 	}
+	
+
+	public void actionLevelConflict(String name) {
+		String message = "The level of action \"" + name + "\" has been declared both low and high";
+		ASTNode[] affectedNodes = model.getResolver().getActionLevelDeclarations(name);
+		for (ASTNode node : affectedNodes) {
+			problems.add(ProblemFactory.buildProblem(IProblem.LevelConflict,
+				node, message));
+		}
+	}
+
+	public void actionLevelMultipleDeclaration(String name) {
+		String message = "The level of action " + name + " has been declared multiple times";
+		ASTNode[] affectedNodes = model.getResolver().getActionLevelDeclarations(name);
+		for (ASTNode node : affectedNodes) {
+			problems.add(ProblemFactory.buildProblem(IProblem.RedudantLevel,
+				node, message));
+		}
+
+	}
 
 	public void rateNotUsedProblem(String name) {
 		String message = "Rate " + name + " not used";

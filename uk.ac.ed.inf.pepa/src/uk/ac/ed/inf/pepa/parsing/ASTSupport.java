@@ -236,6 +236,16 @@ public class ASTSupport {
 				rDN.accept0(this);
 				r.add((RateDefinitionNode) copy);
 			}
+			Actions h_level = m.levelDeclarations().getHigh();
+			for (ActionTypeNode h_action : model.levelDeclarations().getHigh()) {
+				h_action.accept0(this);
+				h_level.add((ActionTypeNode) copy);
+			}
+			Actions l_level = m.levelDeclarations().getLow();
+			for (ActionTypeNode l_action : model.levelDeclarations().getLow()) {
+				l_action.accept0(this);
+				l_level.add((ActionTypeNode) copy);
+			}
 			ProcessDefinitions p = m.processDefinitions();
 			for (ProcessDefinitionNode pDN : model.processDefinitions()) {
 				pDN.accept0(this);
@@ -742,12 +752,39 @@ public class ASTSupport {
 			string.append(">");
 		}
 
+		private void visitLevelDeclarations(String level, Actions actionDefinitions)
+		{
+			string.append(level).append(": ");
+			for (ActionTypeNode action : actionDefinitions) {
+				string.append(action.getType()).append(",");
+			}
+			if (string.charAt(string.length() - 1) == ',')
+				string.deleteCharAt(string.length() - 1);
+			string.append(";\n");
+		}
+		
+		private void visitLevelDeclarations(ModelNode model)
+		{
+			string.append("default level: ");
+			if (model.levelDeclarations().default_level == LevelDeclarations.HIGH_LEVEL) {
+				string.append("high");
+			} else {
+				string.append("low");
+			}
+			string.append(";\n");
+			
+			visitLevelDeclarations("high", model.levelDeclarations().getHigh());
+			visitLevelDeclarations("low", model.levelDeclarations().getLow());
+		}
+		
 		public void visitModelNode(ModelNode model) {
 			string.append("//Rates\n");
 			for (RateDefinitionNode rtn : model.rateDefinitions()) {
 				rtn.accept(this);
 				string.append(";\n");
 			}
+			string.append("//Action Level Definitions\n");
+			visitLevelDeclarations(model);
 			string.append("\n//Definitions\n");
 			for (ProcessDefinitionNode ptn : model.processDefinitions()) {
 				ptn.accept(this);
