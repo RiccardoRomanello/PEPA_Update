@@ -10,6 +10,7 @@ package uk.ac.ed.inf.pepa.ctmc.derivation.filters;
 import uk.ac.ed.inf.pepa.ctmc.derivation.IFilterRunner;
 import uk.ac.ed.inf.pepa.ctmc.derivation.IStateSpace;
 import uk.ac.ed.inf.pepa.ctmc.derivation.IStateSpaceFilter;
+import uk.ac.ed.inf.pepa.model.NamedAction;
 
 public class ActionFilter implements IStateSpaceFilter {
 
@@ -32,13 +33,13 @@ public class ActionFilter implements IStateSpaceFilter {
 				indices = fIncoming ? ss.getIncomingStateIndices(state)
 						: ss.getOutgoingStateIndices(state);
 				for (int i : indices) {
-					String[] actions = null;
+					NamedAction[] actions = null;
 					if (fIncoming)
 						actions = ss.getAction(i, state);
 					else
 						actions = ss.getAction(state, i);
-					for (String action : actions)
-						if (fActionType.equals(action))
+					for (NamedAction action : actions)
+						if (fActionType.equals(action.getName()))
 							return true;
 				}
 				return false;

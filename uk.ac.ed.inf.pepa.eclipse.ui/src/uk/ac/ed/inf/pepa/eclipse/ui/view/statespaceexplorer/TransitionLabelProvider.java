@@ -8,6 +8,7 @@
 package uk.ac.ed.inf.pepa.eclipse.ui.view.statespaceexplorer;
 
 import uk.ac.ed.inf.pepa.ctmc.derivation.IStateSpace;
+import uk.ac.ed.inf.pepa.model.NamedAction;
 
 public class TransitionLabelProvider extends StateLabelProvider {
 
@@ -34,14 +35,14 @@ public class TransitionLabelProvider extends StateLabelProvider {
 				return EMPTY;
 			IStateSpace ss = provider.getStateSpace();
 			int state = (Integer) element;
-			String[] actions = null;
+			NamedAction[] actions = null;
 			if (outgoing)
 				actions = ss.getAction(dialog.currentState, state);
 			else
 				actions = ss.getAction(state, dialog.currentState);
 			StringBuffer buf = new StringBuffer();
 			for (int i = 0; i < actions.length; i++) {
-				buf.append(actions[i]);
+				buf.append(actions[i].prettyPrint());
 				if (i != actions.length - 1)
 					buf.append(", ");
 			}

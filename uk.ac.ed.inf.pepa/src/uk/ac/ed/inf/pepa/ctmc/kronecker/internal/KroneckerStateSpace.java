@@ -36,6 +36,7 @@ import uk.ac.ed.inf.pepa.ctmc.modelchecking.internal.ModelCheckingLog;
 import uk.ac.ed.inf.pepa.ctmc.modelchecking.internal.PropertyBank;
 import uk.ac.ed.inf.pepa.ctmc.solution.OptionMap;
 import uk.ac.ed.inf.pepa.ctmc.solution.internal.simple.Generator;
+import uk.ac.ed.inf.pepa.model.NamedAction;
 
 /**
  * This implements the Kronecker state space for PEPA models. The
@@ -274,12 +275,12 @@ public class KroneckerStateSpace extends AbstractStateSpace implements IKronecke
 	}
 
 	@Override
-	public String[] getAction(int source, int target) {
+	public NamedAction[] getAction(int source, int target) {
 		if (!generatedStateSpace && generationError == null) generateStateSpace();
 		if (generationError != null) return null;
 		
 		short[] source_state = states.get(source).fState;
-		ArrayList<String> actions = new ArrayList<String>(10);
+		ArrayList<NamedAction> actions = new ArrayList<NamedAction>(10);
 		ArrayList<Transition> transitions = null;
 		try {
 			transitions = kroneckerModel.getTransitionsFrom(source_state);
@@ -290,13 +291,13 @@ public class KroneckerStateSpace extends AbstractStateSpace implements IKronecke
 		// if it does, what the action label is.
 		for (Transition t : transitions) {
 			if (getState(t.fTargetProcess).stateNumber == target) {
-				String action_type = symbolGenerator.getActionLabel(t.fActionId);
+				NamedAction action_type = symbolGenerator.getAction(t.fActionId);
 				if (!actions.contains(action_type)) {
 					actions.add(action_type);
 				}
 			}
 		}
-		return (actions.size() > 0) ? (String[]) actions.toArray() : null;
+		return (actions.size() > 0) ? (NamedAction[]) actions.toArray() : null;
 	}
 
 	@Override
@@ -309,7 +310,9 @@ public class KroneckerStateSpace extends AbstractStateSpace implements IKronecke
 		for (Transition t : transitions) {
 			short[] prevState = t.fTargetProcess;
 			int prevStateIndex = getState(prevState).stateNumber;
-			indices.addNew(prevStateIndex);
+			if (!indices.contains(prevStateIndex)) {
+				indices.add(prevStateIndex);
+			}
 		}
 		return indices.toArray();
 	}
@@ -331,7 +334,9 @@ public class KroneckerStateSpace extends AbstractStateSpace implements IKronecke
 		for (Transition t : transitions) {
 			short[] nextState = t.fTargetProcess;
 			int nextStateIndex = getState(nextState).stateNumber;
-			indices.addNew(nextStateIndex);
+			if (!indices.contains(nextStateIndex)) {
+				indices.add(nextStateIndex);
+			}
 		}
 		return indices.toArray();
 	}

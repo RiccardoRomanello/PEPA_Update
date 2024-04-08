@@ -32,6 +32,7 @@ import uk.ac.ed.inf.pepa.ctmc.derivation.common.State;
 import uk.ac.ed.inf.pepa.ctmc.solution.OptionMap;
 import uk.ac.ed.inf.pepa.ctmc.solution.SolverException;
 import uk.ac.ed.inf.pepa.model.Model;
+import uk.ac.ed.inf.pepa.model.NamedAction;
 import uk.ac.ed.inf.pepa.model.Process;
 
 /**
@@ -256,7 +257,7 @@ public class RecursiveBuilder implements IStateSpaceBuilder {
 				return null;
 			}
 
-			public String[] getAction(State source, State target) {
+			public NamedAction[] getAction(State source, State target) {
 				// TODO Auto-generated method stub
 				return null;
 			}
@@ -296,7 +297,7 @@ public class RecursiveBuilder implements IStateSpaceBuilder {
 				
 			}
 
-			public String[] getAction(int source, int target) {
+			public NamedAction[] getAction(int source, int target) {
 				// TODO Auto-generated method stub
 				return null;
 			}

@@ -92,6 +92,7 @@ public class Component {
 			t.fTargetProcess = new short[result.fTargetProcess.length];
 			System.arraycopy(result.fTargetProcess, 0, t.fTargetProcess, 0, result.fTargetProcess.length);
 			t.fActionId =result.fActionId;
+			t.fLevel = result.fLevel;
 			t.fRate = result.fRate;
 			transition[i++] = t;
 		}
@@ -121,6 +122,7 @@ public class Component {
 							fHidingSet.get(t.fActionId)
 									? ISymbolGenerator.TAU_ACTION
 									: t.fActionId,
+							t.fLevel,
 							t.fRate
 			);
 			fFirstStepDerivatives.add(newT);

@@ -7,6 +7,8 @@
  *******************************************************************************/
 package uk.ac.ed.inf.pepa.ctmc.derivation.common;
 
+import uk.ac.ed.inf.pepa.model.ActionLevel;
+
 public class Buffer {
 
 	private static final int SIZE = 500;
@@ -45,7 +47,7 @@ public class Buffer {
 	}
 
 	public Transition getTransition(short[] state, int offset, int length,
-			short actionId, double rate) {
+			short actionId, ActionLevel action_level, double rate) {
 		requests++;
 		Transition newTransition = null;
 		if (counter == buf.length) {
@@ -57,6 +59,7 @@ public class Buffer {
 			newTransition = buf[counter++];
 		}
 		newTransition.fActionId = actionId;
+		newTransition.fLevel = action_level;
 		newTransition.fRate = rate;
 		for (int i = 0; i < length; i++) {
 			newTransition.fTargetProcess[offset + i] = state[offset + i];

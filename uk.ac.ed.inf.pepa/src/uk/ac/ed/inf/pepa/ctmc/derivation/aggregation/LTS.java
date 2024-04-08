@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import uk.ac.ed.inf.pepa.model.ActionLevel;
+
 
 /**
  * Interface to represent a PEPA's LTS model.
@@ -42,6 +44,16 @@ public interface LTS<S> extends Iterable<S> {
 	public Iterable<Short> getActions(S source, S target);
 	
 	/**
+	 * Return all the action types that appear in transitions from source
+	 * to target.
+	 * 
+	 * @param source
+	 * @param target
+	 * @return
+	 */
+	public Iterable<Short> getActions(S source, S target, ActionLevel level);
+
+	/**
 	 * Get the apparent rate of the transitions from source to target
 	 * with the given action type.
 	 * 
@@ -51,24 +63,19 @@ public interface LTS<S> extends Iterable<S> {
 	 * @return
 	 */
 	public double getApparentRate(S source, S target, short actionId);
-	/*
-	default double getApparentRate(S source, List<S> targets, short actionId) {
-		double[] rates = new double[targets.size()];
-		int i = 0;
-		for (S target: targets) {
-			double x = getApparentRate(source, target, actionId);
-			rates[i++] = x;
-		}
-		
-		double result = rates[0];
-		for (i=1; i < rates.length; ++i) {
-			result += rates[i];
-		}
-		
-		return result;
-	}
-	*/
-	
+
+
+	/**
+	 * Get the level of the transitions from source to target
+	 * with the given action type.
+	 * 
+	 * @param source
+	 * @param target
+	 * @param actionId
+	 * @return
+	 */
+	public ActionLevel getActionLevel(short actionId);
+
 	/**
 	 * Get all the states reachable by transitions from source.
 	 * @param source
@@ -84,7 +91,24 @@ public interface LTS<S> extends Iterable<S> {
 	 */
 	public Iterable<S> getPreImage(S target);
 	
+
+	/**
+	 * Get all the states reachable by transitions from source.
+	 * @param source
+	 * @param level
+	 * @return
+	 */
+	public Iterable<S> getImage(S source, ActionLevel level);
 	
+	/**
+	 * Get all states that have transition to target.
+	 * 
+	 * @param target
+	 * @param level
+	 * @return
+	 */
+	public Iterable<S> getPreImage(S target, ActionLevel level);
+
 	/**
 	 * Obtain a variant view of the PEPA LTS.
 	 * 

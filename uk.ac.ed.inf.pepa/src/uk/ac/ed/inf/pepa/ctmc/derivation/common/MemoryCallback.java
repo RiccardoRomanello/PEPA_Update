@@ -14,6 +14,7 @@ import uk.ac.ed.inf.pepa.ctmc.derivation.DerivationException;
 import uk.ac.ed.inf.pepa.ctmc.derivation.IStateSpace;
 import uk.ac.ed.inf.pepa.ctmc.derivation.internal.hbf.ICallbackListener;
 import uk.ac.ed.inf.pepa.ctmc.derivation.internal.hbf.MemoryStateSpace;
+import uk.ac.ed.inf.pepa.model.ActionLevel;
 
 public class MemoryCallback implements ICallbackListener {
 
@@ -27,6 +28,8 @@ public class MemoryCallback implements ICallbackListener {
 
 	private ShortArray action;
 
+	private ArrayList<ActionLevel> action_level;
+
 	private int t;
 
 	private int currentColumn;
@@ -34,6 +37,8 @@ public class MemoryCallback implements ICallbackListener {
 	private double sum;
 
 	private short currentAction;
+
+	private ActionLevel currentLevel;
 
 	private int t_count = 0;
 	
@@ -48,6 +53,7 @@ public class MemoryCallback implements ICallbackListener {
 		column = new IntegerArray(INITIAL_CAPACITY);
 		value = new DoubleArray(INITIAL_CAPACITY * 2);
 		action = new ShortArray(INITIAL_CAPACITY * 2);
+		action_level = new ArrayList<ActionLevel>(INITIAL_CAPACITY * 2);
 	}
 
 	public IStateSpace done(ISymbolGenerator generator, ArrayList<State> states)
@@ -56,6 +62,7 @@ public class MemoryCallback implements ICallbackListener {
 		column.trimToSize();
 		value.trimToSize();
 		action.trimToSize();
+		action_level.trimToSize();
 		isDone = true;
 		/*
 		System.err.println("Row: " + row);
@@ -64,7 +71,7 @@ public class MemoryCallback implements ICallbackListener {
 		System.err.println("Actions: " + action);
 		*/
 		return new MemoryStateSpace(generator, states, row, column, action,
-				value, hasVariableLength, maximumLength);
+									value, hasVariableLength, maximumLength);
 	}
 	
 	// FIXME: this is a bit of a hack to retrieve these values...
@@ -92,6 +99,12 @@ public class MemoryCallback implements ICallbackListener {
 		return action;
 	}
 
+	public ArrayList<ActionLevel> getActionLevels() throws RuntimeException {
+		if (!isDone)
+			throw new RuntimeException("Cannot retrieve action levels before completion!");
+		return action_level;
+	}
+
 	public void foundDerivatives(State state, Transition[] transitions) {
 		this.exploringState(state.stateNumber, transitions.length);
 		if (state.stateNumber == 0)
@@ -116,7 +129,7 @@ public class MemoryCallback implements ICallbackListener {
 			 */
 
 			foundTransition(state.stateNumber, t.fState.stateNumber, t.fRate,
-					t.fActionId);
+					t.fActionId, t.fLevel);
 		}
 	}
 
@@ -126,7 +139,7 @@ public class MemoryCallback implements ICallbackListener {
 		row.add(column.size());
 	}
 
-	private void foundTransition(int i, int j, double rate, short action) {
+	private void foundTransition(int i, int j, double rate, short action, ActionLevel action_level) {
 		if (currentColumn != j) {
 			if (currentColumn != -1)
 				writeAction();
@@ -135,12 +148,14 @@ public class MemoryCallback implements ICallbackListener {
 			column.add(value.size());
 			currentColumn = j;
 			currentAction = action;
+			currentLevel = action_level;
 			sum = 0;
 		}
 		
 		if (currentAction != action) {
 			writeAction();
 			currentAction = action;
+			currentLevel = action_level;
 			sum = rate;
 		} else {
 			sum += rate;
@@ -153,6 +168,7 @@ public class MemoryCallback implements ICallbackListener {
 
 	private void writeAction() {
 		action.add(currentAction);
+		action_level.add(currentLevel);
 		value.add(sum);
 	}
 

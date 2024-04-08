@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 import uk.ac.ed.inf.pepa.ctmc.derivation.aggregation.LTS;
 import uk.ac.ed.inf.pepa.ctmc.derivation.common.ISymbolGenerator;
+import uk.ac.ed.inf.pepa.model.ActionLevel;
 
 /**
  * Lightweight variant view of the LTS.
@@ -113,6 +114,28 @@ public class VariantView<S> implements LTS<S> {
 	}
 
 	/**
+	 * Get the actions that label transitions between <code>source</code>
+	 * and <code>target</code>.
+	 * 
+	 * Note that if <code>source.equals(target)</code> then tau is always
+	 * included.
+	 * 
+	 * @param source
+	 * @param target
+	 * @param level
+	 * @return
+	 */
+	@Override
+	public Iterable<Short> getActions(S source, S target, ActionLevel level) {
+		ArrayList<Short> acts = (ArrayList<Short>) model.getActions(source, target, level);
+		
+		if (source.equals(target) && !acts.contains(ISymbolGenerator.TAU_ACTION)) {
+			acts.add(ISymbolGenerator.TAU_ACTION);
+		}
+		return acts;
+	}
+
+	/**
 	 * Get the apparent rate of the transitions from source to target
 	 * with the given actionId in the underlying LTS.
 	 * 
@@ -167,6 +190,51 @@ public class VariantView<S> implements LTS<S> {
 		if (!sources.contains(target)) sources.add(target);
 		
 		return sources;
+	}
+
+	/**
+	 * Get the states that are reachable via transitions from <code>source</code>.
+	 * 
+	 * Note that <code>source</code> itself is always included since
+	 * it has a tau self-loop.
+	 * 
+	 * @param source
+	 * @param level
+	 * @return
+	 */
+	@Override
+	public Iterable<S> getImage(S source, ActionLevel level) {
+		HashSet<S> targets = (HashSet<S>) model.getImage(source, level);
+		targets.add(source);
+		
+		return targets;
+	}
+
+	/**
+	 * Get the states that can reach via transitions the given
+	 * state <code>target</code>.
+	 * 
+	 * Note that <code>target</code> itself is always included since
+	 * it has a tau self-loop.
+	 * 
+	 * @param target
+	 * @param level
+	 * @return
+	 */
+	@Override
+	public Iterable<S> getPreImage(S target, ActionLevel level) {
+		ArrayList<S> sources = (ArrayList<S>) model.getPreImage(target, level);
+		
+		if (!sources.contains(target)) {
+			sources.add(target);
+		}
+		
+		return sources;
+	}
+
+	@Override
+	public ActionLevel getActionLevel(short actionid) {
+		return model.getActionLevel(actionid);
 	}
 
 	/**

@@ -22,6 +22,7 @@ import uk.ac.ed.inf.pepa.ctmc.derivation.aggregation.StateIsMarkedException;
 import uk.ac.ed.inf.pepa.ctmc.derivation.aggregation.StateNotFoundException;
 import uk.ac.ed.inf.pepa.ctmc.derivation.common.CommonDefaulters;
 import uk.ac.ed.inf.pepa.ctmc.derivation.common.DefaultHashMap;
+import uk.ac.ed.inf.pepa.model.ActionLevel;
 
 
 /**
@@ -110,6 +111,7 @@ public class ContextualLumpability<S extends Comparable<S>>
 		List<Aggregated<S>> aggrLtsStates = new ArrayList<>(partition.size());
 		HashMap<S, HashMap<S, double[]>> aggrTrans = new HashMap<S, HashMap<S, double[]>>();
 		HashMap<PartitionBlock<S>, Aggregated<S>> blocksToAggr = new HashMap<PartitionBlock<S>, Aggregated<S>>(partition.size());
+		ArrayList<ActionLevel> action_level = new ArrayList<ActionLevel>();
 		
 		for (PartitionBlock<S> block: partition.getBlocks()) {
 			Aggregated<S> aggrState = new Aggregated<>(block);
@@ -118,9 +120,9 @@ public class ContextualLumpability<S extends Comparable<S>>
 			blocksToAggr.put(block, aggrState);
 		}
 		
-		prepareAggregatedData(initial, partition, numActions, aggrLtsStates, aggrTrans, blocksToAggr);
+		prepareAggregatedData(initial, partition, numActions, aggrLtsStates, aggrTrans, blocksToAggr, action_level);
 		 
-		return makeAggregatedLts(partition, numActions, aggrLtsStates, aggrTrans, blocksToAggr);
+		return makeAggregatedLts(partition, numActions, aggrLtsStates, aggrTrans, blocksToAggr, action_level);
 	}
 
 	@Override
@@ -138,7 +140,7 @@ public class ContextualLumpability<S extends Comparable<S>>
 	 */
 	private LTS<Aggregated<S>> makeAggregatedLts(Partition<S, PartitionBlock<S>> partition,
 			final int numActions, List<Aggregated<S>> aggrLtsStates, HashMap<S, HashMap<S, double[]>> aggrTrans,
-			HashMap<PartitionBlock<S>, Aggregated<S>> blocksToAggr) {
+			HashMap<PartitionBlock<S>, Aggregated<S>> blocksToAggr, ArrayList<ActionLevel> action_level) {
 		LTSBuilder<Aggregated<S>> aggrLts = new LtsModel<>(numActions);
 
 		
@@ -156,7 +158,7 @@ public class ContextualLumpability<S extends Comparable<S>>
 						aggrLts.addTransition(
 								blocksToAggr.get(partition.getBlockOf(source)),
 								blocksToAggr.get(partition.getBlockOf(target)),
-								value, act);
+								value, act, action_level.get(act));
 					}
 					++act;
 				}
@@ -173,10 +175,11 @@ public class ContextualLumpability<S extends Comparable<S>>
 	 * @param aggrLtsStates
 	 * @param aggrTrans
 	 * @param blocksToAggr
+	 * @param action_level
 	 */
-	public void prepareAggregatedData(LTS<S> initial, Partition<S, PartitionBlock<S>> partition,
+	private void prepareAggregatedData(LTS<S> initial, Partition<S, PartitionBlock<S>> partition,
 			final int numActions, List<Aggregated<S>> aggrLtsStates, HashMap<S, HashMap<S, double[]>> aggrTrans,
-			HashMap<PartitionBlock<S>, Aggregated<S>> blocksToAggr) {
+			HashMap<PartitionBlock<S>, Aggregated<S>> blocksToAggr, ArrayList<ActionLevel> action_level) {
 		for (Aggregated<S> aggrState: aggrLtsStates) {
 			S aggrSRepr = aggrState.getRepresentative();
 
@@ -193,6 +196,12 @@ public class ContextualLumpability<S extends Comparable<S>>
 							rates = new double[numActions];
 							trans.put(targetRepr, rates);
 						}
+						
+						while (act >= action_level.size()) {
+							action_level.add(ActionLevel.UNDEFINDED);
+						}
+						
+						action_level.set(act, initial.getActionLevel(act));
 						
 						rates[act] += initial.getApparentRate(state, target, act);
 					}

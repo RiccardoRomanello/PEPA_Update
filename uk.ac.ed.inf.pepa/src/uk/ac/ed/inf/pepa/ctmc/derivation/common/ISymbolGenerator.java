@@ -10,6 +10,7 @@ package uk.ac.ed.inf.pepa.ctmc.derivation.common;
 import java.util.Collection;
 import java.util.Map;
 
+import uk.ac.ed.inf.pepa.model.NamedAction;
 import uk.ac.ed.inf.pepa.model.Process;
 
 public interface ISymbolGenerator {
@@ -28,8 +29,10 @@ public interface ISymbolGenerator {
 	 * @return null if no association is found.
 	 * 
 	 */
+	public abstract NamedAction getAction(short actionId);
+
 	public abstract String getActionLabel(short actionId);
-	
+
 	public abstract short getActionId(String action);
 
 	public abstract short getIndex(Process process);

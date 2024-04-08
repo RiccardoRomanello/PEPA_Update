@@ -24,6 +24,7 @@ import uk.ac.ed.inf.pepa.ctmc.derivation.common.ISymbolGenerator;
 import uk.ac.ed.inf.pepa.ctmc.derivation.common.State;
 import uk.ac.ed.inf.pepa.ctmc.solution.internal.simple.Generator;
 import uk.ac.ed.inf.pepa.model.Constant;
+import uk.ac.ed.inf.pepa.model.NamedAction;
 import uk.ac.ed.inf.pepa.model.Process;
 
 public abstract class AbstractStateSpace implements IStateSpace {
@@ -200,7 +201,7 @@ public abstract class AbstractStateSpace implements IStateSpace {
 	}
 
 
-	public abstract String[] getAction(int source, int target);
+	public abstract NamedAction[] getAction(int source, int target);
 
 	public String[] getComponentNames() {
 

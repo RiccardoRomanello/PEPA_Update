@@ -15,6 +15,7 @@ import java.util.TreeSet;
 import uk.ac.ed.inf.pepa.ctmc.derivation.common.ISymbolGenerator;
 import uk.ac.ed.inf.pepa.model.NamedAction;
 import uk.ac.ed.inf.pepa.model.Process;
+import uk.ac.ed.inf.pepa.model.internal.NamedActionImpl;
 
 public class SymbolGenerator implements ISymbolGenerator {
 
@@ -38,7 +39,16 @@ public class SymbolGenerator implements ISymbolGenerator {
 						ISymbolGenerator.TAU : null)
 				: action.prettyPrint();
 	}
-	
+
+
+	public NamedAction getAction(short actionId) {
+		NamedAction action = actionMap.get(actionId);
+		return (action == null) ? 
+				((actionId == ISymbolGenerator.TAU_ACTION) ?
+						new NamedActionImpl(ISymbolGenerator.TAU) : null)
+				: action;
+	}
+
 	public short getActionId(String action) {
 		for (Map.Entry<Short, NamedAction> entry : actionMap.entrySet()) {
 			if (action.equals(entry.getValue().prettyPrint()))

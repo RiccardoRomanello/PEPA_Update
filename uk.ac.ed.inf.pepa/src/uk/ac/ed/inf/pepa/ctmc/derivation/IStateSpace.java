@@ -12,7 +12,7 @@ import uk.ac.ed.inf.pepa.ctmc.PopulationLevelResult;
 import uk.ac.ed.inf.pepa.ctmc.SequentialComponent;
 import uk.ac.ed.inf.pepa.ctmc.ThroughputResult;
 import uk.ac.ed.inf.pepa.ctmc.solution.OptionMap;
-import uk.ac.ed.inf.pepa.ctmc.solution.SolverException;
+import uk.ac.ed.inf.pepa.model.NamedAction;
 
 /**
  * Represents the underlying Continuous Time Markov Chain (CTMC) of a PEPA
@@ -130,7 +130,7 @@ public interface IStateSpace {
 	 * target, or <code>null</code>
 	 * @throws DerivationException 
 	 */
-	public String[] getAction(int source, int target);
+	public NamedAction[] getAction(int source, int target);
 
 	/**
 	 * Returns the transition rate.

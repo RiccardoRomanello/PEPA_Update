@@ -33,6 +33,7 @@ import uk.ac.ed.inf.pepa.ctmc.derivation.common.Transition;
 import uk.ac.ed.inf.pepa.ctmc.derivation.internal.hbf.MemoryStateSpace;
 import uk.ac.ed.inf.pepa.ctmc.derivation.common.OptimisedHashMap.InsertionResult;
 import uk.ac.ed.inf.pepa.ctmc.derivation.common.ShortArray;
+import uk.ac.ed.inf.pepa.model.ActionLevel;
 import uk.ac.ed.inf.pepa.model.NamedRate;
 import uk.ac.ed.inf.pepa.model.RateMath;
 import uk.ac.ed.inf.pepa.model.internal.NamedRateImpl;
@@ -106,12 +107,13 @@ public class AggregationStateSpaceBuilder implements IStateSpaceBuilder {
 			IntegerArray col = callback.getColumn();
 			DoubleArray rates = callback.getRates();
 			ShortArray actionIds = callback.getActions();
+			ArrayList<ActionLevel> action_levels = callback.getActionLevels();
 			
 			endTime = System.nanoTime();
 			commonDeriveTimeMillis = (endTime - startTime)/1000000;
 			
 			startTime = System.nanoTime();
-			lts = deriveLts(states, row, col, rates, actionIds);
+			lts = deriveLts(states, row, col, rates, actionIds, action_levels);
 			endTime = System.nanoTime();
 			obtainLtsTimeMillis = (endTime-startTime)/1000000;
 		}
@@ -346,7 +348,7 @@ public class AggregationStateSpaceBuilder implements IStateSpaceBuilder {
 	 */
 	private LTS<Integer> deriveLts(ArrayList<State> states,
 			IntegerArray row, IntegerArray col, DoubleArray rates,
-			ShortArray actionIds) {
+			ShortArray actionIds, ArrayList<ActionLevel> action_level) {
 		
 		int numActIds = 0;
 		{
@@ -362,7 +364,7 @@ public class AggregationStateSpaceBuilder implements IStateSpaceBuilder {
 		LTS<Integer> lts;
 		
 		if (useArraysModel) {
-			lts = new ArraysLtsModel(numActIds, row, col, actionIds, rates);
+			lts = new ArraysLtsModel(numActIds, row, col, actionIds, action_level, rates);
 		} else {
 			LTSBuilder<Integer> ltsBuilder = new LtsModel<>(numActIds);
 		
@@ -392,7 +394,8 @@ public class AggregationStateSpaceBuilder implements IStateSpaceBuilder {
 					for (int k=colRangeStart; k < colRangeEnd; k++) {
 						double rate = rates.get(k);
 						short actionId = actionIds.get(k);
-						ltsBuilder.addTransition(s.stateNumber, targetId, rate, actionId);
+						ltsBuilder.addTransition(s.stateNumber, targetId, rate, actionId,
+												 lts.getActionLevel(actionId));
 					}
 				}
 				

@@ -22,6 +22,8 @@ import uk.ac.ed.inf.pepa.ctmc.derivation.common.IntegerArray;
 import uk.ac.ed.inf.pepa.ctmc.derivation.common.ShortArray;
 import uk.ac.ed.inf.pepa.ctmc.derivation.common.State;
 import uk.ac.ed.inf.pepa.ctmc.solution.internal.simple.Generator;
+import uk.ac.ed.inf.pepa.model.ActionLevel;
+import uk.ac.ed.inf.pepa.model.NamedAction;
 
 /**
  * @author mtribast
@@ -198,8 +200,8 @@ public class MemoryStateSpace extends AbstractStateSpace {
 	 * @see uk.ac.ed.inf.pepa.ctmc.derivation.internal.hbf.AbstractStateSpace#getAction(int,
 	 *      int)
 	 */
-	public String[] getAction(int source, int target) {
-		LinkedList<String> labels = new LinkedList<String>();
+	public NamedAction[] getAction(int source, int target) {
+		LinkedList<NamedAction> actions = new LinkedList<NamedAction>();
 		int c1 = row.get(source);
 		int c2;
 		if (source == row.size() - 1) {
@@ -215,13 +217,13 @@ public class MemoryStateSpace extends AbstractStateSpace {
 				int stop = (i + 3 <= column.size() - 1) ? column.get(i + 3)
 						: action.size();
 				for (int j = start; j < stop; j++) {
-					labels.add(symbolGenerator.getActionLabel(action.get(j)));
+					actions.add(symbolGenerator.getAction(action.get(j)));
 				}
 			}
 			if (found)
 				break;
 		}
-		return labels.toArray(new String[labels.size()]);
+		return actions.toArray(new NamedAction[actions.size()]);
 	}
 
 	/*

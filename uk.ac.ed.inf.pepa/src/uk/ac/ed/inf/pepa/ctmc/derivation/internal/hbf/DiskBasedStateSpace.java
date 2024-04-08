@@ -26,6 +26,8 @@ import uk.ac.ed.inf.pepa.ctmc.derivation.common.ISymbolGenerator;
 import uk.ac.ed.inf.pepa.ctmc.derivation.common.IntegerArray;
 import uk.ac.ed.inf.pepa.ctmc.derivation.common.State;
 import uk.ac.ed.inf.pepa.ctmc.solution.internal.simple.Generator;
+import uk.ac.ed.inf.pepa.model.NamedAction;
+import uk.ac.ed.inf.pepa.model.internal.NamedActionImpl;
 
 public class DiskBasedStateSpace extends AbstractStateSpace {
 
@@ -200,8 +202,8 @@ public class DiskBasedStateSpace extends AbstractStateSpace {
 	 *      int)
 	 */
 	@Override
-	public String[] getAction(int source, int target) {
-		LinkedList<String> labels = new LinkedList<String>();
+	public NamedAction[] getAction(int source, int target) {
+		LinkedList<NamedAction> actions = new LinkedList<NamedAction>();
 
 		try {
 			int c1 = row.get(source);
@@ -222,14 +224,14 @@ public class DiskBasedStateSpace extends AbstractStateSpace {
 					short[] values = new short[diff];
 					action.getBulk(start, stop, values);
 					for (int j = 0; j < diff; j++) {
-						labels.add(symbolGenerator.getActionLabel(values[j]));
+						actions.add(symbolGenerator.getAction(values[j]));
 					}
 				}
 			}
 		} catch (IOException e) {
 			throw new IllegalStateException(e);
 		}
-		return labels.toArray(new String[labels.size()]);
+		return actions.toArray(new NamedAction[actions.size()]);
 	}
 
 	/*

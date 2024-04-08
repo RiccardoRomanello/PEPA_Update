@@ -13,6 +13,7 @@ import uk.ac.ed.inf.pepa.ctmc.derivation.common.Component;
 import uk.ac.ed.inf.pepa.ctmc.derivation.common.ISymbolGenerator;
 import uk.ac.ed.inf.pepa.ctmc.derivation.common.SequentialComponentData;
 import uk.ac.ed.inf.pepa.ctmc.derivation.common.Transition;
+import uk.ac.ed.inf.pepa.model.ActionLevel;
 
 public class ProcessArray extends Component {
 	
@@ -44,8 +45,9 @@ public class ProcessArray extends Component {
 				// change one element with its target
 				// important, sorts the aggregation subarray
 				Transition newTransition = buf.getTransition(currentState, fOffset, fLength, 
-						fHidingSet.get(t.fActionId) ? ISymbolGenerator.TAU_ACTION
-								: t.fActionId, n * t.fRate);
+						fHidingSet.get(t.fActionId) ? ISymbolGenerator.TAU_ACTION : t.fActionId, 
+						fHidingSet.get(t.fActionId) ? ActionLevel.UNDEFINDED : t.fLevel,
+								n * t.fRate);
 				newTransition.fTargetProcess[fOffset + i] = t.fTargetProcess[0];
 				Arrays.sort(newTransition.fTargetProcess, fOffset, fOffset + fLength);
 				fFirstStepDerivatives.add(newTransition);

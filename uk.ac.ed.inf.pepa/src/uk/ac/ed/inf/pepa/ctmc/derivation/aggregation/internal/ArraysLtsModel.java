@@ -13,6 +13,7 @@ import uk.ac.ed.inf.pepa.ctmc.derivation.common.DoubleArray;
 import uk.ac.ed.inf.pepa.ctmc.derivation.common.ISymbolGenerator;
 import uk.ac.ed.inf.pepa.ctmc.derivation.common.IntegerArray;
 import uk.ac.ed.inf.pepa.ctmc.derivation.common.ShortArray;
+import uk.ac.ed.inf.pepa.model.ActionLevel;
 
 /**
  * @author Giacomo Alzetta
@@ -24,6 +25,7 @@ public class ArraysLtsModel implements LTS<Integer> {
 	private IntegerArray stateRow;
 	private IntegerArray transitionColumn;
 	private ShortArray actionColumn;
+	private ArrayList<ActionLevel> action_levels;
 	private IntegerArray preStateRow = null;
 	private IntegerArray preImageColumn = null;
 	private DoubleArray rates;
@@ -31,10 +33,11 @@ public class ArraysLtsModel implements LTS<Integer> {
 
 	
 	public ArraysLtsModel(int numActionTypes, IntegerArray row, IntegerArray column,
-						  ShortArray actions, DoubleArray rates) {
+						  ShortArray actions, ArrayList<ActionLevel> action_levels, DoubleArray rates) {
 		stateRow = row;
 		transitionColumn = column;
 		actionColumn = actions;
+		this.action_levels = action_levels;
 		this.rates = rates;
 		this.numActionTypes = numActionTypes;
 		
@@ -97,6 +100,19 @@ public class ArraysLtsModel implements LTS<Integer> {
 	}
 
 	@Override
+	public Iterable<Short> getActions(Integer source, Integer target, ActionLevel level) {
+		ArrayList<Short> actTypes = new ArrayList<>();
+
+		for (Short actionid : getActions(source, target)) {
+			if (action_levels.get(numActionTypes) == level) {
+				actTypes.add(actionid);
+			}
+		}
+
+		return actTypes;
+	}
+
+	@Override
 	public double getApparentRate(Integer source, Integer target, short actionId) {
 		if (actionId == ISymbolGenerator.TAU_ACTION && source.equals(target)) {
 			System.err.println("found tau action! (self loop!)");
@@ -152,7 +168,42 @@ public class ArraysLtsModel implements LTS<Integer> {
 		return preIm;
  	}
 	
+
+	@Override
+	public Iterable<Integer> getImage(Integer source, ActionLevel level) {
+		HashSet<Integer> targets = new HashSet<>();
+		int startCol = stateRow.get(source);
+		int endCol = (source == stateRow.size() - 1 ? transitionColumn.size() : stateRow.get(source+1));
+		for (int i=startCol; i < endCol; i += 2) {
+			if (action_levels.get(actionColumn.get(i)) == level) {
+				int tState = transitionColumn.get(i);
+
+				targets.add(tState);
+			}
+		}
+		
+		return targets;
+	}
+
+	@Override
+	public ActionLevel getActionLevel(short actionId) {
+		return action_levels.get(actionId);
+	}
 	
+	@Override
+	public Iterable<Integer> getPreImage(Integer target, ActionLevel level) {
+		int rangeStart = preStateRow.get(target);
+		int rangeEnd = target == preStateRow.size()-1 ? preImageColumn.size() : preStateRow.get(target+1);
+		
+		ArrayList<Integer> preIm = new ArrayList<>(rangeEnd-rangeStart);
+		for (int i=rangeStart; i < rangeEnd; ++i) {
+			if (action_levels.get(actionColumn.get(i)) == level) {
+				preIm.add(preImageColumn.get(i));
+			}
+		}
+		
+		return preIm;
+ 	}
 	
 	private void computePreImageColumn() {
 		HashMap<Integer, HashSet<Integer>> pre = new HashMap<>(stateRow.size());
@@ -327,6 +378,33 @@ public class ArraysLtsModel implements LTS<Integer> {
 			return model.numberOfActionTypes();
 		}
 
+		@Override
+		public ActionLevel getActionLevel(short actionid) {
+			return model.getActionLevel(actionid);
+		}
+		
+		/**
+		 * Get the actions that label transitions between <code>source</code>
+		 * and <code>target</code>.
+		 * 
+		 * Note that if <code>source.equals(target)</code> then tau is always
+		 * included.
+		 * 
+		 * @param source
+		 * @param target
+		 * @param level
+		 * @return
+		 */
+		@Override
+		public Iterable<Short> getActions(Integer source, Integer target, ActionLevel level) {
+			ArrayList<Short> acts = (ArrayList<Short>) model.getActions(source, target, level);
+			
+			if (source.equals(target) && !acts.contains(ISymbolGenerator.TAU_ACTION)) {
+				acts.add(ISymbolGenerator.TAU_ACTION);
+			}
+			return acts;
+		}		
+		
 		/**
 		 * Get the actions that label transitions between <code>source</code>
 		 * and <code>target</code>.
@@ -401,6 +479,46 @@ public class ArraysLtsModel implements LTS<Integer> {
 			ArrayList<Integer> sources = (ArrayList<Integer>) model.getPreImage(target);
 			
 			if (!sources.contains(target)) sources.add(target);
+			
+			return sources;
+		}
+
+		/**
+		 * Get the states that are reachable via transitions from <code>source</code>.
+		 * 
+		 * Note that <code>source</code> itself is always included since
+		 * it has a tau self-loop.
+		 * 
+		 * @param source
+		 * @param level
+		 * @return
+		 */
+		@Override
+		public Iterable<Integer> getImage(Integer source, ActionLevel level) {
+			HashSet<Integer> targets = (HashSet<Integer>) model.getImage(source, level);
+			targets.add(source);
+			
+			return targets;
+		}
+
+		/**
+		 * Get the states that can reach via transitions the given
+		 * state <code>target</code>.
+		 * 
+		 * Note that <code>target</code> itself is always included since
+		 * it has a tau self-loop.
+		 * 
+		 * @param target
+		 * @param level
+		 * @return
+		 */
+		@Override
+		public Iterable<Integer> getPreImage(Integer target, ActionLevel level) {
+			ArrayList<Integer> sources = (ArrayList<Integer>) model.getPreImage(target, level);
+			
+			if (!sources.contains(target)) {
+				sources.add(target);
+			}
 			
 			return sources;
 		}

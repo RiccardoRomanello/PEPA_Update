@@ -8,16 +8,19 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import uk.ac.ed.inf.pepa.ctmc.derivation.aggregation.LTS;
 import uk.ac.ed.inf.pepa.ctmc.derivation.aggregation.LTSBuilder;
 import uk.ac.ed.inf.pepa.ctmc.derivation.common.ISymbolGenerator;
+import uk.ac.ed.inf.pepa.model.ActionLevel;
 
 public class LtsModel<S> implements LTS<S>, LTSBuilder<S> {
 
 	private ArrayList<S> states;
+	private ActionLevel action_levels[];
 	private HashMap<S, HashMap<S, double[]>> transitionMap;
-	private HashMap<S, ArrayList<S>> preImageMap;
+	private HashMap<S, HashMap<ActionLevel, TreeSet<S>>> preImageMap;
 	
 	private int numActionIds;
 	
@@ -27,6 +30,12 @@ public class LtsModel<S> implements LTS<S>, LTSBuilder<S> {
 		states = new ArrayList<>();
 		preImageMap = new HashMap<>();
 		transitionMap = new HashMap<>();
+
+		action_levels = new ActionLevel[numActionIds];
+		
+		for (int i=0; i<numActionIds; ++i) {
+			action_levels[i] = ActionLevel.UNDEFINDED;
+		}
 	}
 	
 	@Override
@@ -41,21 +50,61 @@ public class LtsModel<S> implements LTS<S>, LTSBuilder<S> {
 		}
 
 		// FIXME: this may throw a NPE if the LTS is built incorrectly...
-		double[] rates = transitionMap.get(source).get(target);
-		if (rates == null) return 0.0d;
-		return rates[actionId];
+		double[] labels = transitionMap.get(source).get(target);
+		if (labels == null) return 0.0d;
+		return labels[actionId];
+	}
+
+	@Override
+	public ActionLevel getActionLevel(short actionId) {
+		return action_levels[actionId];
 	}
 
 	@Override
 	public Iterable<S> getImage(S source) {
 		HashMap<S, double[]> targetsMap = transitionMap.get(source);
-		return new ArrayList<S>(targetsMap.keySet());
-		
+		return targetsMap.keySet();
 	}
 
 	@Override
 	public Iterable<S> getPreImage(S target) {
-		return preImageMap.get(target);
+		TreeSet<S> total = new TreeSet<S>();
+		
+		for (TreeSet<S> level_pre_images : preImageMap.get(target).values()) {
+			total.addAll(level_pre_images);
+		}
+		return total;
+	}
+	
+	private Boolean any_label_at_level(double[] rates, ActionLevel level)
+	{
+		for (int i=0; i<numActionIds; ++i) {
+			if (rates[i] != 0.0 && action_levels[i] == level) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
+
+	@Override
+	public Iterable<S> getImage(S source, ActionLevel level) {
+		HashMap<S, double[]> targetsMap = transitionMap.get(source);
+		
+		TreeSet<S> total = new TreeSet<S>();
+		for (S target : targetsMap.keySet()) {
+			if (any_label_at_level(targetsMap.get(target), level)) {
+				total.add(target);
+			}
+		}
+		return total;
+		
+	}
+
+	@Override
+	public Iterable<S> getPreImage(S target, ActionLevel level) {
+		return preImageMap.get(target).get(level);
 	}
 	
 	@Override
@@ -79,22 +128,42 @@ public class LtsModel<S> implements LTS<S>, LTSBuilder<S> {
 	}
 
 	@Override
+	public Iterable<Short> getActions(S source, S target, ActionLevel level) {
+		ArrayList<Short> actTypes = new ArrayList<>();
+
+		for (Short actionid : getActions(source, target)) {
+			if (action_levels[actionid] == level) {
+				actTypes.add(actionid);
+			}
+		}
+
+		return actTypes;
+	}
+	
+
+	@Override
 	public void addState(S state) {
 		states.add(state);
 		transitionMap.put(state, new HashMap<S, double[]>());
-		preImageMap.put(state, new ArrayList<S>());
+		preImageMap.put(state, new HashMap<ActionLevel, TreeSet<S>>());
 	}
 
 	@Override
-	public void addTransition(S source, S target, double rate, short actionId) {
-		double[] targetMap = get(source, target);
+	public void addTransition(S source, S target, double rate, short actionId, ActionLevel level) {
+		double[] targetMap = getRates(source, target);
+		action_levels[actionId] = level;
 		targetMap[actionId] = rate;
-		ArrayList<S> preImTarget = preImageMap.get(target);
+		HashMap<ActionLevel, TreeSet<S>> preImTarget = preImageMap.get(target);
 		if (preImTarget == null) {
-			preImTarget = new ArrayList<>();
+			preImTarget = new HashMap<ActionLevel, TreeSet<S>>();
 			preImageMap.put(target, preImTarget);
 		}
-		preImTarget.add(source);
+		TreeSet<S> preImTargetLevel = preImTarget.get(level);
+		if (preImTargetLevel == null) {
+			preImTargetLevel = new TreeSet<S>();
+			preImTarget.put(level, preImTargetLevel);
+		}
+		preImTargetLevel.add(source);
 	}
 	
 	@Override
@@ -103,7 +172,7 @@ public class LtsModel<S> implements LTS<S>, LTSBuilder<S> {
 	}
 	
 	
-	private double[] get(S source, S target) {
+	private double[] getRates(S source, S target) {
 		HashMap<S, double[]> targetsMap = transitionMap.get(source);
 		// targetsMap cannot be null. If it is then source is not in the LTS.
 		assert targetsMap != null;

@@ -10,6 +10,7 @@ import java.util.Iterator;
 
 import uk.ac.ed.inf.pepa.ctmc.derivation.aggregation.LTS;
 import uk.ac.ed.inf.pepa.ctmc.derivation.common.ISymbolGenerator;
+import uk.ac.ed.inf.pepa.model.ActionLevel;
 
 /**
  * @author Giacomo Alzetta
@@ -41,8 +42,28 @@ public class ReverseLtsModel<S> implements LTS<S> {
 	}
 	
 	@Override
+	public Iterable<S> getImage(S source, ActionLevel level) {
+		return lts.getPreImage(source, level);
+	}
+	
+	@Override
+	public Iterable<S> getPreImage(S target, ActionLevel level) {
+		return lts.getImage(target, level);
+	}
+
+	@Override
 	public Iterable<Short> getActions(S source, S target) {
 		return lts.getActions(target, source);
+	}
+
+	@Override
+	public Iterable<Short> getActions(S source, S target, ActionLevel level) {
+		return lts.getActions(target, source, level);
+	}
+
+	@Override
+	public ActionLevel getActionLevel(short actionid) {
+		return lts.getActionLevel(actionid);
 	}
 
 	@Override

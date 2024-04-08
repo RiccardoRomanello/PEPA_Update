@@ -7,6 +7,7 @@
  *******************************************************************************/
 package uk.ac.ed.inf.pepa.ctmc.derivation.common;
 
+import uk.ac.ed.inf.pepa.model.ActionLevel;
 
 /**
  * A lightweight data structure representing a transition.
@@ -26,6 +27,11 @@ public final class Transition implements Comparable<Transition> {
 	 * Identifier of the action type of this transition
 	 */
 	public short fActionId;
+
+	/**
+	 * Level of the transition
+	 */
+	public ActionLevel fLevel = ActionLevel.UNDEFINDED;
 	
 	/**
 	 * The rate at which this transition occurs
@@ -57,6 +63,6 @@ public final class Transition implements Comparable<Transition> {
 		assert fState.stateNumber != State.NOT_INITIALISED;
 		assert o.fState.stateNumber != State.NOT_INITIALISED;
 		int v = this.fState.stateNumber - o.fState.stateNumber;
-		return v != 0 ? v : fActionId - o.fActionId; 
+		return v != 0 ? v : fActionId - o.fActionId;
 	}
 }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import uk.ac.ed.inf.pepa.ctmc.derivation.DerivationException;
 import uk.ac.ed.inf.pepa.ctmc.derivation.IStateSpace;
 import uk.ac.ed.inf.pepa.ctmc.solution.OptionMap;
+import uk.ac.ed.inf.pepa.model.NamedAction;
 import uk.ac.ed.inf.pepa.parsing.ModelNode;
 import uk.ac.ed.inf.pepa.tools.PepaTools;
 
@@ -27,8 +28,8 @@ public class SteadyStateAnalysis {
 				message.append(" --> ");
 				message.append(getProcessString(stateSpace, target));
 				message.append(" via ");
-				for (String action : stateSpace.getAction(i, target)) 
-					message.append(action + " ");
+				for (NamedAction action : stateSpace.getAction(i, target)) 
+					message.append(action.prettyPrint() + " ");
 				System.out.println(message.toString());
 			}
 		}
