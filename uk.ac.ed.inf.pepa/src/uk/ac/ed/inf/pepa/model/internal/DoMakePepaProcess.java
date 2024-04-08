@@ -12,6 +12,7 @@
 package uk.ac.ed.inf.pepa.model.internal;
 
 import uk.ac.ed.inf.pepa.model.Action;
+import uk.ac.ed.inf.pepa.model.ActionLevel;
 import uk.ac.ed.inf.pepa.model.ActionSet;
 import uk.ac.ed.inf.pepa.model.Activity;
 import uk.ac.ed.inf.pepa.model.Aggregation;
@@ -152,14 +153,27 @@ public class DoMakePepaProcess {
      * Convenience method for creating a named (typed) action.
      * 
      * @param name Action type
+     * @param level Action level
+     * @return the requested action
+     */
+    public NamedAction createNamedAction(String name, ActionLevel level) {
+        NamedActionImpl action = new NamedActionImpl();
+        action.setName(name);
+        action.setLevel(level);
+
+        return action;
+    }
+
+    /**
+     * Convenience method for creating a named (typed) action.
+     * 
+     * @param name Action type
      * @return the requested action
      */
     public NamedAction createNamedAction(String name) {
-        NamedActionImpl action = new NamedActionImpl();
-        action.setName(name);
-        return action;
+        return createNamedAction(name, ActionLevel.UNDEFINDED);
     }
-   
+
     /**
      * Creates a silent (tau) action.
      * 

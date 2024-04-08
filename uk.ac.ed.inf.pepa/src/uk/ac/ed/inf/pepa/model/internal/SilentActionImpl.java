@@ -11,6 +11,7 @@
  */
 package uk.ac.ed.inf.pepa.model.internal;
 
+import uk.ac.ed.inf.pepa.model.ActionLevel;
 import uk.ac.ed.inf.pepa.model.NamedAction;
 import uk.ac.ed.inf.pepa.model.SilentAction;
 
@@ -53,5 +54,9 @@ public class SilentActionImpl implements SilentAction {
 
     public NamedAction getHiddenAction() {
         return oldAction;
+    }
+    
+    public ActionLevel getLevel() {
+    	return ActionLevel.UNDEFINDED;
     }
 }

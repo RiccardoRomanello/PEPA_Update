@@ -52,7 +52,11 @@ public class Compiler {
 		Object compiledObject;
 		
 		Compiler newCompiler;
+
+		static ActionLevel action_level;
 		
+		static HashMap<String, ActionLevel> action_levels;
+
 		static HashSet<String> currentActions;
 		
 		static HashMap<String, HashSet<String>> viewableActions;
@@ -75,7 +79,15 @@ public class Compiler {
 		}
 
 		public void visitActionTypeNode(ActionTypeNode actionType) {
-			compiledObject = factory.createNamedAction(actionType.getType());
+			String type = actionType.getType();
+			if (action_levels.containsKey(type)) {
+				compiledObject = factory.createNamedAction(type, action_levels.get(type));
+			} else {
+				if (action_level != null) {
+					action_levels.put(type, action_level);
+				}
+				compiledObject = factory.createNamedAction(type, action_level);
+			}
 		}
 
 		public void visitChoiceNode(ChoiceNode choice) {
@@ -136,10 +148,33 @@ public class Compiler {
 				currentActions.remove(atn.getType());
 		}
 
+		private void visitActionLevels(ModelNode model) {
+			action_levels = new HashMap<String, ActionLevel>();
+			for (ActionTypeNode action: model.levelDeclarations().getHigh()) {
+				action_level = ActionLevel.HIGH;
+				action.accept(new CompilerVisitor(newCompiler));
+			}
+			for (ActionTypeNode action: model.levelDeclarations().getLow()) {
+				action_level = ActionLevel.LOW;
+				action.accept(new CompilerVisitor(newCompiler));
+			}
+			if (model.levelDeclarations().default_level != null) {
+				if (model.levelDeclarations().default_level == LevelDeclarations.LOW_LEVEL) {
+					action_level = ActionLevel.LOW;
+				} else {
+					action_level = ActionLevel.HIGH;
+				}
+			} else {
+				action_level = ActionLevel.UNDEFINDED;
+			}
+		}
+
 		public void visitModelNode(ModelNode model) {
 			viewableActions = (new AlphabetProvider(model)).getViewableActionAlphabets();
 			CompilerVisitor v = null;
 			Model memModel = factory.createModel(model);
+			visitActionLevels(model);
+
 			for (RateDefinitionNode def : model.rateDefinitions()) {
 				def.accept((v = new CompilerVisitor(newCompiler)));
 				memModel.getRateDefinitions().add((NamedRate) v.compiledObject);
@@ -305,6 +340,15 @@ public class Compiler {
 			this.compiledObject = factory.createSilentAction(null);
 		}
 		
+		public NamedAction createNameAction(String type)
+		{
+			if (action_levels.containsKey(type)) {
+				return factory.createNamedAction(type, action_levels.get(type));
+			}
+			
+			return factory.createNamedAction(type);
+		}
+		
 		public void visitWildcardCooperationNode(WildcardCooperationNode cooperation) {
 			CompilerVisitor compLHS = new CompilerVisitor(newCompiler);
 			CompilerVisitor compRHS = new CompilerVisitor(newCompiler);
@@ -318,7 +362,7 @@ public class Compiler {
 			currentActions.addAll(leftActions);
 			ActionSetImpl set = (ActionSetImpl) factory.createActionSet();
 			for(String s : intersection)
-				set.add(factory.createNamedAction(s));
+				set.add(createNameAction(s));
 			compiledObject = factory.createCooperation(
 					(Process) compLHS.compiledObject,
 					(Process) compRHS.compiledObject,

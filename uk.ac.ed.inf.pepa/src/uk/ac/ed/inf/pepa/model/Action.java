@@ -23,5 +23,9 @@ package uk.ac.ed.inf.pepa.model;
  *  
  */
 public abstract interface Action extends ModelElement {
-    
+    /**
+     * @return the action level
+     * @model
+     */
+    public ActionLevel getLevel();
 }

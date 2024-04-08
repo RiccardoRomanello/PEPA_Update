@@ -12,6 +12,7 @@
 package uk.ac.ed.inf.pepa.model.internal;
 
 import uk.ac.ed.inf.pepa.model.NamedAction;
+import uk.ac.ed.inf.pepa.model.ActionLevel;
 
 /**
  * Implementation of a named action.
@@ -22,14 +23,30 @@ import uk.ac.ed.inf.pepa.model.NamedAction;
 public class NamedActionImpl implements NamedAction {
 
     private String type;
+    private ActionLevel level;
 
+    public NamedActionImpl() {
+    	this.type = "";
+    	this.level = ActionLevel.UNDEFINDED;
+    }
+    
+    public NamedActionImpl(String type) {
+    	this.type = type;
+    	this.level = ActionLevel.UNDEFINDED;
+    }
+    
+    public NamedActionImpl(String type, ActionLevel level) {
+    	this.type = type;
+    	this.level = level;
+    }
+    
     /**
      * @see NamedAction
      */
     public String getName() {
         return this.type;
     }
-
+    
     /**
      * @see NamedAction
      */
@@ -39,6 +56,15 @@ public class NamedActionImpl implements NamedAction {
         this.type = name;
     }
 
+    public ActionLevel getLevel()
+    {
+    	return this.level;
+    }
+    
+    public void setLevel(ActionLevel level) {
+        this.level = level;
+    }
+    
     public boolean equals(Object o) {
         if (!(o instanceof NamedAction))
             return false;
@@ -53,6 +79,16 @@ public class NamedActionImpl implements NamedAction {
      * @see uk.ac.ed.inf.pepa.Action#prettyPrint()
      */
     public String prettyPrint() {
-        return this.type;
+
+    	switch(level) {
+    	case UNDEFINDED:
+    		return this.type;
+    	case HIGH:
+    		return this.type + " (high)";
+    	case LOW:
+    		return this.type + " (low)";
+    	default:
+    		throw new IllegalArgumentException("Unsupported level");
+    	}
     }
 }

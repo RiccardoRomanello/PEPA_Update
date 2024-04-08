@@ -263,10 +263,7 @@ action_type_levels		::= SET_DEFAULT_LEVEL LOW SEMI action_type_level_def
 							{:
 								model.levelDeclarations().default_level = LevelDeclarations.HIGH_LEVEL;
 							:}
-						  | action_type_level_def
-							{:
-								model.levelDeclarations().default_level = LevelDeclarations.LOW_LEVEL;
-							:}
+						  |
 						  ;
 						 
 

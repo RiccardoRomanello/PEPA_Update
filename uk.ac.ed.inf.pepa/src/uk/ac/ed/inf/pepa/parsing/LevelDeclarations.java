@@ -13,7 +13,7 @@ public class LevelDeclarations {
 	public static int HIGH_LEVEL = 0;
 	public static int LOW_LEVEL = 1;
 	
-	public int default_level = LevelDeclarations.HIGH_LEVEL;
+	public Integer default_level = null;
 	
 	public LevelDeclarations() {
 		levelDefinitions = new Actions[2];

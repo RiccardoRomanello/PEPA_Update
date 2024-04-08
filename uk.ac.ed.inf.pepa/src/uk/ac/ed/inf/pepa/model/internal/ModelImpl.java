@@ -30,11 +30,7 @@ public class ModelImpl implements Model {
 	private Process process;
 	
 	private ModelNode modelNode;
-
-	private LinkedHashSet<NamedAction> high_actions = new LinkedHashSet<NamedAction>();
-
-	private LinkedHashSet<NamedAction> low_actions = new LinkedHashSet<NamedAction>();
-
+	
 	private LinkedHashSet<NamedRate> rates = new LinkedHashSet<NamedRate>();
 
 	private LinkedHashSet<Constant> constants = new LinkedHashSet<Constant>();
@@ -65,14 +61,6 @@ public class ModelImpl implements Model {
 
 	public Collection<Constant> getProcessDefinitions() {
 		return this.constants;
-	}
-
-	public Collection<NamedAction> getHighActionDefinitions() {
-		return this.high_actions;
-	}
-	
-	public Collection<NamedAction> getLowActionDefinitions() {
-		return this.low_actions;
 	}
 	
 	public Collection<NamedRate> getRateDefinitions() {
