@@ -42,6 +42,8 @@ public class ProcessAlgebraModelChangedEvent {
 	
 	public static final int MODEL_CHECKING_INFO = 7;
 
+	public static final int PSNI_CHECKED = 8;
+
 	private int fType;
 
 	private Exception fException;

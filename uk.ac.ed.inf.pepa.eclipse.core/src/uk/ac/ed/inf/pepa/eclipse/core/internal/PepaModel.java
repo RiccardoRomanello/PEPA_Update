@@ -278,13 +278,25 @@ public class PepaModel extends ProcessAlgebraModel implements IPepaModel {
 		if (!isDerivable())
 			return; // no-effect rule
 
-		PSNIVerifier verifier = PSNIVerifierBuilder.createVerifier(fAstModel);
-
 		PSNI = null;
+		StringBuilder log = new StringBuilder();
 
-		PSNI = verifier.verify((monitor == null) ? null
-							: new PepatoProgressMonitorAdapter(monitor,
-							"PSNI verification"));
+		Exception de = null;
+		long tic = System.currentTimeMillis();
+		try {
+			PSNIVerifier verifier = PSNIVerifierBuilder.createVerifier(fAstModel);
+
+			PSNI = verifier.verify((monitor == null) ? null
+								: new PepatoProgressMonitorAdapter(monitor,
+								"PSNI verification"), log);
+		} catch (DerivationException e) {
+			fKroneckerDerivationProblem = true;
+			de = e;
+		}
+		long elapsed = System.currentTimeMillis() - tic;
+
+		notify(new ProcessAlgebraModelChangedEvent(
+				ProcessAlgebraModelChangedEvent.PSNI_CHECKED, this, de, elapsed, log.toString()));
 	}
 
 	public Boolean isPSNI() {

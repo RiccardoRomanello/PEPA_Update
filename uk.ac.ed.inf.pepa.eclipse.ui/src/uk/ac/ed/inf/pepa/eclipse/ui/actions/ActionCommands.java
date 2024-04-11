@@ -143,8 +143,8 @@ public class ActionCommands {
 		} else {
 			MessageDialog.openInformation(Display.getCurrent().getActiveShell(),
 										  "PSNI Verification Results",
-										  model.isPSNI()?"The model is PSNI":
-											             "The model is not PSNI");
+										  model.isPSNI()?"The process satisfies PSNI":
+											             "The process does not satisfy PSNI");
 		}
 	}
 

@@ -47,6 +47,8 @@ public class ConsoleWriter implements IProcessAlgebraModelChangedListener,
 	
 	private static final String MODEL_CHECKING_INFO = "<Model Checker> ";
 	
+	private static final String PSNI_CHECKED = "PSNI checked. ";
+
 	private MessageConsoleStream stream;
 	
 	private IDocument console;
@@ -131,6 +133,14 @@ public class ConsoleWriter implements IProcessAlgebraModelChangedListener,
 		case ProcessAlgebraModelChangedEvent.MODEL_CHECKING_INFO:
 			if (event.getException() == null)
 				notify(MODEL_CHECKING_INFO + event.getInformation());
+			break;
+		case ProcessAlgebraModelChangedEvent.PSNI_CHECKED:
+			if (event.getException() != null) {
+				notify("Warning: " + event.getException().getMessage());
+			} else {
+				notify(PSNI_CHECKED + " Elapsed time: " + event.getElapsedTimeMillis() + " ms. "
+						+ (event.getInformation() == "" ? "" : "\n"+event.getInformation()));
+			}
 			break;
 		default:
 			break;
