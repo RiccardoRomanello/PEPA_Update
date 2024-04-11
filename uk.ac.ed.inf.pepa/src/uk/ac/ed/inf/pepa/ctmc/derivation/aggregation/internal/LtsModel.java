@@ -19,7 +19,7 @@ public class LtsModel<S> implements LTS<S>, LTSBuilder<S> {
 
 	private ArrayList<S> states;
 	private ActionLevel action_levels[];
-	private HashMap<S, HashMap<S, double[]>> transitionMap;
+	private HashMap<S, HashMap<S, HashMap<Short, Double>>> transitionMap;
 	private HashMap<S, HashMap<ActionLevel, TreeSet<S>>> preImageMap;
 	
 	private int numActionIds;
@@ -34,25 +34,52 @@ public class LtsModel<S> implements LTS<S>, LTSBuilder<S> {
 		action_levels = new ActionLevel[numActionIds];
 		
 		for (int i=0; i<numActionIds; ++i) {
-			action_levels[i] = ActionLevel.UNDEFINDED;
+			action_levels[i] = ActionLevel.UNDEFINED;
 		}
 	}
 	
+	public LtsModel(LTS<S> lts) {
+		this(lts.numberOfActionTypes());
+
+		for (S state : lts.getStates()) {
+			this.addState(state);
+		}
+
+		for (S src : lts.getStates()) {
+			for (S dst : lts.getImage(src)) {
+				for (short actionid : lts.getActions(src, dst)) {
+					double rate = lts.getApparentRate(src, dst, actionid);
+					ActionLevel level = lts.getActionLevel(actionid);
+
+					this.addTransition(src, dst, rate, actionid, level);
+				}
+			}
+		}
+	}
+
 	@Override
 	public int numberOfStates() {
 		return states.size();
 	}
 
 	@Override
+	public Iterable<S> getStates() {
+		return states;
+	}
+
+	@Override
 	public double getApparentRate(S source, S target, short actionId) {
-		if (actionId == ISymbolGenerator.TAU_ACTION && source.equals(target)) {
-			System.err.println("found tau action! (self loop)");
+		HashMap<S, HashMap<Short, Double>> dest_map = transitionMap.get(source);
+		if (!dest_map.containsKey(target)) {
+			return 0.0d;
 		}
 
-		// FIXME: this may throw a NPE if the LTS is built incorrectly...
-		double[] labels = transitionMap.get(source).get(target);
-		if (labels == null) return 0.0d;
-		return labels[actionId];
+		HashMap<Short, Double> dest_action_map = dest_map.get(target);
+		if (!dest_action_map.containsKey(actionId)) {
+			return 0.0d;
+		}
+
+		return dest_action_map.get(actionId);
 	}
 
 	@Override
@@ -62,24 +89,23 @@ public class LtsModel<S> implements LTS<S>, LTSBuilder<S> {
 
 	@Override
 	public Iterable<S> getImage(S source) {
-		HashMap<S, double[]> targetsMap = transitionMap.get(source);
+		HashMap<S, HashMap<Short, Double>> targetsMap = transitionMap.get(source);
 		return targetsMap.keySet();
 	}
 
 	@Override
 	public Iterable<S> getPreImage(S target) {
 		TreeSet<S> total = new TreeSet<S>();
-		
 		for (TreeSet<S> level_pre_images : preImageMap.get(target).values()) {
 			total.addAll(level_pre_images);
 		}
 		return total;
 	}
 	
-	private Boolean any_label_at_level(double[] rates, ActionLevel level)
+	private boolean any_action_at_level(HashMap<Short, Double> dest_action_map, ActionLevel level)
 	{
-		for (int i=0; i<numActionIds; ++i) {
-			if (rates[i] != 0.0 && action_levels[i] == level) {
+		for (Map.Entry<Short, Double> entry : dest_action_map.entrySet()) {
+			if (action_levels[entry.getKey()] == level) {
 				return true;
 			}
 		}
@@ -87,14 +113,13 @@ public class LtsModel<S> implements LTS<S>, LTSBuilder<S> {
 		return false;
 	}
 
-
 	@Override
 	public Iterable<S> getImage(S source, ActionLevel level) {
-		HashMap<S, double[]> targetsMap = transitionMap.get(source);
+		HashMap<S, HashMap<Short, Double>> targetsMap = transitionMap.get(source);
 		
 		TreeSet<S> total = new TreeSet<S>();
 		for (S target : targetsMap.keySet()) {
-			if (any_label_at_level(targetsMap.get(target), level)) {
+			if (any_action_at_level(targetsMap.get(target), level)) {
 				total.add(target);
 			}
 		}
@@ -109,20 +134,18 @@ public class LtsModel<S> implements LTS<S>, LTSBuilder<S> {
 	
 	@Override
 	public Iterable<Short> getActions(S source, S target) {
-		HashMap<S, double[]> acts = transitionMap.get(source);
+		HashMap<S, HashMap<Short, Double>> acts = transitionMap.get(source);
 		assert acts != null;
 		
-		double[] actionTypes = acts.get(target);
+		HashMap<Short, Double> actionTypes = acts.get(target);
 		ArrayList<Short> actTypes = new ArrayList<>();
 		if (actionTypes == null) {
 			assert false :  "found null action types!";
 			return actTypes;
 		}
 		
-		for (short i=0; i < actionTypes.length; ++i) {
-			if (actionTypes[i] != 0.0d) {
-				actTypes.add(i);
-			}
+		for (Map.Entry<Short, Double> entry : actionTypes.entrySet()) {
+			actTypes.add(entry.getKey());
 		}
 		return actTypes;
 	}
@@ -139,20 +162,19 @@ public class LtsModel<S> implements LTS<S>, LTSBuilder<S> {
 
 		return actTypes;
 	}
-	
 
 	@Override
 	public void addState(S state) {
 		states.add(state);
-		transitionMap.put(state, new HashMap<S, double[]>());
+		transitionMap.put(state, new HashMap<S, HashMap<Short, Double>>());
 		preImageMap.put(state, new HashMap<ActionLevel, TreeSet<S>>());
 	}
 
 	@Override
 	public void addTransition(S source, S target, double rate, short actionId, ActionLevel level) {
-		double[] targetMap = getRates(source, target);
+		HashMap<Short, Double> targetMap = getRates(source, target);
 		action_levels[actionId] = level;
-		targetMap[actionId] = rate;
+		targetMap.put(actionId, rate);
 		HashMap<ActionLevel, TreeSet<S>> preImTarget = preImageMap.get(target);
 		if (preImTarget == null) {
 			preImTarget = new HashMap<ActionLevel, TreeSet<S>>();
@@ -172,14 +194,14 @@ public class LtsModel<S> implements LTS<S>, LTSBuilder<S> {
 	}
 	
 	
-	private double[] getRates(S source, S target) {
-		HashMap<S, double[]> targetsMap = transitionMap.get(source);
+	private HashMap<Short, Double> getRates(S source, S target) {
+		HashMap<S, HashMap<Short, Double>> targetsMap = transitionMap.get(source);
 		// targetsMap cannot be null. If it is then source is not in the LTS.
 		assert targetsMap != null;
 		
-		double[] map = targetsMap.get(target);
+		HashMap<Short, Double> map = targetsMap.get(target);
 		if (map == null) {
-			map = new double[numActionIds];
+			map = new HashMap<Short, Double>();
 			//Arrays.fill(map, 0.0d);
 			targetsMap.put(target, map);
 		}
@@ -190,13 +212,10 @@ public class LtsModel<S> implements LTS<S>, LTSBuilder<S> {
 	@Override
 	public int numberOfTransitions() {
 		int total = 0;
-		for (HashMap<S, double[]> trans : transitionMap.values()) {
-			for (double[] m : trans.values()) {
-				for (double d: m) {
-					if (d != 0.0d) {
-						total += 1;
-					}
-				}
+
+		for (HashMap<S, HashMap<Short, Double>> targetsMap : transitionMap.values()) {
+			for (HashMap<Short, Double> map : targetsMap.values()) {
+				total += 1;
 			}
 		}
 		
@@ -212,31 +231,29 @@ public class LtsModel<S> implements LTS<S>, LTSBuilder<S> {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("LTS:\n");
-		builder.append("States are:\n");
+		builder.append("LTS:\n States: {");
+		String sep = "";
 		for (S state: this) {
-			builder.append("State: " + state + "\n");
-			
+			builder.append(sep + state);
+			sep = ",";
 		}
-		for (S source: this) {
-			builder.append("State: " + source + " to:\n");
-			builder.append("Transitions are:\n");
-			for (S target: getImage(source)) {
-				builder.append("\tTarget " + target + "\n");
-				for (short action: getActions(source, target)) {
-					builder.append("\t\tLabel " + action + " rate "
-								   + getApparentRate(source, target, action) + "\n");
-				}
-		    }
-		}
-		
-		return builder.toString();
-		
-	}
 
-	@Override
-	public LTS<S> variantView() {
-		return new VariantView<>(this);
+		builder.append("}\n Transitions:");
+		Iterable<S> local_states = getStates();
+		for (S src : local_states) {
+			for (S dst : local_states) {
+				for (short action : getActions(src, dst)) {
+					double rate = getApparentRate(src, dst, action);
+					if (rate != 0) {
+						ActionLevel level = getActionLevel(action);
+						builder.append("\n  " + src + "-[" + action + ","
+										+ rate + "," + level + "]->" + dst);
+					}
+				}
+			}
+		}
+
+		return builder.toString();
 	}
 
 	@Override

@@ -199,6 +199,13 @@ public class CMDLWizard extends Wizard {
 		public void derive(IProgressMonitor monitor) throws DerivationException {
 		}
 
+		public void PSNI_verify(IProgressMonitor monitor) throws DerivationException {
+		}
+
+		public Boolean isPSNI() {
+			return null;
+		}
+
 		// mtribast
 		public OptionMap getOptionMap() {
 			throw new IllegalStateException();

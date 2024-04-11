@@ -171,7 +171,7 @@ public class DoMakePepaProcess {
      * @return the requested action
      */
     public NamedAction createNamedAction(String name) {
-        return createNamedAction(name, ActionLevel.UNDEFINDED);
+        return createNamedAction(name, ActionLevel.UNDEFINED);
     }
 
     /**

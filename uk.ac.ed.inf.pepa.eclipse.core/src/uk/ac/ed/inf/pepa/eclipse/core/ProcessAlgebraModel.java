@@ -54,6 +54,9 @@ public abstract class ProcessAlgebraModel implements IProcessAlgebraModel {
 	public abstract void derive(IProgressMonitor monitor)
 			throws DerivationException;
 
+	public abstract void PSNI_verify(IProgressMonitor monitor)
+			throws DerivationException;
+
 	public IStateSpace getStateSpace() {
 		return fStateSpace;
 	}

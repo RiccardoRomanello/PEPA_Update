@@ -52,6 +52,11 @@ public class ReverseLtsModel<S> implements LTS<S> {
 	}
 
 	@Override
+	public Iterable<S> getStates() {
+		return lts.getStates();
+	}
+
+	@Override
 	public Iterable<Short> getActions(S source, S target) {
 		return lts.getActions(target, source);
 	}
@@ -84,10 +89,5 @@ public class ReverseLtsModel<S> implements LTS<S> {
 	@Override
 	public int numberOfActionTypes() {
 		return lts.numberOfActionTypes();
-	}
-
-	@Override
-	public LTS<S> variantView() {
-		return new VariantView<>(this);
 	}
 }

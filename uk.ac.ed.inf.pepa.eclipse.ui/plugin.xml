@@ -130,6 +130,13 @@
                style="push"
                tooltip="Calculate the steady state probability distribution of the underlying CTMC"/>
          <action
+               class="uk.ac.ed.inf.pepa.eclipse.ui.actions.PSNIVerifyDelegate"
+               id="uk.ac.ed.inf.pepa.eclipse.ui.PSNIVerify"
+               label="Verify PSNI..."
+               menubarPath="uk.ac.ed.inf.pepa.eclipse.ui.editorMenu/uk.ac.ed.inf.pepa.eclipse.ui.editorMenu.CTMC/content"
+               style="push"
+               tooltip="Verify the Persistent Stochastic Non-Interference (PSNI)"/>
+         <action
                class="uk.ac.ed.inf.pepa.eclipse.ui.actions.DeriveActionDelegate"
                icon="icons/derive.gif"
                id="uk.ac.ed.inf.pepa.eclipse.ui.deriveAction"

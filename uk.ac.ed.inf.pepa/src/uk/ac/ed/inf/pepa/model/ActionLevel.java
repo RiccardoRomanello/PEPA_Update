@@ -9,7 +9,7 @@
 package uk.ac.ed.inf.pepa.model;
 
 public enum ActionLevel { 
-	UNDEFINDED,
+	UNDEFINED,
 	HIGH,
 	LOW
 };

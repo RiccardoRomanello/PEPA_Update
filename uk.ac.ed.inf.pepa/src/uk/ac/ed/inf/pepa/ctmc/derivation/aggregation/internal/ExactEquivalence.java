@@ -107,7 +107,7 @@ public class ExactEquivalence<S extends Comparable<S>>
 	}
 	
 	@Override
-	protected LTS<S> getLTSView(LTS<S> initial) {
+	public LTS<S> getLumpingGraph(LTS<S> initial) {
 		return initial;
 	}
  }

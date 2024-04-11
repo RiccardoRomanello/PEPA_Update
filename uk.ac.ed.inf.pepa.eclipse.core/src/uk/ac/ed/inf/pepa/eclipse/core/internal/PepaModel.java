@@ -26,6 +26,8 @@ import uk.ac.ed.inf.pepa.OptionsMap;
 import uk.ac.ed.inf.pepa.OptionsMap.Solver;
 import uk.ac.ed.inf.pepa.analysis.IProblem;
 import uk.ac.ed.inf.pepa.analysis.StaticAnalyser;
+import uk.ac.ed.inf.pepa.ctmc.PSNI.PSNIVerifier;
+import uk.ac.ed.inf.pepa.ctmc.PSNI.PSNIVerifierBuilder;
 import uk.ac.ed.inf.pepa.ctmc.derivation.*;
 import uk.ac.ed.inf.pepa.ctmc.kronecker.IKroneckerStateSpace;
 import uk.ac.ed.inf.pepa.ctmc.kronecker.KroneckerDisplayModel;
@@ -108,6 +110,8 @@ public class PepaModel extends ProcessAlgebraModel implements IPepaModel {
 
 	private MarkerManager markerCreator;
 
+	protected Boolean PSNI = null;
+
 	/**
 	 * Create a PepaModel from a given resource. The resource has already been
 	 * tested for (1) existing and (2) being a file with a supported extension.
@@ -175,7 +179,7 @@ public class PepaModel extends ProcessAlgebraModel implements IPepaModel {
 		if (!isDerivable() || fKroneckerDerivationProblem) {
 			fKroneckerStateSpace = null;
 		} else {
-			DerivationException de = null;
+			Exception de = null;
 			long tic = System.currentTimeMillis();
 			OptionMap map = new OptionMap(fOptionHandler.getOptionMap());
 			map.put(OptionMap.DERIVATION_KIND, OptionMap.DERIVATION_KRONECKER);
@@ -186,6 +190,9 @@ public class PepaModel extends ProcessAlgebraModel implements IPepaModel {
 						                                                       : new PepatoProgressMonitorAdapter(monitor, "Kronecker derivation"),
 						                                                       IResourceManager.TEMP);
 			} catch (DerivationException e) {
+				fKroneckerDerivationProblem = true;
+				de = e;
+			} catch (ClassCastException e) {
 				fKroneckerDerivationProblem = true;
 				de = e;
 			}
@@ -228,7 +235,7 @@ public class PepaModel extends ProcessAlgebraModel implements IPepaModel {
 	public ModelNode getAST() {
 		return fAstModel;
 	}
-	
+
 	public void derive(IProgressMonitor monitor) throws DerivationException {
 		if (!isDerivable())
 			return; // no-effect rule
@@ -265,6 +272,23 @@ public class PepaModel extends ProcessAlgebraModel implements IPepaModel {
 
 		// markerCreator.createStateSpaceMarkers(deadCode, ts);
 
+	}
+
+	public void PSNI_verify(IProgressMonitor monitor) throws DerivationException {
+		if (!isDerivable())
+			return; // no-effect rule
+
+		PSNIVerifier verifier = PSNIVerifierBuilder.createVerifier(fAstModel);
+
+		PSNI = null;
+
+		PSNI = verifier.verify((monitor == null) ? null
+							: new PepatoProgressMonitorAdapter(monitor,
+							"PSNI verification"));
+	}
+
+	public Boolean isPSNI() {
+		return PSNI;
 	}
 
 	public boolean isDerivable() {

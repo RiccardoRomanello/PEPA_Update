@@ -89,6 +89,65 @@ public class ActionCommands {
 		}
 	}
 
+	public static void PSNI_verify(final IProcessAlgebraModel model) {
+
+		IProgressService progressService = PlatformUI.getWorkbench()
+				.getProgressService();
+
+		String err_title=null, err_msg=null;
+		try {
+
+			progressService.run(true, true, new IRunnableWithProgress() {
+
+				public void run(IProgressMonitor monitor)
+						throws InvocationTargetException, InterruptedException {
+					monitor.beginTask("PSNI Verification",
+							IProgressMonitor.UNKNOWN);
+					try {
+						model.PSNI_verify(monitor);
+					} catch (Exception e) {
+						throw new InvocationTargetException(e);
+					} finally {
+						monitor.done();
+					}
+
+				}
+
+			});
+
+		} catch (InvocationTargetException e) {
+			PepaLog.logError(e);
+			if (e.getTargetException() instanceof DerivationException) {
+				err_title = "PSNI Verification Error";
+				err_msg = ((DerivationException) e.getTargetException())
+								.getMessage();
+			} else {
+				err_title = "Unexpected Error";
+				err_msg = e.getTargetException().getMessage();
+			}
+		} catch (InterruptedException e) {
+			err_title = "Job Interrupted";
+			err_msg = "PSNI verification interrupted by user";
+		}
+
+		if (err_title != null) {
+			MessageDialog.openError(Display.getCurrent().getActiveShell(),
+					err_title, err_msg);
+			return;
+		}
+
+		if (model.isPSNI()==null) {
+			MessageDialog.openError(Display.getCurrent().getActiveShell(),
+					"Unknown error",
+					"PSNI verification produces an unknown error");
+		} else {
+			MessageDialog.openInformation(Display.getCurrent().getActiveShell(),
+										  "PSNI Verification Results",
+										  model.isPSNI()?"The model is PSNI":
+											             "The model is not PSNI");
+		}
+	}
+
 	public static void experiment(IPepaModel model) {
 		ExperimentationWizard wizard = new ExperimentationWizard(
 				new PEPAEvaluator(model),

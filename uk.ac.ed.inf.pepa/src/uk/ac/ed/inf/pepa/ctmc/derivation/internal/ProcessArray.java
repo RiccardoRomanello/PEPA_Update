@@ -46,7 +46,7 @@ public class ProcessArray extends Component {
 				// important, sorts the aggregation subarray
 				Transition newTransition = buf.getTransition(currentState, fOffset, fLength, 
 						fHidingSet.get(t.fActionId) ? ISymbolGenerator.TAU_ACTION : t.fActionId, 
-						fHidingSet.get(t.fActionId) ? ActionLevel.UNDEFINDED : t.fLevel,
+						fHidingSet.get(t.fActionId) ? ActionLevel.UNDEFINED : t.fLevel,
 								n * t.fRate);
 				newTransition.fTargetProcess[fOffset + i] = t.fTargetProcess[0];
 				Arrays.sort(newTransition.fTargetProcess, fOffset, fOffset + fLength);

@@ -10,6 +10,8 @@ package uk.ac.ed.inf.pepa.ctmc.derivation.common;
 import java.util.ArrayList;
 import java.util.BitSet;
 
+import uk.ac.ed.inf.pepa.model.ActionLevel;
+
 /**
  * Representation of a component for the iterative state space explorer.
  * 
@@ -122,7 +124,9 @@ public class Component {
 							fHidingSet.get(t.fActionId)
 									? ISymbolGenerator.TAU_ACTION
 									: t.fActionId,
-							t.fLevel,
+							fHidingSet.get(t.fActionId)
+									? ActionLevel.UNDEFINED
+									: t.fLevel,
 							t.fRate
 			);
 			fFirstStepDerivatives.add(newT);

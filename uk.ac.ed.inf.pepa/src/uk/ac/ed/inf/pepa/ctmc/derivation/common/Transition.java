@@ -31,7 +31,7 @@ public final class Transition implements Comparable<Transition> {
 	/**
 	 * Level of the transition
 	 */
-	public ActionLevel fLevel = ActionLevel.UNDEFINDED;
+	public ActionLevel fLevel = ActionLevel.UNDEFINED;
 	
 	/**
 	 * The rate at which this transition occurs

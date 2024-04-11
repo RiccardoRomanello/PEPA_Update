@@ -25,7 +25,7 @@ public class ArraysLtsModel implements LTS<Integer> {
 	private IntegerArray stateRow;
 	private IntegerArray transitionColumn;
 	private ShortArray actionColumn;
-	private ArrayList<ActionLevel> action_levels;
+	private ActionLevel[] action_levels;
 	private IntegerArray preStateRow = null;
 	private IntegerArray preImageColumn = null;
 	private DoubleArray rates;
@@ -37,10 +37,19 @@ public class ArraysLtsModel implements LTS<Integer> {
 		stateRow = row;
 		transitionColumn = column;
 		actionColumn = actions;
-		this.action_levels = action_levels;
 		this.rates = rates;
 		this.numActionTypes = numActionTypes;
 		
+		this.action_levels = new ActionLevel[numActionTypes];
+		for (int i=0; i<numActionTypes; ++i) {
+			this.action_levels[i] = ActionLevel.UNDEFINED;
+		}
+
+		for (int i=0; i<actions.size(); ++i) {
+			Short actionid = actions.get(i);
+			this.action_levels[actionid] = action_levels.get(i);
+		}
+
 		computePreImageColumn();
 	}
 	
@@ -57,6 +66,19 @@ public class ArraysLtsModel implements LTS<Integer> {
 				return i++;
 			}
 		};
+	}
+
+	@Override
+	public Iterable<Integer> getStates() {
+		ArrayList<Integer> states = new ArrayList<Integer>();
+
+		Iterator<Integer> state_it = iterator();
+
+		while (state_it.hasNext()) {
+			states.add(state_it.next());
+		}
+
+		return states;
 	}
 
 	@Override
@@ -104,7 +126,7 @@ public class ArraysLtsModel implements LTS<Integer> {
 		ArrayList<Short> actTypes = new ArrayList<>();
 
 		for (Short actionid : getActions(source, target)) {
-			if (action_levels.get(numActionTypes) == level) {
+			if (action_levels[actionid] == level) {
 				actTypes.add(actionid);
 			}
 		}
@@ -175,7 +197,7 @@ public class ArraysLtsModel implements LTS<Integer> {
 		int startCol = stateRow.get(source);
 		int endCol = (source == stateRow.size() - 1 ? transitionColumn.size() : stateRow.get(source+1));
 		for (int i=startCol; i < endCol; i += 2) {
-			if (action_levels.get(actionColumn.get(i)) == level) {
+			if (action_levels[actionColumn.get(i)] == level) {
 				int tState = transitionColumn.get(i);
 
 				targets.add(tState);
@@ -187,7 +209,7 @@ public class ArraysLtsModel implements LTS<Integer> {
 
 	@Override
 	public ActionLevel getActionLevel(short actionId) {
-		return action_levels.get(actionId);
+		return action_levels[actionId];
 	}
 	
 	@Override
@@ -197,7 +219,7 @@ public class ArraysLtsModel implements LTS<Integer> {
 		
 		ArrayList<Integer> preIm = new ArrayList<>(rangeEnd-rangeStart);
 		for (int i=rangeStart; i < rangeEnd; ++i) {
-			if (action_levels.get(actionColumn.get(i)) == level) {
+			if (action_levels[actionColumn.get(i)] == level) {
 				preIm.add(preImageColumn.get(i));
 			}
 		}
@@ -260,275 +282,32 @@ public class ArraysLtsModel implements LTS<Integer> {
 		return rates.size();
 	}
 
-	
-	
 	@Override
 	public String toString() {
-		
 		StringBuilder builder = new StringBuilder();
-		builder.append("LTS:\n");
-		builder.append("States are:\n");
+		builder.append("LTS:\n States: {");
+		String sep = "";
 		for (int state=0; state < stateRow.size(); ++state) {
-			builder.append("State: " + state + "\n");
+			builder.append(sep + state);
+			sep = ",";
 		}
-		builder.append("Transitions are:\n");
+
+		builder.append("}\n Transitions:");
 		for (int source=0; source < stateRow.size(); ++source) {
-			builder.append("State: " + source + " to:\n");
 			int rangeStart = stateRow.get(source);
 			int rangeEnd = source == stateRow.size()-1 ? transitionColumn.size() : stateRow.get(source+1);
 			for (int t=rangeStart; t < rangeEnd; t+=2) {
 				int target = transitionColumn.get(t);
-				builder.append("\tTarget " + target + "\n");
 				int startCol = transitionColumn.get(t+1);
 				int endCol = t < transitionColumn.size()-3 ? transitionColumn.get(t+3) : rates.size(); 
 				for (int c=startCol; c < endCol; ++c) {
-					builder.append("\t\tLabel " + actionColumn.get(c) + " rate " + rates.get(c) + "\n");
+					builder.append("\n  " + source + "-["+ actionColumn.get(c) + ","
+					               + rates.get(c) + "," + action_levels[actionColumn.get(c)]
+					               + "]->" + target);
 				}
 			}
 		}
 		
 		return builder.toString();
-	}
-
-
-	@Override
-	public LTS<Integer> variantView() {
-		return new View(this);
-	}
-	
-	
-	
-	/**
-	 * Lightweight variant view of the LTS.
-	 * 
-	 * @author Giacomo Alzetta
-	 *
-	 */
-	private class View implements LTS<Integer> {
-		
-		/**
-		 * The underlying LTS.
-		 */
-		ArraysLtsModel model;
-		
-		/**
-		 * The tau self-loop rates. The value at index i corresponds to the rate
-		 * of the self-loop for state i.
-		 */
-		DoubleArray selfLoops;
-		
-		public View(ArraysLtsModel model) {
-			this.model = model;
-			
-			// We compute all self loops now.
-			selfLoops = new DoubleArray(model.numberOfStates());
-			for (int i=0; i < model.numberOfStates(); ++i) {
-				selfLoops.add(computeSelfLoopRate(i));
-			}
-		}
-		
-		/**
-		 * Get the rate of the tau self loop for state i.
-		 * 
-		 * @param i
-		 * @return
-		 */
-		private double computeSelfLoopRate(int i) {
-			double rate = 0.0d;
-			for (int j=0; j < model.stateRow.size(); ++j) {
-				if (i != j) {
-					rate += model.getApparentRate(i, j, ISymbolGenerator.TAU_ACTION);
-				}
-			}
-			
-			return -rate;
-		}
-
-		/**
-		 * Iterate over all the states of the underlying LTS.
-		 * @return
-		 */
-		@Override
-		public Iterator<Integer> iterator() {
-			return model.iterator();
-		}
-
-		/**
-		 * The number of states of the underlying LTS.
-		 */
-		@Override
-		public int numberOfStates() {
-			return model.numberOfStates();
-		}
-
-		/**
-		 * The number of transitions in the underlying LTS.
-		 */
-		@Override
-		public int numberOfTransitions() {
-			// FIXME: add self loops? 
-			return model.numberOfTransitions();
-		}
-
-		/**
-		 * The number of action types in the underlying LTS.
-		 */
-		@Override
-		public int numberOfActionTypes() {
-			return model.numberOfActionTypes();
-		}
-
-		@Override
-		public ActionLevel getActionLevel(short actionid) {
-			return model.getActionLevel(actionid);
-		}
-		
-		/**
-		 * Get the actions that label transitions between <code>source</code>
-		 * and <code>target</code>.
-		 * 
-		 * Note that if <code>source.equals(target)</code> then tau is always
-		 * included.
-		 * 
-		 * @param source
-		 * @param target
-		 * @param level
-		 * @return
-		 */
-		@Override
-		public Iterable<Short> getActions(Integer source, Integer target, ActionLevel level) {
-			ArrayList<Short> acts = (ArrayList<Short>) model.getActions(source, target, level);
-			
-			if (source.equals(target) && !acts.contains(ISymbolGenerator.TAU_ACTION)) {
-				acts.add(ISymbolGenerator.TAU_ACTION);
-			}
-			return acts;
-		}		
-		
-		/**
-		 * Get the actions that label transitions between <code>source</code>
-		 * and <code>target</code>.
-		 * 
-		 * Note that if <code>source.equals(target)</code> then tau is always
-		 * included.
-		 * 
-		 * @param source
-		 * @param target
-		 * @return
-		 */
-		@Override
-		public Iterable<Short> getActions(Integer source, Integer target) {
-			ArrayList<Short> acts = (ArrayList<Short>) model.getActions(source, target);
-			
-			if (source.equals(target) && !acts.contains(ISymbolGenerator.TAU_ACTION)) {
-				acts.add(ISymbolGenerator.TAU_ACTION);
-			}
-			return acts;
-		}
-
-		/**
-		 * Get the apparent rate of the transitions from source to target
-		 * with the given actionId in the underlying LTS.
-		 * 
-		 * If <code>source.equals(target)</code> and the <code>actionId</code>
-		 * refers to the tau transition then the self-loop rate is returned.
-		 * 
-		 * @param source
-		 * @param target
-		 * @param actionId
-		 * @return
-		 */
-		@Override
-		public double getApparentRate(Integer source, Integer target, short actionId) {
-			if (actionId == ISymbolGenerator.TAU_ACTION && source.equals(target)) {
-				return selfLoops.get(source);
-			}
-			
-			return model.getApparentRate(source, target, actionId);
-		}
-
-		/**
-		 * Get the states that are reachable via transitions from <code>source</code>.
-		 * 
-		 * Note that <code>source</code> itself is always included since
-		 * it has a tau self-loop.
-		 * 
-		 * @param source
-		 * @return
-		 */
-		@Override
-		public Iterable<Integer> getImage(Integer source) {
-			HashSet<Integer> targets = (HashSet<Integer>) model.getImage(source);
-			targets.add(source);
-			
-			return targets;
-		}
-
-		/**
-		 * Get the states that can reach via transitions the given
-		 * state <code>target</code>.
-		 * 
-		 * Note that <code>target</code> itself is always included since
-		 * it has a tau self-loop.
-		 * 
-		 * @param target
-		 * @return
-		 */
-		@Override
-		public Iterable<Integer> getPreImage(Integer target) {
-			ArrayList<Integer> sources = (ArrayList<Integer>) model.getPreImage(target);
-			
-			if (!sources.contains(target)) sources.add(target);
-			
-			return sources;
-		}
-
-		/**
-		 * Get the states that are reachable via transitions from <code>source</code>.
-		 * 
-		 * Note that <code>source</code> itself is always included since
-		 * it has a tau self-loop.
-		 * 
-		 * @param source
-		 * @param level
-		 * @return
-		 */
-		@Override
-		public Iterable<Integer> getImage(Integer source, ActionLevel level) {
-			HashSet<Integer> targets = (HashSet<Integer>) model.getImage(source, level);
-			targets.add(source);
-			
-			return targets;
-		}
-
-		/**
-		 * Get the states that can reach via transitions the given
-		 * state <code>target</code>.
-		 * 
-		 * Note that <code>target</code> itself is always included since
-		 * it has a tau self-loop.
-		 * 
-		 * @param target
-		 * @param level
-		 * @return
-		 */
-		@Override
-		public Iterable<Integer> getPreImage(Integer target, ActionLevel level) {
-			ArrayList<Integer> sources = (ArrayList<Integer>) model.getPreImage(target, level);
-			
-			if (!sources.contains(target)) {
-				sources.add(target);
-			}
-			
-			return sources;
-		}
-
-		/**
-		 * Returns itself.
-		 */
-		@Override
-		public LTS<Integer> variantView() {
-			return this;
-		}
 	}
 }

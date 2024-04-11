@@ -32,7 +32,14 @@ public interface LTS<S> extends Iterable<S> {
 	 * @return the number of action types that appear in LTS transitions.
 	 */
 	public int numberOfActionTypes();
-	
+
+	/**
+	 * Return the LTS states
+	 *
+	 * @return the LTS states
+	 */
+	public Iterable<S> getStates();
+
 	/**
 	 * Return all the action types that appear in transitions from source
 	 * to target.
@@ -110,16 +117,8 @@ public interface LTS<S> extends Iterable<S> {
 	public Iterable<S> getPreImage(S target, ActionLevel level);
 
 	/**
-	 * Obtain a variant view of the PEPA LTS.
-	 * 
-	 * The variant view should be exactly the same LTS, the only change
-	 * is that it introduces self-loops for every state with label tau.
-	 * The rate of such self-loops is equal to *minus* the sum of all outgoing
-	 * tau transitions from the state.
-	 * 
-	 * Changes to the view may reflect on the original LTS.
-	 * 
-	 * @return The variant view of this LTS.
+	 * Get a string representation of the LTS
+	 * @return
 	 */
-	public LTS<S> variantView();
+	public String toString();
 }

@@ -8,7 +8,6 @@ import uk.ac.ed.inf.pepa.ctmc.derivation.aggregation.LTS;
 
 /**
  * @author Giacomo Alzetta
- *
  */
 public class StrongEquivalence<S extends Comparable<S>> extends ContextualLumpability<S> {
 
@@ -17,7 +16,7 @@ public class StrongEquivalence<S extends Comparable<S>> extends ContextualLumpab
 	}
 
 	@Override
-	public LTS<S> getLTSView(LTS<S> initial) {
+	public LTS<S> getLumpingGraph(LTS<S> initial) {
 		return initial;
 	}
 }

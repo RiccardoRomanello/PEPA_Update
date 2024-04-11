@@ -27,12 +27,12 @@ public class NamedActionImpl implements NamedAction {
 
     public NamedActionImpl() {
     	this.type = "";
-    	this.level = ActionLevel.UNDEFINDED;
+    	this.level = ActionLevel.UNDEFINED;
     }
     
     public NamedActionImpl(String type) {
     	this.type = type;
-    	this.level = ActionLevel.UNDEFINDED;
+    	this.level = ActionLevel.UNDEFINED;
     }
     
     public NamedActionImpl(String type, ActionLevel level) {
@@ -81,7 +81,7 @@ public class NamedActionImpl implements NamedAction {
     public String prettyPrint() {
 
     	switch(level) {
-    	case UNDEFINDED:
+    	case UNDEFINED:
     		return this.type;
     	case HIGH:
     		return this.type + " (high)";

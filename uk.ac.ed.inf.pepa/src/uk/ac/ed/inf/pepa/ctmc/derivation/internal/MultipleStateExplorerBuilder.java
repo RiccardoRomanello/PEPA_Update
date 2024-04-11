@@ -297,6 +297,7 @@ public class MultipleStateExplorerBuilder {
 			transition.fTargetProcess = new short[initialStateVector.length];
 			Arrays.fill(transition.fTargetProcess, targetProcessId);
 			transition.fActionId = actionId;
+			transition.fLevel = actionMap.get(actionId).getLevel();
 			transition.fRate = rate;
 
 			data.fFirstStepDerivative.add(transition);

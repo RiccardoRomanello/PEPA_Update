@@ -12,6 +12,7 @@ Export-Package: uk.ac.ed.inf.pepa,
  uk.ac.ed.inf.pepa.cpt.config.control.populationControl,
  uk.ac.ed.inf.pepa.cpt.searchEngine.tree.viewer,
  uk.ac.ed.inf.pepa.ctmc,
+ uk.ac.ed.inf.pepa.ctmc.PSNI,
  uk.ac.ed.inf.pepa.ctmc.derivation;uses:="uk.ac.ed.inf.pepa",
  uk.ac.ed.inf.pepa.ctmc.derivation.common;
   uses:="uk.ac.ed.inf.pepa.ctmc.solution,

@@ -22,6 +22,7 @@ import uk.ac.ed.inf.pepa.ctmc.derivation.aggregation.StateIsMarkedException;
 import uk.ac.ed.inf.pepa.ctmc.derivation.aggregation.StateNotFoundException;
 import uk.ac.ed.inf.pepa.ctmc.derivation.common.CommonDefaulters;
 import uk.ac.ed.inf.pepa.ctmc.derivation.common.DefaultHashMap;
+import uk.ac.ed.inf.pepa.ctmc.derivation.common.ISymbolGenerator;
 import uk.ac.ed.inf.pepa.model.ActionLevel;
 
 
@@ -50,8 +51,8 @@ public class ContextualLumpability<S extends Comparable<S>>
 				new CommonDefaulters.Basic<Double>(0.0d)
 		);
 		
-		LTS<S> ltsView = getLTSView(initial);
-		
+		LTS<S> lumpingGraph = getLumpingGraph(initial);
+
 		while (!splitters.isEmpty()) {
 			PartitionBlock<S> splitter = splitters.pollFirst();
 			splitter.usingAsSplitter();
@@ -60,10 +61,10 @@ public class ContextualLumpability<S extends Comparable<S>>
 			HashMap<S, HashMap<Short, HashSet<S>>> preIm = new HashMap<>();
 			
 			//HashMap<S, HashMap<Short, HashSet<S>>> preIm = new HashMap<>();
-			HashSet<Short> allActions = computeAllPreimages(ltsView, splitter, preIm);
+			HashSet<Short> allActions = computeAllPreimages(lumpingGraph, splitter, preIm);
 			
 			for (short act: allActions) {
-				ArrayList<S> seenStates = computeWeights(ltsView, weights, splitter, preIm, act);
+				ArrayList<S> seenStates = computeWeights(lumpingGraph, weights, splitter, preIm, act);
 				markVisitedStates(partition, touchedBlocks, seenStates);
 				
 				for (PartitionBlock<S> b: touchedBlocks) {
@@ -82,13 +83,46 @@ public class ContextualLumpability<S extends Comparable<S>>
 		return partition;
 	}
 
-
 	/**
-	 * @param initial
-	 * @return
+	 * Get the lumping graph of a PEPA LTS
+	 *
+	 * Depending on the relation between LTS states, the partition algorithm
+	 * must distinguish the actions according to their names. For instance,
+	 * the lumpable bisimulation (i.e., the contextual lumpability [1])
+	 * handles the tau actions differently from the other actions.
+	 * In some cases, the action processing can be standardized and the
+	 * algorithm can be simplified by dealing with a variant of the
+	 * original LTS, named lumping graph, which is relation specific.
+	 * In the case of the lumpable bisimulation, the lumping graph of an
+	 * LTS contains all its states and transitions, but it it introduces
+	 * self-loops for every state with label tau (see Def. 6.4 in [1]).
+	 * The rate of such self-loops is equal to *minus* the sum of all outgoing
+	 * tau transitions from the state.
+	 *
+	 * [1] Alzetta G., Marin A., Piazza C., Rossi S., Lumping-based
+	 *     equivalences in Markovian automata: Algorithms and applications
+	 *     to product-form analyses, (2018) Information and Computation, 260,
+	 *     pp. 99 - 125, DOI: 10.1016/j.ic.2018.04.002.
+	 *
+	 * @param lts is a PEPA LTS
+	 * @return The lumping graph of lts
 	 */
-	protected LTS<S> getLTSView(LTS<S> initial) {
-		return initial.variantView();
+	public LTS<S> getLumpingGraph(LTS<S> lts) {
+		LtsModel<S> lgraph = new LtsModel<S>(lts);
+
+		for (S state : lgraph.getStates()) {
+			double rate = 0.0d;
+			for (S target: lgraph.getImage(state)) {
+				if (!state.equals(target)) {
+					rate -= lts.getApparentRate(state, target, ISymbolGenerator.TAU_ACTION);
+				}
+			}
+
+			ActionLevel level = lgraph.getActionLevel(ISymbolGenerator.TAU_ACTION);
+			lgraph.addTransition(state, state, rate, ISymbolGenerator.TAU_ACTION, level);
+		}
+
+		return lgraph;
 	}
 	
 
@@ -198,7 +232,7 @@ public class ContextualLumpability<S extends Comparable<S>>
 						}
 						
 						while (act >= action_level.size()) {
-							action_level.add(ActionLevel.UNDEFINDED);
+							action_level.add(ActionLevel.UNDEFINED);
 						}
 						
 						action_level.set(act, initial.getActionLevel(act));

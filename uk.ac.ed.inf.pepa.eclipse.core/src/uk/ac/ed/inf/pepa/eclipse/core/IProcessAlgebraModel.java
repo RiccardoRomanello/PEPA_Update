@@ -90,6 +90,31 @@ public interface IProcessAlgebraModel extends IOptionHandler {
 	 */
 	public void derive(IProgressMonitor monitor)
 			throws DerivationException;
+
+	/**
+	 * Verify the Persistent Stochastic Non-Interference (PSNI) of the underlying CTMC.
+	 * <p>
+	 * This is typically a long-running operation scheduled in a separate
+	 * thread.
+	 * <p>
+	 * Once the state space is created, listeners are notified with the
+	 * STATE_SPACE_DERIVED event.
+	 * <p>
+	 * The method has no effect when it is called on models which are not have a
+	 * correct AST yet. Information about success of this operation is found in
+	 * the state space returned by <code>getStateSpace()</code>
+	 *
+	 * @param monitor
+	 *            a progress monitor for controlling this long-running activity,
+	 *            or null
+	 * @throws DerivationException
+	 *             if errors occur during the PSNI verification
+	 */
+	public void PSNI_verify(IProgressMonitor monitor)
+			throws DerivationException;
+
+	public Boolean isPSNI();
+
 	/**
 	 * Return the state space of the underlying CTMC.
 	 * <p>

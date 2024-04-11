@@ -123,8 +123,9 @@ public class StateExplorerBuilder {
 			Process initialProcess = aggregation.getSubProcesses().keySet()
 					.iterator().next();
 			short initialId = getIndex(initialProcess);
-			for (int i = 0; i < aggregation.getCopies(); i++)
+			for (int i = 0; i < aggregation.getCopies(); i++) {
 				initialState.add(initialId);
+			}
 			array.fLength = aggregation.getCopies();
 			array.fOffset = offset;
 			offset += aggregation.getCopies();
@@ -283,8 +284,9 @@ public class StateExplorerBuilder {
 			transition.fTargetProcess = new short[initialStateVector.length];
 			Arrays.fill(transition.fTargetProcess, targetProcessId);
 			transition.fActionId = actionId;
+			transition.fLevel = actionMap.get(actionId).getLevel();
 			transition.fRate = rate;
-			
+
 			data.fFirstStepDerivative.add(transition);
 			// check if target has been explored already
 			HashMapSequentialComponentData targetData = sequentialComponentsData
@@ -296,7 +298,6 @@ public class StateExplorerBuilder {
 				// if not, it is a unnamed component which
 				// doesn't need to be visited again
 			} else {
-
 				target.accept(new SequentialComponentVisitor(
 						targetProcessId, true, fUnguardedDefinitionMap));
 			}
@@ -316,8 +317,9 @@ public class StateExplorerBuilder {
 		// we have the initial state
 		initialStateVector = new short[initialState.size()];
 		int i = 0;
-		for (short stateId : initialState)
+		for (short stateId : initialState) {
 			initialStateVector[i++] = stateId;
+		}
 		// creates all symbols
 		scan_two();
 		// all action types have been explored
@@ -339,7 +341,7 @@ public class StateExplorerBuilder {
 		for (Map.Entry<Component, List<Short>> entry : hidingSets.entrySet()) {
 			entry.getKey().setHidingSet(createBitSet(entry.getValue(), n));
 		}
-		
+
 		// prepares the state explorer
 		explorer.operators = operators.toArray(new Operator[operators.size()]);
 		explorer.sequentialComponents = sequentialComponents

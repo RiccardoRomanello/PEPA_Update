@@ -165,7 +165,7 @@ public class Compiler {
 					action_level = ActionLevel.HIGH;
 				}
 			} else {
-				action_level = ActionLevel.UNDEFINDED;
+				action_level = ActionLevel.UNDEFINED;
 			}
 		}
 

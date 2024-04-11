@@ -57,6 +57,6 @@ public class SilentActionImpl implements SilentAction {
     }
     
     public ActionLevel getLevel() {
-    	return ActionLevel.UNDEFINDED;
+    	return ActionLevel.UNDEFINED;
     }
 }
