@@ -94,6 +94,10 @@ public class SymbolGenerator implements ISymbolGenerator {
 	public Map<Short, Process> getSequentialComponentMap() {
 		return processMap;
 	}
+	
+	public Map<Short, NamedAction> getActionMap() {
+		return actionMap;
+	}
 
 	public Collection<String> getSequentialComponentNames() {
 		SortedSet<String> set = new TreeSet<String>();
