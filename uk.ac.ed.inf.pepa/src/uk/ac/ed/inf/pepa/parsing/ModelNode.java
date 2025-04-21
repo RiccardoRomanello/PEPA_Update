@@ -11,6 +11,8 @@ import org.apache.log4j.Logger;
 
 import uk.ac.ed.inf.pepa.analysis.IProblem;
 
+import java.util.HashSet;
+
 /**
  * PEPA model AST node type. This is the type of the root of an AST, as returned
  * by the parser ({@link} ASTParser).
@@ -25,6 +27,8 @@ public class ModelNode extends ASTNode {
 	private static Logger logger = Logger.getLogger(ModelNode.class);
 
 	private LevelDeclarations levelDeclarations = new LevelDeclarations();
+	
+	private HashSet<String> reversibleActionTypes = new HashSet<String>();
 	
 	private RateDefinitions rateDefinitions = new RateDefinitions();
 
@@ -58,7 +62,15 @@ public class ModelNode extends ASTNode {
 		return levelDeclarations;
 	}
 
-
+	/**
+	 * The reversible action types for this model. 
+	 * 
+	 * @return the reversible action types for this model
+	 */
+	public HashSet<String> reversibleActionTypes() {
+		return reversibleActionTypes;
+	}
+	
 	/**
 	 * The rate definitions for this model. This property is a list-property of
 	 * of instances of <code>RateDefinitionNode</code>

@@ -12,6 +12,8 @@ action code {:
 	
 	/* The top-level AST node for the parsed file */
 	public ModelNode model = ASTFactory.createModel();
+
+	public HashMap<String, String> revActionDst = new HashMap<String, String>();
 	
 	/* Utility field for collecting temporary action sets */
 	final ActionManager actionManager = new ActionManager();
@@ -89,12 +91,13 @@ parser code {:
 	    {	
 	    	 case PepaToken.PASSIVE_MULTIPLIER: { str = " natural "; break; } 
 	         case PepaToken.PROCESS_STRN:   { str=" identifier "; break; }
-                 case PepaToken.ACTIVITY_STRN:  { str=" identifier "; break; }
-                 case PepaToken.RPAREN:         { str=" ) "; break; }
+             case PepaToken.ACTIVITY_STRN:  { str=" identifier "; break; }
+             case PepaToken.RPAREN:         { str=" ) "; break; }
              case PepaToken.TAU:				{ str=" TAU "; break; }
              case PepaToken.HIGH:				{ str=" HIGH "; break; }
              case PepaToken.LOW:				{ str=" LOW "; break; }
              case PepaToken.SET_DEFAULT_LEVEL:	{ str=" SET_DEFAULT_LEVEL "; break; }
+             case PepaToken.REV_ACTIONS:	{ str=" REV_ACTIONS "; break; }
 	         case PepaToken.SEMI:           { str=" ; "; break; }
 	         case PepaToken.SUM:            { str=" + "; break; }
 	         case PepaToken.LPAREN:         { str=" ( "; break; }
@@ -192,6 +195,7 @@ parser code {:
 terminal            COMMA, DOT, TOP, LPAREN, RPAREN, SEMI, EQUALS, PAR, RATE_EQUALS;
 terminal            COOP, LCOOP, RCOOP, MINUS, MULT, SUM, DIVIDE, HASH, PERC;
 terminal            LSET, RSET, LSQUARE, RSQUARE, TAU, HIGH, LOW, SET_DEFAULT_LEVEL;
+terminal            REV_ACTIONS;
 terminal 	Integer	PASSIVE_MULTIPLIER;
 terminal    String  ACTIVITY_STRN, PROCESS_STRN, QUOTED_STRN;
 terminal    Double  DOUBLE_NUMBER;
@@ -215,6 +219,7 @@ non terminal Actions				action_set;
 non terminal             			rate_assignment_token;
 non terminal						action_type_level_def;
 non terminal						action_type_levels;
+non terminal						reversible_actions;
 non terminal RateDefinitionNode		basic_rate_definition, rate_definition, rate_definition_list, action_list;
 non terminal ProcessDefinitionNode	basic_process_definition, process_definition, process_definition_list;
 
@@ -237,7 +242,7 @@ precedence left     MULT, DIVIDE;			// precedence of HIDE
 
 start with model;
 
-model	 				::= rate_definition_list action_type_levels process_definition_list process:equation
+model	 				::= rate_definition_list action_type_levels reversible_actions process_definition_list process:equation
 
 	                       {: 	model.setSystemEquation(equation);
 	                       		RESULT = model;
@@ -266,6 +271,14 @@ action_type_levels		::= SET_DEFAULT_LEVEL LOW SEMI action_type_level_def
 						  |
 						  ;
 						 
+reversible_actions		::= REV_ACTIONS action_list SEMI 
+							{:
+								HashSet<String> reversibleActionTypes = model.reversibleActionTypes();
+								for (ActionTypeNode action_type : actionManager.get()) {
+									reversibleActionTypes.add(action_type.getType());
+								}
+							 :}
+							| ;
 
 rate_definition_list 	::= rate_definition_list rate_definition | ;
        
@@ -415,6 +428,30 @@ process          		::= activity:a DOT process:p
 			                {: PrefixNode prefix = ASTFactory.createPrefix();
 			                	prefix.setActivity(a);
 			                	prefix.setTarget(p);
+
+								if (p instanceof ConstantProcessNode) {
+									String dstName = ((ConstantProcessNode)p).getName();
+
+									if (revActionDst.containsKey(dstName)) {
+										String action_type = ((ActionTypeNode)a.getAction()).getType();
+										String message = "The action \"" + revActionDst.get(dstName)
+															+ " cannot be reversed because "
+															+ " the process \"" + dstName
+															+ "\" is also reached by \"" + action_type + "\".";
+										this.parser.report_error(message, p);
+									}
+
+									if (a.getAction() instanceof ActionTypeNode) {
+										String action_type = ((ActionTypeNode)a.getAction()).getType();
+										if (model.reversibleActionTypes().contains(action_type)) {
+											//logger.debug("Processo di destinazione " + (((ConstantProcessNode)p).getName()));
+											//throw new IllegalArgumentException("PROVA " + dstName);
+
+											revActionDst.put(dstName, action_type);
+										}
+									}
+								}
+
 			                	RESULT = prefix;
 			                :}
 			              

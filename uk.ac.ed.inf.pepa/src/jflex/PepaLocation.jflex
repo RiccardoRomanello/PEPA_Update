@@ -123,6 +123,11 @@ DOUBLE_NUMBER=[0-9]+(\.[0-9]*)?
 	"set_default_level"  {
 		return symbol("SET_DEFAULT_LEVEL", PepaToken.SET_DEFAULT_LEVEL); 
 	}
+
+	"rev_actions"  {
+		return symbol("REV_ACTIONS", PepaToken.REV_ACTIONS); 
+	}
+
 	
 	"T" 	{ return symbol("TOP", PepaToken.TOP); } 
 	

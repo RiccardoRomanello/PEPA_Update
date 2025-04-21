@@ -70,7 +70,8 @@ public interface IProblem {
 	public final int LevelConflict = Error + ActionRelated + 14;
 
 	public final int RedudantLevel = Warning + ActionRelated + 15;
-	
+
+	public final int NonReversibleAction = Error + ActionRelated + 16;
 
 	/**
 	 * Returns the severity level of this problem
