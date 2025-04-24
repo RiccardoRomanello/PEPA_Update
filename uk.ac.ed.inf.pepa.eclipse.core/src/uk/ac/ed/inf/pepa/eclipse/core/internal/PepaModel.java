@@ -112,6 +112,8 @@ public class PepaModel extends ProcessAlgebraModel implements IPepaModel {
 
 	protected Boolean PSNI = null;
 
+	protected Boolean isReversible = null;
+
 	/**
 	 * Create a PepaModel from a given resource. The resource has already been
 	 * tested for (1) existing and (2) being a file with a supported extension.
@@ -301,6 +303,33 @@ public class PepaModel extends ProcessAlgebraModel implements IPepaModel {
 
 	public Boolean isPSNI() {
 		return PSNI;
+	}
+
+	public void reversible_verify(IProgressMonitor monitor) {
+		ModelNode model = fAstModel; 
+		
+		Model cModel = new Compiler(model).getModel();
+		
+		StateExplorerBuilder seb = new StateExplorerBuilder(cModel);
+		
+		ISymbolGenerator sg = seb.getSymbolGenerator();
+		IStateExplorer explorer = seb.getExplorer();
+		
+		LTSDeriver deriver = new LTSDeriver(explorer, sg);
+		ArrayList<State> states = new ArrayList<State>();
+		
+		try {
+			LTS<Integer> lts = deriver.derive(new DoNothingMonitor(), states);
+			LtsModel<Integer> ltsModel = new LtsModel<Integer>(lts);
+			isReversible = ltsModel.isReversible();
+		} catch (DerivationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public Boolean isReversible() {
+		return isReversible;
 	}
 
 	public boolean isDerivable() {

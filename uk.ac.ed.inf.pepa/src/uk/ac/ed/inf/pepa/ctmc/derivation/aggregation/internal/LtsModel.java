@@ -93,6 +93,25 @@ public class LtsModel<S> implements LTS<S>, LTSBuilder<S> {
 		return targetsMap.keySet();
 	}
 
+	/*
+	 * Returns the image of a state 'projected' according to one particular action. 
+	 */
+	public Iterable<S> getImageForAction(S source, short actionId) {
+		HashMap<S, HashMap<Short, Double>> targetsMap = transitionMap.get(source);
+		ArrayList<S> results = new ArrayList<S>();
+		
+		Iterator<S> neighboursIterator = targetsMap.keySet().iterator();
+		while(neighboursIterator.hasNext()) {
+			S neighbour = neighboursIterator.next();
+			if(getApparentRate(source, neighbour, actionId) != 0) {
+				results.add(neighbour);
+			}
+		}
+		
+		
+		return results;
+	}
+
 	@Override
 	public Iterable<S> getPreImage(S target) {
 		TreeSet<S> total = new TreeSet<S>();
@@ -227,6 +246,88 @@ public class LtsModel<S> implements LTS<S>, LTSBuilder<S> {
 		return numActionIds;
 	}
 	
+	// Reversibility check begin
+	
+	private void addStateIfAbsent(S state) {
+		if(states.indexOf(state) == -1) {
+			addState(state);
+		}
+	}
+	
+	private LtsModel<S> toMarkovChain(){
+		LtsModel<S> markovChain = new LtsModel<>(1);
+		for(S source : states) {
+			
+			markovChain.addStateIfAbsent(source);
+			
+			Iterator<S> neighbours = getImage(source).iterator();
+			while(neighbours.hasNext()) {
+				S target = neighbours.next();
+				
+				markovChain.addStateIfAbsent(target);
+				
+				HashMap<Short, Double> rates = getRates(source, target);
+				Double rateSum = 0.0;
+				for(Short key : rates.keySet()) {
+					Double rate = rates.get(key);
+					rateSum += rate;
+				}
+				
+				markovChain.addTransition(source, target, rateSum, (short)0, ActionLevel.UNDEFINED);
+			}
+		}
+		
+		return markovChain;
+	}
+	
+	public Boolean isReversible() {
+		int n = numberOfStates();
+		// colors = 0, 1. 0 = white, 1 = grey
+		HashMap<S, Integer> colors = new HashMap<S, Integer>(n);
+		HashMap<S, Double> pi = new HashMap<S, Double>(n);
+		
+		for(S state : states) {
+			colors.put(state, 0);
+			pi.put(state, 0.0);
+		}
+		
+		LtsModel<S> markovChain = toMarkovChain();
+		
+		return markovChain.isReversibleDFS(states.get(0), (short)0, colors, pi);
+	}
+	
+	private Boolean isReversibleDFS(S state, short actionId, HashMap<S, Integer> colors, HashMap<S, Double> pi) {
+		Boolean reversibleUntilNow = true; 
+		
+		Iterator<S> neighboursIterator = getImageForAction(state, actionId).iterator();
+		
+		while(neighboursIterator.hasNext()) {
+			S neighbour = neighboursIterator.next();
+			
+			double iTojRate = getApparentRate(state, neighbour, actionId);
+			double jToiRate = getApparentRate(neighbour, state, actionId);
+			
+			if (jToiRate == 0.0) {
+				reversibleUntilNow = false; 
+			}
+			
+			if (colors.get(neighbour) != 0 && pi.get(state)*iTojRate != pi.get(neighbour)*jToiRate) {
+				reversibleUntilNow = false;
+			}
+			
+			if (colors.get(neighbour) == 0) {
+				colors.put(neighbour, 1);
+				double coefficient = iTojRate / jToiRate;
+				
+				pi.put(neighbour, pi.get(state)*coefficient);
+				reversibleUntilNow = reversibleUntilNow && isReversibleDFS(neighbour, actionId, colors, pi);
+			}
+		}
+	
+		return reversibleUntilNow;
+	}
+	
+	// Reversibility check end
 	
 	@Override
 	public String toString() {

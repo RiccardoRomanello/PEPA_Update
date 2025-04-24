@@ -157,6 +157,65 @@ public class ActionCommands {
 		dialog.setPageSize(400, 400);
 		dialog.open();
 	}
+
+	public static void checkReversibility(final IProcessAlgebraModel model) {
+
+		IProgressService progressService = PlatformUI.getWorkbench()
+				.getProgressService();
+
+		String err_title=null, err_msg=null;
+		try {
+
+			progressService.run(true, true, new IRunnableWithProgress() {
+
+				public void run(IProgressMonitor monitor)
+						throws InvocationTargetException, InterruptedException {
+					monitor.beginTask("Reversibility Check",
+							IProgressMonitor.UNKNOWN);
+					try {
+						model.reversible_verify(monitor);
+					} catch (Exception e) {
+						throw new InvocationTargetException(e);
+					} finally {
+						monitor.done();
+					}
+
+				}
+
+			});
+
+		} catch (InvocationTargetException e) {
+			PepaLog.logError(e);
+			if (e.getTargetException() instanceof DerivationException) {
+				err_title = "Reversibility check Error";
+				err_msg = ((DerivationException) e.getTargetException())
+								.getMessage();
+			} else {
+				err_title = "Unexpected Error";
+				err_msg = e.getTargetException().getMessage();
+			}
+		} catch (InterruptedException e) {
+			err_title = "Job Interrupted";
+			err_msg = "Reversibility check interrupted by user";
+		}
+
+		if (err_title != null) {
+			MessageDialog.openError(Display.getCurrent().getActiveShell(),
+					err_title, err_msg);
+			return;
+		}
+
+		if (model.isReversible()==null) {
+			MessageDialog.openError(Display.getCurrent().getActiveShell(),
+					"Unknown error",
+					"Reversibility check produces an unknown error");
+		} else {
+			MessageDialog.openInformation(Display.getCurrent().getActiveShell(),
+										  "Reversibility check Results",
+										  model.isReversible()?"The process is reversible":
+											             "The process is not reversible");
+		}
+	}
 	
 	public static void aggregation(IOptionHandler optHandler) {
 		AggregationWizard wizard = new AggregationWizard(optHandler);
