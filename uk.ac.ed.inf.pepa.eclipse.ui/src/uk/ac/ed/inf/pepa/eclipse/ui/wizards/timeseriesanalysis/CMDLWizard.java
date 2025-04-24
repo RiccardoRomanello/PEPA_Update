@@ -26,7 +26,6 @@ import uk.ac.ed.inf.pepa.ctmc.solution.SolverException;
 import uk.ac.ed.inf.pepa.eclipse.core.IPepaModel;
 import uk.ac.ed.inf.pepa.eclipse.core.IProcessAlgebraModelChangedListener;
 import uk.ac.ed.inf.pepa.eclipse.core.PEPAModelChecker;
-import uk.ac.ed.inf.pepa.eclipse.ui.wizards.timeseriesanalysis.CMDLWizard.CMDLsubPEPAModel.CMDLProgressMonitorAdapter;
 import uk.ac.ed.inf.pepa.parsing.ModelNode;
 import uk.ac.ed.inf.pepa.sba.*;
 

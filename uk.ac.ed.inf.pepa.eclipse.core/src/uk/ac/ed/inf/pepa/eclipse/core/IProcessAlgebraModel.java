@@ -115,6 +115,10 @@ public interface IProcessAlgebraModel extends IOptionHandler {
 
 	public Boolean isPSNI();
 
+	public void reversible_verify(IProgressMonitor monitor);
+
+	public Boolean isReversible();
+	
 	/**
 	 * Return the state space of the underlying CTMC.
 	 * <p>

@@ -21,19 +21,29 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 
+import uk.ac.ed.inf.pepa.DoNothingMonitor;
 import uk.ac.ed.inf.pepa.IResourceManager;
 import uk.ac.ed.inf.pepa.OptionsMap;
 import uk.ac.ed.inf.pepa.OptionsMap.Solver;
 import uk.ac.ed.inf.pepa.analysis.IProblem;
 import uk.ac.ed.inf.pepa.analysis.StaticAnalyser;
+import uk.ac.ed.inf.pepa.ctmc.LTSDeriver;
 import uk.ac.ed.inf.pepa.ctmc.PSNI.PSNIVerifier;
 import uk.ac.ed.inf.pepa.ctmc.PSNI.PSNIVerifierBuilder;
 import uk.ac.ed.inf.pepa.ctmc.derivation.*;
+import uk.ac.ed.inf.pepa.ctmc.derivation.aggregation.LTS;
+import uk.ac.ed.inf.pepa.ctmc.derivation.aggregation.internal.LtsModel;
+import uk.ac.ed.inf.pepa.ctmc.derivation.common.Compiler;
+import uk.ac.ed.inf.pepa.ctmc.derivation.common.IStateExplorer;
+import uk.ac.ed.inf.pepa.ctmc.derivation.common.ISymbolGenerator;
+import uk.ac.ed.inf.pepa.ctmc.derivation.common.State;
+import uk.ac.ed.inf.pepa.ctmc.derivation.internal.StateExplorerBuilder;
 import uk.ac.ed.inf.pepa.ctmc.kronecker.IKroneckerStateSpace;
 import uk.ac.ed.inf.pepa.ctmc.kronecker.KroneckerDisplayModel;
 import uk.ac.ed.inf.pepa.ctmc.modelchecking.ICSLModelChecker;
 import uk.ac.ed.inf.pepa.ctmc.solution.OptionMap;
 import uk.ac.ed.inf.pepa.eclipse.core.*;
+import uk.ac.ed.inf.pepa.model.Model;
 import uk.ac.ed.inf.pepa.parsing.EqualityVisitor;
 import uk.ac.ed.inf.pepa.parsing.ModelNode;
 import uk.ac.ed.inf.pepa.sba.Mapping;
@@ -46,6 +56,7 @@ import uk.ac.ed.inf.pepa.sba.SBAReaction;
 import uk.ac.ed.inf.pepa.sba.SBASimulatorException;
 import uk.ac.ed.inf.pepa.sba.SBAtoISBJava;
 import uk.ac.ed.inf.pepa.tools.PepaTools;
+
 
 /**
  * Concrete class describing a PEPA Model.
