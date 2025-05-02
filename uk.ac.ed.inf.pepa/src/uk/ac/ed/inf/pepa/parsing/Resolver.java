@@ -41,6 +41,8 @@ public class Resolver implements NodeResolver {
 		});
 		return usage.toArray(new ASTNode[usage.size()]);
 	}
+	
+	
 
 	public ASTNode getRateDefinition(String name) {
 		for (RateDefinitionNode def : model.rateDefinitions())

@@ -34,6 +34,11 @@ public final class Transition implements Comparable<Transition> {
 	public ActionLevel fLevel = ActionLevel.UNDEFINED;
 	
 	/**
+	 * Is action reversible
+	 */
+	public Boolean fReversible = false;
+	
+	/**
 	 * The rate at which this transition occurs
 	 */
 	public double fRate;

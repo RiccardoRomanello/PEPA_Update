@@ -85,12 +85,13 @@ public class LTSDeriver {
 			DoubleArray rates = callback.getRates();
 			ShortArray actionIds = callback.getActions();
 			ArrayList<ActionLevel> action_levels = callback.getActionLevels();
+			ArrayList<Boolean> action_reversibilities = callback.getReversibleActions();
 			
 			endTime = System.nanoTime();
 			commonDeriveTimeMillis = (endTime - startTime)/1000000;
 			
 			startTime = System.nanoTime();
-			lts = deriveLTS(states, row, col, rates, actionIds, action_levels);
+			lts = deriveLTS(states, row, col, rates, actionIds, action_levels, action_reversibilities);
 			endTime = System.nanoTime();
 			obtainLtsTimeMillis = (endTime-startTime)/1000000;
 		}
@@ -192,11 +193,12 @@ public class LTSDeriver {
 	 * @param rates
 	 * @param actionIds
 	 * @param action_levels 
+	 * @param action_reversibilities 
 	 * @return
 	 */
 	private LTS<Integer> deriveLTS(ArrayList<State> states,
 			IntegerArray row, IntegerArray col, DoubleArray rates,
-			ShortArray actionIds, ArrayList<ActionLevel> action_levels) {
+			ShortArray actionIds, ArrayList<ActionLevel> action_levels, ArrayList<Boolean> action_reversibilities) {
 		
 		int numActIds = 0;
 		{
@@ -245,6 +247,15 @@ public class LTSDeriver {
 						ActionLevel level = action_levels.get(k);
 						ltsBuilder.addTransition(s.stateNumber, targetId, rate, actionId,
 												 level);
+						// REVERSIBILI: e poi qui si controlla se la reversibilità è stata rispettata (un arco entrante)
+						// aggiungere arco all'indietro se l'azione è reversibile (con stesso ID)
+						
+						Boolean reversible = action_reversibilities.get(k);
+						if (reversible) {
+							ltsBuilder.addTransition(targetId, s.stateNumber, rate, actionId,
+									 level);
+						}
+						
 					}
 				}
 				

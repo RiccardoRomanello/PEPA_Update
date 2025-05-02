@@ -67,7 +67,6 @@ public class StaticAnalyser {
 		this.model.accept(new ReferenceCounterVisitor(problemManager));
 
 		if (!problemManager.hasError()) {
-
 			this.alphabets = new AlphabetProvider(this.model);
 
 			unguardedProcesses();
@@ -85,10 +84,29 @@ public class StaticAnalyser {
 			selfLoopAnalysis(); // TODO Implement self loop analysis
 
 			implementCompositionLoop();
+			
+			// A process P that is used for a reversible action 'a' like: 
+			// M :- <a, gamma>.P 
+			// cannot appear in no other right side of rules. 
+			checkReversibilityConstraints();
+			
 		}
 		problemManager.setProblems();
 		return;
 
+	}
+
+	private void checkReversibilityConstraints() {
+		// TODO Auto-generated method stub
+		// A process P that is used for a reversible action a like: 
+		// M :- <a, gamma>.P 
+		// cannot appear in no other right side of rules. 
+		ASTReversibilityDefinitionVisitor v = new ASTReversibilityDefinitionVisitor(this.model);
+		Set<String> wrongProcesses = v.getMultiReferencedProcesses();
+		
+		for (String processName : wrongProcesses) {
+			problemManager.reversibleActionConflict(processName);
+		}
 	}
 
 	/**

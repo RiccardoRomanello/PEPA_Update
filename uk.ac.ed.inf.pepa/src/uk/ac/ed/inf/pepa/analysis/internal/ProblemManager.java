@@ -113,6 +113,17 @@ public class ProblemManager {
 
 	}
 
+	/* 
+	 * Handling reversible actions related errors
+	 */
+	
+	public void reversibleActionConflict(String name) {
+		String message = "Process " + name + " which is reached by a reversible action, has more than one incoming edge";
+		problems.add(ProblemFactory.buildProblem(IProblem.NonReversibleAction,
+				model.getResolver().getProcessDefinition(name), message));
+
+	}
+	
 	public void rateNotUsedProblem(String name) {
 		String message = "Rate " + name + " not used";
 		problems.add(ProblemFactory.buildProblem(IProblem.UnusedRate,

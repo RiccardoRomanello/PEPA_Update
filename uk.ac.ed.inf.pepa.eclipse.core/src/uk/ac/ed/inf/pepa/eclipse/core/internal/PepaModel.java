@@ -144,6 +144,7 @@ public class PepaModel extends ProcessAlgebraModel implements IPepaModel {
 	public void parse() throws CoreException {
 		long tic = System.currentTimeMillis();
 		boolean hasChanged = doParse();
+		// REVERSIBILI: qui secondo me si può costruire l'LTS al volo e controllare se le azioni reversibili sono state fatte bene
 		long toc = System.currentTimeMillis();
 		markerCreator.createStaticAnalysisMarkers();
 		if (hasChanged) {

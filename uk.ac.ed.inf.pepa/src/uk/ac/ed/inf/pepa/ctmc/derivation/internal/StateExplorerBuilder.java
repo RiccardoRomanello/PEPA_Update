@@ -286,6 +286,10 @@ public class StateExplorerBuilder {
 			transition.fActionId = actionId;
 			transition.fLevel = actionMap.get(actionId).getLevel();
 			transition.fRate = rate;
+			
+			//handling reversible actions
+			Boolean isReversible = model.getASTModel().reversibleActionTypes().contains(actionMap.get(actionId).getName());
+			transition.fReversible = isReversible;
 
 			data.fFirstStepDerivative.add(transition);
 			// check if target has been explored already

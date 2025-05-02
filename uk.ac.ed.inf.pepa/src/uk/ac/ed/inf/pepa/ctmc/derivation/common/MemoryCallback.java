@@ -9,6 +9,7 @@ package uk.ac.ed.inf.pepa.ctmc.derivation.common;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 
 import uk.ac.ed.inf.pepa.ctmc.derivation.DerivationException;
 import uk.ac.ed.inf.pepa.ctmc.derivation.IStateSpace;
@@ -30,6 +31,9 @@ public class MemoryCallback implements ICallbackListener {
 
 	private ArrayList<ActionLevel> action_level;
 
+	// True if reversible, False otherwise
+	private ArrayList<Boolean> reversible_action;
+	
 	private int t;
 
 	private int currentColumn;
@@ -39,6 +43,8 @@ public class MemoryCallback implements ICallbackListener {
 	private short currentAction;
 
 	private ActionLevel currentLevel;
+	
+	private Boolean currentReversibility;
 
 	private int t_count = 0;
 	
@@ -54,6 +60,7 @@ public class MemoryCallback implements ICallbackListener {
 		value = new DoubleArray(INITIAL_CAPACITY * 2);
 		action = new ShortArray(INITIAL_CAPACITY * 2);
 		action_level = new ArrayList<ActionLevel>(INITIAL_CAPACITY * 2);
+		reversible_action = new ArrayList<Boolean>(INITIAL_CAPACITY * 2);
 	}
 
 	public IStateSpace done(ISymbolGenerator generator, ArrayList<State> states)
@@ -63,7 +70,8 @@ public class MemoryCallback implements ICallbackListener {
 		value.trimToSize();
 		action.trimToSize();
 		action_level.trimToSize();
-		isDone = true;
+		reversible_action.trimToSize();
+		// qua va sistemato l'hashset
 		/*
 		System.err.println("Row: " + row);
 		System.err.println("Col: " + column);
@@ -105,6 +113,12 @@ public class MemoryCallback implements ICallbackListener {
 		return action_level;
 	}
 
+	public ArrayList<Boolean> getReversibleActions() throws RuntimeException {
+		if (!isDone)
+			throw new RuntimeException("Cannot retrieve action reversibility before completion");
+		return reversible_action;
+	}
+	
 	public void foundDerivatives(State state, Transition[] transitions) {
 		this.exploringState(state.stateNumber, transitions.length);
 		if (state.stateNumber == 0)
@@ -129,7 +143,7 @@ public class MemoryCallback implements ICallbackListener {
 			 */
 
 			foundTransition(state.stateNumber, t.fState.stateNumber, t.fRate,
-					t.fActionId, t.fLevel);
+					t.fActionId, t.fLevel, t.fReversible);
 		}
 	}
 
@@ -139,7 +153,10 @@ public class MemoryCallback implements ICallbackListener {
 		row.add(column.size());
 	}
 
-	private void foundTransition(int i, int j, double rate, short action, ActionLevel action_level) {
+	private void foundTransition(int i, int j, double rate, short action, ActionLevel action_level, Boolean reversible) {
+		
+		// REVERSIBILI: qui sicuramente va segnato se l'azione è reversibile oppure no
+		// Check whether action is reversible or not
 		if (currentColumn != j) {
 			if (currentColumn != -1)
 				writeAction();
@@ -149,6 +166,7 @@ public class MemoryCallback implements ICallbackListener {
 			currentColumn = j;
 			currentAction = action;
 			currentLevel = action_level;
+			currentReversibility = reversible;
 			sum = 0;
 		}
 		
@@ -156,6 +174,7 @@ public class MemoryCallback implements ICallbackListener {
 			writeAction();
 			currentAction = action;
 			currentLevel = action_level;
+			currentReversibility = reversible;
 			sum = rate;
 		} else {
 			sum += rate;
@@ -169,6 +188,7 @@ public class MemoryCallback implements ICallbackListener {
 	private void writeAction() {
 		action.add(currentAction);
 		action_level.add(currentLevel);
+		reversible_action.add(currentReversibility);
 		value.add(sum);
 	}
 
