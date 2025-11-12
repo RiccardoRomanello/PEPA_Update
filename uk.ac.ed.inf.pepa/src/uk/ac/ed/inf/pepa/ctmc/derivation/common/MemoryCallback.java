@@ -71,6 +71,8 @@ public class MemoryCallback implements ICallbackListener {
 		action.trimToSize();
 		action_level.trimToSize();
 		reversible_action.trimToSize();
+
+		isDone = true;
 		// qua va sistemato l'hashset
 		/*
 		System.err.println("Row: " + row);
